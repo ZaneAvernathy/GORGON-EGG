@@ -1,0 +1,6 @@
+<Module Name="DrawStandard">
+  <TilemapDestination File="DrawStandard.lyn.event" Name="DrawStandard_TilemapDestination"/>
+  <ResetExclusivity File="DrawStandard.lyn.event" Name="DrawStandard_ResetExclusivity"/>
+  <Extend File="DrawStandard.lyn.event" Name="DrawStandard_Extend"/>
+  <Retract File="DrawStandard.lyn.event" Name="DrawStandard_Retract"/>
+</Module>

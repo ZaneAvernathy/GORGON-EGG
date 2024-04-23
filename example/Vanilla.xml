@@ -1,0 +1,8 @@
+<Config>
+  <Module Name="TilemapStandard"/>
+  <Module Name="DrawStandard"/>
+  <Module Name="MinimugStandard"/>
+  <Module Name="NameStandard"/>
+  <Module Name="HPBarStandard"/>
+  <Module Name="HPOrStatus"/>
+</Config>
