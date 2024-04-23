@@ -44,7 +44,7 @@ extern u8 gGfx_StatusText[];
     #endif // CURRENT_HP_X
 
   #ifndef MAX_HP_X
-    #define MAX_HP_X ((HPORSTATUS_X * 8) + 47)
+    #define MAX_HP_X ((HPORSTATUS_X * 8) + 49)
     #endif // MAX_HP_X
 
   #endif // HPORSTATUS_X
