@@ -34,7 +34,7 @@ def discover_modules(path: Path) -> dict[str, tuple[Path, dict]]:
   # A valid module is a folder that contains a .xml file within it,
   # which consists of a <Module Name="ModuleName">...</Module> tag.
 
-  for potential in [f for f in path.glob("*/*.xml")]:
+  for potential in [f for f in path.glob("**/*.xml")]:
     tree = ET.parse(potential)
     root = tree.getroot()
 
