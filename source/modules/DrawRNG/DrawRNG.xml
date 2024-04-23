@@ -1,0 +1,7 @@
+<Module Name="DrawRNG">
+  <TilemapDestination File="DrawRNG.lyn.event" Name="DrawRNG_TilemapDestination"/>
+  <ResetExclusivity File="DrawRNG.lyn.event" Name="DrawRNG_ResetExclusivity"/>
+  <Extend File="DrawRNG.lyn.event" Name="DrawRNG_Extend"/>
+  <Retract File="DrawRNG.lyn.event" Name="DrawRNG_Retract"/>
+  <Definition Name="GE_CHANCE" Value="1"/>
+</Module>
