@@ -11,6 +11,9 @@ void DrawUnsignedSmallNumber(int number, int x, int y);
 void ResistanceStandard_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
 {
   /* Draws the unit's resistance, right-aligned.
+   *
+   * As a note, this is resistance without bonuses, because it's
+   * difficult to generate.
    */
 
   int resistance;
