@@ -21,6 +21,34 @@
     return unit;
   }
 
+  // Number drawing helpers to avoid repetition
+  // See modules/Number
+
+  #define GenericNumberTwoDigits(n, xBase, yBase)             \
+    int number = (n);                                         \
+    struct Vec2 coords = GE_GetWindowPosition(proc);          \
+                                                              \
+    if ( proc->busyFlag )                                     \
+      return;                                                 \
+                                                              \
+    DrawUnsignedSmallNumber(                                  \
+        (number >= 100) ? 0xFF : number,                      \
+        (coords.x * 8) + (xBase),                             \
+        (coords.y * 8) + (yBase)                              \
+      );
+
+  #define GenericNumberThreeDigits(n, xBase, yBase)  \
+    struct Vec2 coords = GE_GetWindowPosition(proc); \
+                                                     \
+    if ( proc->busyFlag )                            \
+      return;                                        \
+                                                     \
+    DrawUnsignedSmallNumber(                         \
+        (n),                                         \
+        (coords.x * 8) + (xBase),                    \
+        (coords.y * 8) + (yBase)                     \
+      );
+
 
 // Proc definitions
 

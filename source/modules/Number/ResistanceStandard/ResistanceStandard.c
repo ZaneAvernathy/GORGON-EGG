@@ -16,20 +16,7 @@ void ResistanceStandard_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDat
    * difficult to generate.
    */
 
-  int resistance;
-  struct Vec2 coords;
-
-  if ( proc->busyFlag )
-    return;
-
-  coords = GE_GetWindowPosition(proc);
-  resistance = udp->unit->res;
-
-  DrawUnsignedSmallNumber(
-      (resistance >= 100) ? 0xFF : resistance,
-      (coords.x * 8) + RES_X,
-      (coords.y * 8) + RES_Y
-    );
+  GenericNumberTwoDigits(udp->unit->res, RES_X, RES_Y);
 
   return;
 }

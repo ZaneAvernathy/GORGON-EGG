@@ -13,20 +13,7 @@ void HitStandard_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* 
   /* Draws the unit's hit, right-aligned.
    */
 
-  int hit;
-  struct Vec2 coords;
-
-  if ( proc->busyFlag )
-    return;
-
-  coords = GE_GetWindowPosition(proc);
-  hit = udp->battleHitRate;
-
-  DrawUnsignedSmallNumber(
-      hit,
-      (coords.x * 8) + HIT_X,
-      (coords.y * 8) + HIT_Y
-    );
+  GenericNumberTwoDigits(udp->battleHitRate, HIT_X, HIT_Y);
 
   return;
 }

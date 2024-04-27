@@ -13,20 +13,7 @@ void AttackSpeedStandard_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDa
   /* Draws the unit's Attack Speed, right-aligned.
    */
 
-  int attackSpeed;
-  struct Vec2 coords;
-
-  if ( proc->busyFlag )
-    return;
-
-  coords = GE_GetWindowPosition(proc);
-  attackSpeed = udp->battleSpeed;
-
-  DrawUnsignedSmallNumber(
-      attackSpeed,
-      (coords.x * 8) + AS_X,
-      (coords.y * 8) + AS_Y
-    );
+  GenericNumberTwoDigits(udp->battleSpeed, AS_X, AS_Y);
 
   return;
 }

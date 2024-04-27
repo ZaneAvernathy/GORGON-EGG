@@ -15,20 +15,7 @@ void MaxHPStandard_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc
    * Draws `--` if the unit's HP is over 99.
    */
 
-  int maxHP;
-  struct Vec2 coords;
-
-  if ( proc->busyFlag )
-    return;
-
-  coords = GE_GetWindowPosition(proc);
-  maxHP = GetUnitMaxHp(udp->unit);
-
-  DrawUnsignedSmallNumber(
-      (maxHP >= 100) ? 0xFF : maxHP,
-      (coords.x * 8) + MAX_HP_X,
-      (coords.y * 8) + MAX_HP_Y
-    );
+  GenericNumberTwoDigits(GetUnitMaxHp(udp->unit), MAX_HP_X, MAX_HP_Y)
 
   return;
 }

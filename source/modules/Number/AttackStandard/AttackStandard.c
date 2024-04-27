@@ -13,20 +13,7 @@ void AttackStandard_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataPro
   /* Draws the unit's attack, right-aligned.
    */
 
-  int attack;
-  struct Vec2 coords;
-
-  if ( proc->busyFlag )
-    return;
-
-  coords = GE_GetWindowPosition(proc);
-  attack = udp->battleAttack;
-
-  DrawUnsignedSmallNumber(
-      (attack >= 100) ? 0xFF : attack,
-      (coords.x * 8) + ATK_X,
-      (coords.y * 8) + ATK_Y
-    );
+  GenericNumberTwoDigits(udp->battleAttack, ATK_X, ATK_Y);
 
   return;
 }

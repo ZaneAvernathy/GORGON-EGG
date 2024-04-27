@@ -13,20 +13,7 @@ void DefenseStandard_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataPr
   /* Draws the unit's defense, right-aligned.
    */
 
-  int defense;
-  struct Vec2 coords;
-
-  if ( proc->busyFlag )
-    return;
-
-  coords = GE_GetWindowPosition(proc);
-  defense = udp->battleDefense;
-
-  DrawUnsignedSmallNumber(
-      (defense >= 100) ? 0xFF : defense,
-      (coords.x * 8) + DEF_X,
-      (coords.y * 8) + DEF_Y
-    );
+  GenericNumberTwoDigits(udp->battleDefense, DEF_X, DEF_Y);
 
   return;
 }

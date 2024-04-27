@@ -13,20 +13,7 @@ void CritStandard_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc*
   /* Draws the unit's crit, right-aligned.
    */
 
-  int crit;
-  struct Vec2 coords;
-
-  if ( proc->busyFlag )
-    return;
-
-  coords = GE_GetWindowPosition(proc);
-  crit = udp->battleCritRate;
-
-  DrawUnsignedSmallNumber(
-      crit,
-      (coords.x * 8) + CRT_X,
-      (coords.y * 8) + CRT_Y
-    );
+  GenericNumberTwoDigits(udp->battleCritRate, CRT_X, CRT_Y);
 
   return;
 }
