@@ -19,7 +19,7 @@ const struct ProcInstruction ProcUnitData[] = {
 };
 
 #define BATTLE_DATA_START (offsetof(struct UnitDataProc, weapon))
-#define BATTLE_DATA_SIZE  (sizeof(struct UnitDataProc) - BATTLE_DATA_START)
+#define BATTLE_DATA_SIZE  (sizeof(struct UnitDataProc) - BATTLE_DATA_START - sizeof(u32))
 
 
 void ResetUnitDataProc(struct UnitDataProc* udp)
