@@ -18,8 +18,7 @@ const struct ProcInstruction ProcUnitData[] = {
   PROC_END,
 };
 
-#define BATTLE_DATA_START (offsetof(struct UnitDataProc, weapon))
-#define BATTLE_DATA_SIZE  (sizeof(struct UnitDataProc) - BATTLE_DATA_START - sizeof(u32))
+#define BATTLE_DATA_SIZE  (sizeof(struct UnitDataProc) - offsetof(struct UnitDataProc, weapon))
 
 
 void ResetUnitDataProc(struct UnitDataProc* udp)
@@ -33,7 +32,15 @@ void ResetUnitDataProc(struct UnitDataProc* udp)
 
   BattleGenerateUiStats(unit, GetUnitEquippedWeaponSlot(unit));
 
-  CpuFastCopy(&gBattleActor.weapon, &((u8*)udp)[BATTLE_DATA_START], BATTLE_DATA_SIZE);
+  // Manually memory copying this because CPUFastSet requires multiples of
+  // 8 words.
+
+  u8* source = (u8*)(&gBattleActor.weapon);
+  u8* dest = (u8*)(&udp->weapon);
+
+  int i;
+  for ( i = 0; i < BATTLE_DATA_SIZE; i++ )
+    *dest++ = *source++;
 
 }
 
