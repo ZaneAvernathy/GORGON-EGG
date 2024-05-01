@@ -3,17 +3,16 @@
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
-struct Vec2 GE_GetWindowPosition(struct PlayerInterfaceProc* proc);
-
-void DrawUnsignedSmallNumber(int number, int x, int y);
-
 
 void AttackSpeedStandard_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
 {
-  /* Draws the unit's Attack Speed, right-aligned.
+  /* Draws the unit's attack speed, right-aligned.
    */
 
-  GenericNumberTwoDigits(udp->battleSpeed, AS_X, AS_Y);
+  if ( proc->busyFlag )
+    return;
+
+  GenericNumberTwoDigits(udp->battleSpeed, AS_X, AS_Y, proc);
 
   return;
 }

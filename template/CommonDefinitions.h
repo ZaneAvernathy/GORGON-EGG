@@ -9,46 +9,6 @@
 
 #include "gbafe.h"
 
-// Helpers
-
-  static inline struct Unit* GetUnitAtCursor(void)
-  {
-    /* Get a unit under the cursor in a mid-battle map.
-     */
-    struct Unit* unit = GetUnit(
-        gMapUnit[gGameState.cursorMapPos.y][gGameState.cursorMapPos.x]
-      );
-    return unit;
-  }
-
-  // Number drawing helpers to avoid repetition
-  // See modules/Number
-
-  #define GenericNumberTwoDigits(n, xBase, yBase)             \
-    int number = (n);                                         \
-    struct Vec2 coords = GE_GetWindowPosition(proc);          \
-                                                              \
-    if ( proc->busyFlag )                                     \
-      return;                                                 \
-                                                              \
-    DrawUnsignedSmallNumber(                                  \
-        (number >= 100) ? 0xFF : number,                      \
-        (coords.x * 8) + (xBase),                             \
-        (coords.y * 8) + (yBase)                              \
-      );
-
-  #define GenericNumberThreeDigits(n, xBase, yBase)  \
-    struct Vec2 coords = GE_GetWindowPosition(proc); \
-                                                     \
-    if ( proc->busyFlag )                            \
-      return;                                        \
-                                                     \
-    DrawUnsignedSmallNumber(                         \
-        (n),                                         \
-        (coords.x * 8) + (xBase),                    \
-        (coords.y * 8) + (yBase)                     \
-      );
-
 
 // Proc definitions
 
@@ -221,3 +181,57 @@
 
   extern struct ProcInstruction gProc_CameraMovement[];
 
+
+// Helpers
+
+  // Cursor position getter
+
+  static inline struct Unit* GetUnitAtCursor(void)
+  {
+    /* Get a unit under the cursor in a mid-battle map.
+     */
+    struct Unit* unit = GetUnit(
+        gMapUnit[gGameState.cursorMapPos.y][gGameState.cursorMapPos.x]
+      );
+    return unit;
+  }
+
+  // Number drawing helpers to avoid repetition
+  // See modules/Number
+
+  struct Vec2 GE_GetWindowPosition(struct PlayerInterfaceProc* proc);
+  void DrawUnsignedSmallNumber(int number, int x, int y);
+
+  static inline void GenericNumberTwoDigits(int number, int x, int y, struct PlayerInterfaceProc* proc)
+  {
+    /* Draw a two digit number as objects.
+     *
+     * Numbers above 99 are drawn as `--`.
+     */
+    struct Vec2 coords = GE_GetWindowPosition(proc);
+
+    DrawUnsignedSmallNumber(
+        (number >= 100) ? 0xFF : number,
+        (coords.x * 8) + x,
+        (coords.y * 8) + y
+      );
+
+    return;
+  }
+
+  static inline void GenericNumberThreeDigits(int number, int x, int y, struct PlayerInterfaceProc* proc)
+  {
+    /* Draw a three digit number as objects.
+     *
+     * Numbers above 254 will be drawn as `--`.
+     */
+    struct Vec2 coords = GE_GetWindowPosition(proc);
+
+    DrawUnsignedSmallNumber(
+        (number >= 255) ? 0xFF : number,
+        (coords.x * 8) + x,
+        (coords.y * 8) + y
+      );
+
+    return;
+  }

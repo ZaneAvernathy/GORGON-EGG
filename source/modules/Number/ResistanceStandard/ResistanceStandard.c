@@ -3,10 +3,6 @@
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
-struct Vec2 GE_GetWindowPosition(struct PlayerInterfaceProc* proc);
-
-void DrawUnsignedSmallNumber(int number, int x, int y);
-
 
 void ResistanceStandard_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
 {
@@ -16,7 +12,7 @@ void ResistanceStandard_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDat
    * difficult to generate.
    */
 
-  GenericNumberTwoDigits(udp->unit->res, RES_X, RES_Y);
+  GenericNumberTwoDigits(GetUnitResistance(udp->unit), RES_X, RES_Y, proc);
 
   return;
 }
