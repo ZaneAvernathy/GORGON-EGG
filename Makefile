@@ -11,11 +11,17 @@ build: backup clean_output template config deps
 .DEFAULT_GOAL := build
 
 
+# Pre-build output generation
+
+$(OUTPUTDIR):
+	@mkdir -p $(OUTPUTDIR)
+
+
 # Fixed input file copying
 
 TEMPLATE_FILES := $(foreach f,$(wildcard $(TEMPLATEDIR)/*),$(notdir $(f)))
 
-template:
+template: | $(OUTPUTDIR)
 	@for f in $(TEMPLATE_FILES); do cp -f $(TEMPLATEDIR)/$$f $(OUTPUTDIR)/$$f; done
 
 
@@ -40,7 +46,7 @@ config $(GENERATED_DEFINITIONS) $(GENERATED_INSTALLER) &: $(CONFIG)
 # This will keep backups of the config and output of the last 5 builds.
 # Second line taken from https://stackoverflow.com/a/34862475
 
-backup $(BACKUPDIR) &:
+backup $(BACKUPDIR) &: | $(OUTPUTDIR)
 	@$(create_backup) $(BACKUPDIR) $(CONFIG) $(OUTPUTDIR)
 	@(cd $(BACKUPDIR) && ls -tp | grep -v '/$$' | tail -n +6 | tr '\n' '\0' | xargs -0 rm -f --)
 
