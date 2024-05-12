@@ -1,6 +1,18 @@
 
 # This file handles prerequisites and requirements for building.
 
+# Building requires the following:
+# devkitARM: https://devkitpro.org/wiki/Getting_Started
+# Python3.11+: https://www.python.org/downloads/
+# CLib: https://github.com/StanHash/FE-CLib
+# lyn: https://github.com/StanHash/lyn
+# ea-dep: https://github.com/StanHash/ea-dep
+# png2dmp: https://feuniverse.us/t/1764
+
+# In the `tools` folder, place `CLib` (named `CLib`), lyn, ea-dep, and png2dmp.
+# Create a Python3.11+ virtual environment named `venv` in the `tools` folder
+# using `python -m venv venv`
+
 
 export ROOTDIR  := $(realpath .)
 export TOOLSDIR  = tools
