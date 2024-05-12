@@ -111,3 +111,16 @@ export ea-dep := $(TOOLSDIR)/ea-dep$(COMPAT_SUFFIX)
 ifeq ($(wildcard $(ea-dep)),)
   $(error $(EADEP_MISSING_ERROR))
 endif
+
+
+# Check if we have png2dmp.
+
+define PNG2DMP_MISSING_ERROR =
+Please place a copy of png2dmp into the tools folder. https://feuniverse.us/t/1764
+endef
+
+export png2dmp := $(TOOLSDIR)/png2dmp$(COMPAT_SUFFIX)
+
+ifeq ($(wildcard $(png2dmp)),)
+  $(error $(PNG2DMP_MISSING_ERROR))
+endif

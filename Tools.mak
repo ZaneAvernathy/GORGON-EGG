@@ -16,8 +16,6 @@ export create_backup   := $(PYTHON) $(TOOLSDIR)/create_backup.py
 export read_config     := $(PYTHON) $(TOOLSDIR)/read_config.py
 export convert_tilemap := $(PYTHON) $(TOOLSDIR)/convert_tilemap.py
 
-export png2dmp := $(TOOLSDIR)/png2dmp$(COMPAT_SUFFIX)
-
 
 # Misc. recipes
 
