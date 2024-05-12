@@ -146,7 +146,7 @@ Example:
 <Internal File="SomeSharedThing/SomeSharedThing.lyn.event"/>
 ```
 
-This generates the following line in the generated Event Assembler installer:|
+This generates the following line in the generated Event Assembler installer:
 ```
 #include "source/internal/SomeSharedThing/SomeSharedThing.lyn.event"
 ```
@@ -195,7 +195,7 @@ See the [Dynamic source file](../../template/Dynamic.c) for more information.
 
 ### `TilemapDestination`
 
-`TilemapDestination` tags define functions that determine where (full extended) tilemap is drawn to. Typically, a config includes exactly one module that contains this tag.
+`TilemapDestination` tags define functions that determine where the (full extended) tilemap is drawn to. Typically, a config includes exactly one module that contains this tag.
 
 A `TilemapDestination` tag has two attributes, `File` and `Name`. The `Name` attribute specifies the function's name, and the `File` attribute specifies the file that the function is found in.
 

@@ -3,7 +3,7 @@ DrawRNG
 
 ---
 
-This module extends and retracts the window the same way that the vanilla window does (by extending from/retracting to the left side of the screen), but only after a random delay.
+This module extends and retracts the window the same way that the vanilla window does (by extending from/retracting to the side of the screen), but only after a random delay.
 
 ---
 
