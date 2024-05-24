@@ -35,7 +35,7 @@ clean_output:
 
 CONFIG                := $(CONFIGDIR)/Config.xml
 GENERATED_DEFINITIONS := $(OUTPUTDIR)/GeneratedDefinitions.h
-GENERATED_INSTALLER   := $(OUTPUTDIR)/GeneratedInstaller.edent
+GENERATED_INSTALLER   := $(OUTPUTDIR)/GeneratedInstaller.event
 
 config $(GENERATED_DEFINITIONS) $(GENERATED_INSTALLER) &: $(CONFIG)
 	@$(read_config) $(CONFIG) $(OUTPUTDIR) $(NATIVE_MODULESDIR) $(CUSTOM_MODULESDIR)
