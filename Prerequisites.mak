@@ -27,7 +27,7 @@ define SPACE_ERROR =
 Please ensure that there are no spaces in your file names
 endef
 
-ifeq ($(findstring $(SPACECHAR),$(ROOTDIR)), $(SPACECHAR))
+ifeq ($(findstring $(SPACECHAR),$(ROOTDIR)),$(SPACECHAR))
   $(error $(SPACE_ERROR))
 endif
 
