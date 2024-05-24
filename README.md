@@ -21,7 +21,7 @@ The full name of this project is `Modular, User-configurable, Makefile-based, C 
 * A copy of [CrazyColorz5's png2dmp](https://feuniverse.us/t/1764) named `png2dmp` in the `tools` folder
 * An installation of [GNU Make](https://www.gnu.org/software/make/) (likely, your installation of devkitARM already provides `Make`)
 
-Afterward, you can build `GORGON-EGG` by running `make` in the root directory.
+Afterward, you can build `GORGON-EGG` by running `make` in the root directory. This will generate the file `Installer.event` in the `output` folder, which you can then `#include` as part of your Event Assembler buildfile.
 
 ## User Configuration
 
