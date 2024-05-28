@@ -76,3 +76,17 @@ Here's an example of an `ASMDefinition`:
 ## Custom modules
 
 GORGON-EGG provides the [custom](custom) folder for user-provided modules. This allows users to create custom modules or modules that override/replace prepackaged modules without having to disrupt existing files. See the [modules README](source/modules/README.md) for more details on how to make a module.
+
+## Misc. features, design philosophy
+
+GORGON-EGG automatically creates backups of your last 5 builds in the `backups` folder. A backup is created even if nothing has been changed, so be careful.
+
+---
+
+GORGON-EGG aims to be both user-friendly and developer-friendly.
+
+GORGON-EGG avoids dead code by installing only what is needed based on the user's config. It splits functionality into `internal` files that can be shared across multiple modules (and only included in the final output once) in order to save space. Configuration variables are baked-in at compile time to avoid cumbersome indirect references.
+
+Users do not need to know anything about the underlying code in order to configure the window, and can easily share their configurations without needing to distribute more than a single file, in most instances.
+
+Developers are free to write their modules in either C or THUMB assembly. Prepackaged modules are written in C here for maximum clarity. GORGON-EGG provides tools for automatically building ASM and C sources, along with other utilities for formatting other files. Developers can add new modules without modifying any other files.
