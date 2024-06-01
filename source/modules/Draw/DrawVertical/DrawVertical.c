@@ -48,7 +48,7 @@ struct Vec2 DrawVertical_TilemapDestination(struct PlayerInterfaceProc* proc, st
 }
 
 
-int DrawVertical_InvalidPosition(struct PlayerInterfaceProc* proc, int quadrant, int invalidPosition)
+bool DrawVertical_InvalidPosition(struct PlayerInterfaceProc* proc, int quadrant, bool invalidPosition)
 {
   /* Avoid drawing the window on top of the terrain window.
    */

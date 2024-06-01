@@ -20,7 +20,7 @@ void GE_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp);
 
 struct UnitDataProc* GetUnitDataProc(struct PlayerInterfaceProc* proc);
 
-typedef int (*invalidposition_func) (struct PlayerInterfaceProc* proc, int quadrant, int invalidPosition);
+typedef bool (*invalidposition_func) (struct PlayerInterfaceProc* proc, int quadrant, bool invalidPosition);
 
 
 const invalidposition_func gInvalidPositionFunctions[] = {

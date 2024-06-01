@@ -385,7 +385,7 @@ def implement_config(
   invalid_decls = []
   for invalid in module_contents["InvalidPosition"]:
     invalid_lines.append("  " + invalid_lines + ",")
-    invalid_decls.append("int " + invalid + "(struct PlayerInterfaceProc* proc, int quadrant, int invalidPosition);")
+    invalid_decls.append("bool " + invalid + "(struct PlayerInterfaceProc* proc, int quadrant, bool invalidPosition);")
 
   invalid_lines.append("  NULL")
 
