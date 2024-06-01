@@ -48,7 +48,7 @@ struct Vec2 DrawStandard_TilemapDestination(struct PlayerInterfaceProc* proc, st
 }
 
 
-int DrawStandard_ResetExclusivity(struct PlayerInterfaceProc* proc, int quadrant, int invalidPosition)
+int DrawStandard_InvalidPosition(struct PlayerInterfaceProc* proc, int quadrant, int invalidPosition)
 {
   /* Avoid drawing the window on top of the terrain window.
    */

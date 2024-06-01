@@ -48,7 +48,7 @@ struct Vec2 DrawRNG_TilemapDestination(struct PlayerInterfaceProc* proc, struct 
 }
 
 
-int DrawRNG_ResetExclusivity(struct PlayerInterfaceProc* proc, int quadrant, int invalidPosition)
+int DrawRNG_InvalidPosition(struct PlayerInterfaceProc* proc, int quadrant, int invalidPosition)
 {
   /* Avoid drawing the window on top of the terrain window; draw randomly.
    */

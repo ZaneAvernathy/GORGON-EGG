@@ -19,7 +19,7 @@ A `module declaration` file is an XML-formatted file (with the .xml extension) t
   * `Definition`: Add a C definition to the generated C header
   * `ASMDefinition`: Add a THUMB assembly definition to the generated ASM include
   * `Internal`: Add an EA-formatted internal file to the Event Assembler installer output
-  * `Static`, `Dynamic`, `TilemapDestination`, `Extend`, `Retract`, `Init`, and `ResetExclusivity`: Add a file/function that handles a specific window task
+  * `Static`, `Dynamic`, `TilemapDestination`, `Extend`, `Retract`, `Init`, and `InvalidPosition`: Add a file/function that handles a specific window task
 
 For example, a simple `module declaration` file might look something like this:
 ```xml
@@ -271,20 +271,20 @@ See the [Init source file](../../template/Init.c) for more information.
 
 ---
 
-### ResetExclusivity
+### InvalidPosition
 
-`ResetExclusivity` tags define functions that return `TRUE` if the window should not be rebuilt.
+`InvalidPosition` tags define functions that return `TRUE` if the window should not be rebuilt.
 
-A `ResetExclusivity` tag has two attributes, `File` and `Name`. The `Name` attribute specifies the function's name, and the `File` attribute specifies the file that the function is found in.
+A `InvalidPosition` tag has two attributes, `File` and `Name`. The `Name` attribute specifies the function's name, and the `File` attribute specifies the file that the function is found in.
 
 Example:
 ```xml
-<ResetExclusivity File="Example.lyn.event" Name="Example_ResetExclusivity"/>
+<InvalidPosition File="Example.lyn.event" Name="Example_InvalidPosition"/>
 ```
 
-This will `#include` the file (if specified by multiple tags, it will only be included once) in the generated Event Assembler installer and will add a function pointer to the `RESET_EXCLUSIVITY` macro in the generated C header file, which will be called like
+This will `#include` the file (if specified by multiple tags, it will only be included once) in the generated Event Assembler installer and will add a function pointer to the `INVALID_POSITION_CALLS` macro in the generated C header file, which will be called like
 ```c
-invalidPosition |= Example_ResetExclusivity(proc, quadrant, invalidPosition);
+invalidPosition |= Example_InvalidPosition(proc, quadrant, invalidPosition);
 ```
 
 See the [Reset source file](../../template/Reset.c) for more information.

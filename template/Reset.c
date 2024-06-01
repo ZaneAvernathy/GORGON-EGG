@@ -3,28 +3,28 @@
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
-#ifndef RESET_EXCLUSIVITY
+#ifndef INVALID_POSITION_CALLS
   /* This dummy macro will have its definition replaced
    * with a series of function pointers, terminated with NULL.
    * These functions are then called like
    * invalidPosition |= SomeFunction(proc, quadrant, invalidPosition);
-   * for each <ResetExclusivity> tag in a module.
+   * for each <InvalidPosition> tag in a module.
    * Generally, there should be only one
    * (from whatever handles extending/retracting).
    */
-  #define RESET_EXCLUSIVITY NULL
-  #endif // RESET_EXCLUSIVITY
+  #define INVALID_POSITION_CALLS NULL
+  #endif // INVALID_POSITION_CALLS
 
 void GE_Static(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp);
 void GE_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp);
 
 struct UnitDataProc* GetUnitDataProc(struct PlayerInterfaceProc* proc);
 
-typedef int (*reset_func) (struct PlayerInterfaceProc* proc, int quadrant, int invalidPosition);
+typedef int (*invalidposition_func) (struct PlayerInterfaceProc* proc, int quadrant, int invalidPosition);
 
 
-const reset_func gResetFunctions[] = {
-  RESET_EXCLUSIVITY
+const invalidposition_func gInvalidPositionFunctions[] = {
+  INVALID_POSITION_CALLS
 };
 
 
@@ -34,7 +34,7 @@ void GE_Reset(struct PlayerInterfaceProc* proc)
    */
 
   int i;
-  reset_func reset;
+  invalidposition_func invalid;
 
   struct UnitDataProc* udp;
   int invalidPosition, quadrant;
@@ -54,9 +54,9 @@ void GE_Reset(struct PlayerInterfaceProc* proc)
 
   invalidPosition = FALSE;
 
-  for ( i = 0, reset = gResetFunctions[i]; reset != NULL; i++, reset = gResetFunctions[i] )
+  for ( i = 0, invalid = gInvalidPositionFunctions[i]; invalid != NULL; i++, invalid = gInvalidPositionFunctions[i] )
   {
-    invalidPosition |= reset(proc, quadrant, invalidPosition);
+    invalidPosition |= invalid(proc, quadrant, invalidPosition);
   }
 
   if ( invalidPosition )

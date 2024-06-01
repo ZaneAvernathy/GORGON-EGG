@@ -281,8 +281,8 @@ def read_module(module_path: Path, module_contents: dict):
       case "init":
         standard_call("Init")
 
-      case "resetexclusivity":
-        standard_call("ResetExclusivity")
+      case "InvalidPosition":
+        standard_call("InvalidPosition")
 
 
 def implement_config(
@@ -311,7 +311,7 @@ def implement_config(
       "Extend": set(),
       "Retract": set(),
       "Init": set(),
-      "ResetExclusivity": set(),
+      "InvalidPosition": set(),
     }
 
   for module in requested_modules:
@@ -381,16 +381,16 @@ def implement_config(
   def_lines.append(" \\\n".join(tmd_lines))
   def_lines.append("")
 
-  reset_lines = ["#define RESET_EXCLUSIVITY"]
-  reset_decls = []
-  for reset in module_contents["ResetExclusivity"]:
-    reset_lines.append("  " + reset + ",")
-    reset_decls.append("int " + reset + "(struct PlayerInterfaceProc* proc, int quadrant, int invalidPosition);")
+  invalid_lines = ["#define INVALID_POSITION_CALLS"]
+  invalid_decls = []
+  for invalid in module_contents["InvalidPosition"]:
+    invalid_lines.append("  " + invalid_lines + ",")
+    invalid_decls.append("int " + invalid + "(struct PlayerInterfaceProc* proc, int quadrant, int invalidPosition);")
 
-  reset_lines.append("  NULL")
+  invalid_lines.append("  NULL")
 
-  def_lines.append("\n".join(reset_decls))
-  def_lines.append(" \\\n".join(reset_lines))
+  def_lines.append("\n".join(invalid_decls))
+  def_lines.append(" \\\n".join(invalid_lines))
   def_lines.append("")
 
   extend_lines = ["#define EXTEND_CALLS"]
