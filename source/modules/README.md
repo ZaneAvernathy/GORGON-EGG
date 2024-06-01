@@ -164,7 +164,7 @@ Example:
 <Static File="Example.lyn.event" Name="Example_Static"/>
 ```
 
-This will `#include` the file (if specified by multiple tags, it will only be included once) in the generated Event Assembler installer and will add a function call to the `STATIC_CALLS` macro in the generated C header file of the form
+This will `#include` the file (if specified by multiple tags, it will only be included once) in the generated Event Assembler installer and will add a function pointer to the `STATIC_CALLS` macro in the generated C header file, which will be called like
 ```c
 Example_Static(proc, udp);
 ```
@@ -184,7 +184,7 @@ Example:
 <Dynamic File="Example.lyn.event" Name="Example_Dynamic"/>
 ```
 
-This will `#include` the file (if specified by multiple tags, it will only be included once) in the generated Event Assembler installer and will add a function call to the `DYNAMIC_CALLS` macro in the generated C header file of the form
+This will `#include` the file (if specified by multiple tags, it will only be included once) in the generated Event Assembler installer and will add a function pointer to the `DYNAMIC_CALLS` macro in the generated C header file, which will be called like
 ```c
 Example_Dynamic(proc, udp);
 ```
@@ -204,7 +204,7 @@ Example:
 <TilemapDestination File="Example.lyn.event" Name="Example_TilemapDestination"/>
 ```
 
-This will `#include` the file (if specified by multiple tags, it will only be included once) in the generated Event Assembler installer and will add a function call to the `TILEMAP_DESTINATION` macro in the generated C header file of the form
+This will `#include` the file (if specified by multiple tags, it will only be included once) in the generated Event Assembler installer and will add a function pointer to the `TILEMAP_DESTINATION` macro in the generated C header file, which will be called like
 ```c
 coords = Example_TilemapDestination(proc, coords);
 ```
@@ -224,7 +224,7 @@ Example:
 <Extend File="Example.lyn.event" Name="Example_Extend"/>
 ```
 
-This will `#include` the file (if specified by multiple tags, it will only be included once) in the generated Event Assembler installer and will add a function call to the `EXTEND_CALLS` macro in the generated C header file of the form
+This will `#include` the file (if specified by multiple tags, it will only be included once) in the generated Event Assembler installer and will add a function pointer to the `EXTEND_CALLS` macro in the generated C header file, which will be called like
 ```c
 Example_Extend(proc);
 ```
@@ -242,7 +242,7 @@ Example:
 <Retract File="Example.lyn.event" Name="Example_Retract"/>
 ```
 
-This will `#include` the file (if specified by multiple tags, it will only be included once) in the generated Event Assembler installer and will add a function call to the `RETRACT_CALLS` macro in the generated C header file of the form
+This will `#include` the file (if specified by multiple tags, it will only be included once) in the generated Event Assembler installer and will add a function pointer to the `RETRACT_CALLS` macro in the generated C header file, which will be called like
 ```c
 Example_Retract(proc);
 ```
@@ -262,7 +262,7 @@ Example:
 <Init File="Example.lyn.event" Name="Example_Init"/>
 ```
 
-This will `#include` the file (if specified by multiple tags, it will only be included once) in the generated Event Assembler installer and will add a function call to the `INIT_CALLS` macro in the generated C header file of the form
+This will `#include` the file (if specified by multiple tags, it will only be included once) in the generated Event Assembler installer and will add a function pointer to the `INIT_CALLS` macro in the generated C header file, which will be called like
 ```c
 Example_Init(proc);
 ```
@@ -282,7 +282,7 @@ Example:
 <ResetExclusivity File="Example.lyn.event" Name="Example_ResetExclusivity"/>
 ```
 
-This will `#include` the file (if specified by multiple tags, it will only be included once) in the generated Event Assembler installer and will add a function call to the `RESET_EXCLUSIVITY` macro in the generated C header file of the form
+This will `#include` the file (if specified by multiple tags, it will only be included once) in the generated Event Assembler installer and will add a function pointer to the `RESET_EXCLUSIVITY` macro in the generated C header file, which will be called like
 ```c
 invalidPosition |= Example_ResetExclusivity(proc, quadrant, invalidPosition);
 ```
