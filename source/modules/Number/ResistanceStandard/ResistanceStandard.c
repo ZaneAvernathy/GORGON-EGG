@@ -12,6 +12,9 @@ void ResistanceStandard_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDat
    * difficult to generate.
    */
 
+  if ( proc->busyFlag )
+    return;
+
   GenericNumberTwoDigits(GetUnitResistance(udp->unit), RES_X, RES_Y, proc);
 
   return;
