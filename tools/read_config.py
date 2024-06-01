@@ -348,8 +348,10 @@ def implement_config(
   static_lines = ["#define STATIC_CALLS"]
   static_decls = []
   for static in module_contents["Static"]:
-    static_lines.append("  " + static + "(proc, udp);")
+    static_lines.append("  " + static + ",")
     static_decls.append("void " + static + "(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp);")
+
+  static_lines.append("  NULL")
 
   def_lines.append("\n".join(static_decls))
   def_lines.append(" \\\n".join(static_lines))
@@ -358,8 +360,10 @@ def implement_config(
   dynamic_lines = ["#define DYNAMIC_CALLS"]
   dynamic_decls = []
   for dynamic in module_contents["Dynamic"]:
-    dynamic_lines.append("  " + dynamic + "(proc, udp);")
+    dynamic_lines.append("  " + dynamic + ",")
     dynamic_decls.append("void " + dynamic + "(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp);")
+
+  dynamic_lines.append("  NULL")
 
   def_lines.append("\n".join(dynamic_decls))
   def_lines.append(" \\\n".join(dynamic_lines))
@@ -368,8 +372,10 @@ def implement_config(
   tmd_lines = ["#define TILEMAP_DESTINATION"]
   tmd_decls = []
   for tmd in module_contents["TilemapDestination"]:
-    tmd_lines.append("  coords = " + tmd + "(proc, coords);")
+    tmd_lines.append("  " + tmd + ",")
     tmd_decls.append("struct Vec2 " + tmd + "(struct PlayerInterfaceProc* proc, struct Vec2 coords);")
+
+  tmd_lines.append("  NULL")
 
   def_lines.append("\n".join(tmd_decls))
   def_lines.append(" \\\n".join(tmd_lines))
@@ -378,8 +384,10 @@ def implement_config(
   reset_lines = ["#define RESET_EXCLUSIVITY"]
   reset_decls = []
   for reset in module_contents["ResetExclusivity"]:
-    reset_lines.append("  invalidPosition |= " + reset + "(proc, quadrant, invalidPosition);")
+    reset_lines.append("  " + reset + ",")
     reset_decls.append("int " + reset + "(struct PlayerInterfaceProc* proc, int quadrant, int invalidPosition);")
+
+  reset_lines.append("  NULL")
 
   def_lines.append("\n".join(reset_decls))
   def_lines.append(" \\\n".join(reset_lines))
@@ -388,8 +396,10 @@ def implement_config(
   extend_lines = ["#define EXTEND_CALLS"]
   extend_decls = []
   for extend in module_contents["Extend"]:
-    extend_lines.append("  " + extend + "(proc);")
+    extend_lines.append("  " + extend + ",")
     extend_decls.append("void " + extend + "(struct PlayerInterfaceProc* proc);")
+
+  extend_lines.append("  NULL")
 
   def_lines.append("\n".join(extend_decls))
   def_lines.append(" \\\n".join(extend_lines))
@@ -398,8 +408,10 @@ def implement_config(
   retract_lines = ["#define RETRACT_CALLS"]
   retract_decls = []
   for retract in module_contents["Retract"]:
-    retract_lines.append("  " + retract + "(proc);")
+    retract_lines.append("  " + retract + ",")
     retract_decls.append("void " + retract + "(struct PlayerInterfaceProc* proc);")
+
+  retract_lines.append("  NULL")
 
   def_lines.append("\n".join(retract_decls))
   def_lines.append(" \\\n".join(retract_lines))
@@ -408,8 +420,10 @@ def implement_config(
   init_lines = ["#define INIT_CALLS"]
   init_decls = []
   for init in module_contents["Init"]:
-    init_lines.append("  " + init + "(proc);")
+    init_lines.append("  " + init + ",")
     init_decls.append("void " + init + "(struct PlayerInterfaceProc* proc);")
+
+  init_lines.append("  NULL")
 
   def_lines.append("\n".join(init_decls))
   def_lines.append(" \\\n".join(init_lines))

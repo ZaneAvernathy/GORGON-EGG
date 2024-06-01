@@ -19,6 +19,9 @@ void GE_Update(struct PlayerInterfaceProc* proc)
 
   proc->hoverFramecount++;
 
+  if ( proc->hoverFramecount < 0 )
+    proc->hoverFramecount = 0;
+
   if ( unit )
   {
     udp = GetUnitDataProc(proc);

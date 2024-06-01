@@ -5,13 +5,14 @@
 
 #ifndef TILEMAP_DESTINATION
   /* This dummy macro will have its definition replaced
-   * with a series of calls of the form
+   * with a series of function pointers, terminated with NULL.
+   * These functions are then called like
    * coords = SomeFunction(proc, coords);
    * for each <TilemapDestination> tag in a module.
    * Generally, there should be exactly one (from
    * whatever handles the window tilemap).
    */
-  #define TILEMAP_DESTINATION
+  #define TILEMAP_DESTINATION NULL
   #endif // TILEMAP_DESTINATION
 
 // These definitions should be overridden by a module or
@@ -25,15 +26,28 @@
   #define GE_HEIGHT 6
   #endif // GE_HEIGHT
 
+typedef struct Vec2 (*copytilemap_func) (struct PlayerInterfaceProc* proc, struct Vec2 coords);
+
+
+const copytilemap_func gCopyTilemapFunctions[] = {
+  TILEMAP_DESTINATION
+};
+
 
 void GE_CopyTilemap(struct PlayerInterfaceProc* proc)
 {
   /* Copy the entire window tilemap to the BG0 buffer.
    */
 
+  int i;
+  copytilemap_func copytilemap;
+
   struct Vec2 coords = {0, 0};
 
-  TILEMAP_DESTINATION;
+  for ( i = 0, copytilemap = gCopyTilemapFunctions[i]; copytilemap != NULL; i++, copytilemap = gCopyTilemapFunctions[i] )
+  {
+    coords = copytilemap(proc, coords);
+  }
 
   BgMapCopyRect(
       gUiTmScratchA,
