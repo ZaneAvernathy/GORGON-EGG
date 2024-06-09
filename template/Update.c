@@ -7,6 +7,14 @@ void GE_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp);
 
 struct UnitDataProc* GetUnitDataProc(struct PlayerInterfaceProc* proc);
 
+#ifndef UPDATE_ON_QUADRANT_CHANGE
+  /* When set to FALSE, the window will not
+   * automatically retract when the cursor quadrant
+   * changes.
+   */
+  #define UPDATE_ON_QUADRANT_CHANGE TRUE
+  #endif // UPDATE_ON_QUADRANT_CHANGE
+
 
 void GE_Update(struct PlayerInterfaceProc* proc)
 {
@@ -47,7 +55,7 @@ void GE_Update(struct PlayerInterfaceProc* proc)
     windowX = sPlayerInterfaceConfigLut[proc->cursorQuadrant].xMinimug;
     windowY = sPlayerInterfaceConfigLut[proc->cursorQuadrant].yMinimug;
 
-    if ( (cursorQuadrant == proc->cursorQuadrant) || ((cursorX == windowX) && (cursorY == windowY)) )
+    if ( (UPDATE_ON_QUADRANT_CHANGE ? (cursorQuadrant == proc->cursorQuadrant) : TRUE) || ((cursorX == windowX) && (cursorY == windowY)) )
     {
       ProcGoto((Proc*)proc, GE_PROC_CHECK_FOR_UNIT);
       return;
