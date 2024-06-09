@@ -27,3 +27,6 @@ export convert_tilemap := $(PYTHON) $(TOOLSDIR)/convert_tilemap.py
 
 %.4bpp: %.png
 	@$(png2dmp) $< -o $@
+
+%.pal: %.png
+	@$(png2dmp) $< -po $@
