@@ -6,6 +6,9 @@ include Tools.mak
 include Code.mak
 
 build: backup clean_output template config deps
+ifeq (,$(findstring s,$(firstword -$(MAKEFLAGS))))
+	@echo GORGON-EGG built successfully!
+endif
 
 .PHONY: build template backup clean_output config clean
 .DEFAULT_GOAL := build
