@@ -58,8 +58,8 @@ endef
 export PYTHON := \
   $(shell \
     { \
-      command -v $(TOOLSDIR)/venv/Scripts/python$(COMPAT_SUFFIX) || \
-      command -v $(TOOLSDIR)/venv/bin/python$(COMPAT_SUFFIX) ; \
+      command -v $(TOOLSDIR)/venv/Scripts/python.exe || \
+      command -v $(TOOLSDIR)/venv/bin/python ; \
     } \
   )
 
