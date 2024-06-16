@@ -281,7 +281,7 @@ def read_module(module_path: Path, module_contents: dict):
       case "init":
         standard_call("Init")
 
-      case "InvalidPosition":
+      case "invalidposition":
         standard_call("InvalidPosition")
 
 
@@ -384,7 +384,7 @@ def implement_config(
   invalid_lines = ["#define INVALID_POSITION_CALLS"]
   invalid_decls = []
   for invalid in module_contents["InvalidPosition"]:
-    invalid_lines.append("  " + invalid_lines + ",")
+    invalid_lines.append("  " + invalid + ",")
     invalid_decls.append("bool " + invalid + "(struct PlayerInterfaceProc* proc, int quadrant, bool invalidPosition);")
 
   invalid_lines.append("  NULL")
