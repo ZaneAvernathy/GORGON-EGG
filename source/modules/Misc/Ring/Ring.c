@@ -11,10 +11,10 @@ struct UnitDataProc* GetUnitDataProc(struct PlayerInterfaceProc* proc);
 
 // These helpers get the coordinates of the center of the ring.
 
-#define RING_X ((proc->xCursor * 16) + 8)
-#define RING_Y ((proc->yCursor * 16) + 8)
-#define RING_PREVIOUS_X ((proc->xCursorPrevious * 16) + 8)
-#define RING_PREVIOUS_Y ((proc->yCursorPrevious * 16) + 8)
+#define RING_X ((proc->xCursor * 16) - (gGameState.cameraRealPos.x) + 8)
+#define RING_Y ((proc->yCursor * 16) - (gGameState.cameraRealPos.y) + 8)
+#define RING_PREVIOUS_X ((proc->xCursorPrevious * 16) - (gGameState.cameraRealPos.x) + 8)
+#define RING_PREVIOUS_Y ((proc->yCursorPrevious * 16) - (gGameState.cameraRealPos.y) + 8)
 
 
 static const struct ObjData* RingFrames[6];

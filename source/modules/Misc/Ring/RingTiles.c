@@ -297,7 +297,7 @@
     /* Gets the unit's tile's item icon layout for the unit's item count.
      */
 
-    u8 variant = RingTiles[proc->yCursor][proc->xCursor];
+    u8 variant = RingTiles[proc->yCursor - (gGameState.cameraRealPos.y / 16)][proc->xCursor - (gGameState.cameraRealPos.x / 16)];
 
     return RingTileLUT[variant]->itemVariants[count];
   }
