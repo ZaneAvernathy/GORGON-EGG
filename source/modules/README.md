@@ -120,7 +120,7 @@ The second form of the `ASMDefinition` tag has one attribute, `Name`, which is u
 Example:
 ```xml
 <ASMDefinition Name="Foo">
-  .macro Foo Frob, Baz
+  .macro Foo, Frob, Baz
     .long \Frob, \Baz
   .endm
 </ASMDefinition>
