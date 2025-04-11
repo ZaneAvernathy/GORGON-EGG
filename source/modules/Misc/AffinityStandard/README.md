@@ -5,7 +5,7 @@ AffinityStandard
 
 This module draws an icon for the selected unit's affinity. Nothing is drawn if the unit has no affinity.
 
-```
+---
 
 Definitions:
 
