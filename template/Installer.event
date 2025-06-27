@@ -17,7 +17,7 @@
      * RESERVE(1200, 1300)
      * ORG 1210; BYTE 1 // Trying to overwrite the area errors.
      */
-    #define RESERVE(Start, End) "PROTECT Start End; ASSERT (End - CURRENTOFFSET);"
+    #define RESERVE(Start, End) "PROTECT Start End; ASSERT ((End | 0x08000000) - CURRENTOFFSET);"
 
   #endif // RESERVE
 
