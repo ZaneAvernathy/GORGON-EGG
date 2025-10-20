@@ -1,9 +1,13 @@
 
-#include "gbafe.h"
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
-struct Vec2 GE_GetWindowPosition(struct PlayerInterfaceProc* proc);
+
+int GetItemIconId(int item);
+void LoadIconPalette(unsigned int iconType, unsigned int paletteIndex);
+void LoadIconObjectGraphics(int iconID, int rootTile);
+int GetUnitItemCount(const struct Unit* unit);
+
 
 #define INVENTORY_ICON_TILE (OAM2_CHR(INVENTORY_ICON_BASE_TILE) | OAM2_LAYER(0) | OAM2_PAL(INVENTORY_ICON_PALETTE))
 
@@ -12,11 +16,11 @@ void FullInventoryAlternating_Static(struct PlayerInterfaceProc* proc, struct Un
 {
   /* Copies a unit's inventory icons to VRAM.
    *
-   * Also copies the palette.
+   * Also copies the item palette.
    */
 
   int i;
-  int item;
+  u16 item;
 
   for ( i = 0; i < GetUnitItemCount(udp->unit); i++ )
   {
@@ -28,7 +32,7 @@ void FullInventoryAlternating_Static(struct PlayerInterfaceProc* proc, struct Un
       );
   }
 
-  LoadIconPalette(0, INVENTORY_ICON_PALETTE);
+  LoadIconPalette(ITEM_ICON_PALETTE_ITEMS, INVENTORY_ICON_PALETTE);
 
   return;
 }
@@ -36,24 +40,37 @@ void FullInventoryAlternating_Static(struct PlayerInterfaceProc* proc, struct Un
 
 void FullInventoryAlternating_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
 {
-  /* Renders a unit's inventory icons to the window, occupying the space of a single icon, alternating every 64 frames.
+  /* Renders a unit's inventory icons to the window, as a single icon that alternates.
+   *
+   * Users can configure the time between alternating by editing the
+   * INVENTORY_ALTERNATE_FRAMES config definition. Users can also provide
+   * their own formula for determining the currently-dsplayed icon
+   * using the INVENTORY_ALTERNATE_FRAME_GETTER config definition.
    */
 
-  int i, itemCount;
-  struct Vec2 base_coords;
+  unsigned i, itemCount;
+  struct Vec2 baseCoords;
 
   itemCount = GetUnitItemCount(udp->unit);
 
-  if ( proc->busyFlag || (itemCount == 0) )
+  if ( proc->hideContents || (itemCount == 0) )
     return;
 
-  base_coords = GE_GetWindowPosition(proc);
+  baseCoords = UI1_GetWindowPosition(proc);
 
-  i = Mod((proc->hoverFramecount / 64), itemCount);
+  #ifdef INVENTORY_ALTERNATE_FRAME_GETTER
 
-  CallARM_PushToSecondaryOAM(
-      (base_coords.x * 8) + INVENTORY_ICON_X,
-      (base_coords.y * 8) + INVENTORY_ICON_Y,
+  i = INVENTORY_ALTERNATE_FRAME_GETTER;
+
+  #else
+
+  i = (proc->hoverFramecount / INVENTORY_ALTERNATE_FRAMES) % itemCount;
+
+  #endif // INVENTORY_ALTERNATE_FRAME_GETTER
+
+  PushToHiOAM(
+      (baseCoords.x * 8) + INVENTORY_ICON_X,
+      (baseCoords.y * 8) + INVENTORY_ICON_Y,
       &gObj_16x16,
       INVENTORY_ICON_TILE + (2 * i)
     );

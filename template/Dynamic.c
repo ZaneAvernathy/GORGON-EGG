@@ -1,5 +1,4 @@
 
-#include "gbafe.h"
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
@@ -8,7 +7,7 @@
    * with a series of function pointers, terminated with NULL.
    * These functions are called like
    * SomeFunction(proc, udp);
-   * for each <Dynamic> tag in a module.
+   * for each [[module.dynamics]] in a module.
    */
   #define DYNAMIC_CALLS NULL
   #endif // DYNAMIC_CALLS
@@ -21,7 +20,7 @@ const dynamic_func gDynamicFunctions[] = {
 };
 
 
-void GE_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
+void UI1_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
 {
   /* Draw dynamic elements.
    *

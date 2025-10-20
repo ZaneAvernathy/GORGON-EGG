@@ -1,25 +1,33 @@
 
-#include "gbafe.h"
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
-extern const struct ProcInstruction ProcGE[];
 
-struct NameStandardProc {
+void Text_InitDB(struct TextHandle* text, int width);
+void Text_Clear(struct TextHandle* text);
+int Text_GetStringTextCenteredPos(int width, const char* string);
+void Text_SetParameters(struct TextHandle* text, int padding, int color);
+void Text_DrawString(struct TextHandle* text, const char* string);
+void Text_Display(struct TextHandle* text, u16* tilemap);
+unsigned Text_GetStringTextWidth(const char* string);
+
+char* String_ExpandNames(void);
+char* GetStringFromIndex(int index);
+
+
+struct NameStandardProc
+{
   /* 00 */ PROC_FIELDS;
   /* 2C */ struct TextHandle nameText;
-
 };
 
-
 const char NameStandardProc_Name[] = "NameStandard";
-
 
 const struct ProcInstruction ProcNameStandard[] = {
   PROC_SET_NAME(&NameStandardProc_Name),
   PROC_SLEEP(0),
 
-  PROC_WHILE_EXISTS(ProcGE),
+  PROC_WHILE_PROC(ProcGORGON_EGG),
 
   PROC_END,
 };
@@ -27,32 +35,50 @@ const struct ProcInstruction ProcNameStandard[] = {
 
 void NameStandard_Static(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
 {
-  /* Draws a unit's name similarly to how vanilla does.
-   *
-   * This places the name centered within the given space.
+  /* Draws a unit's name.
    */
-  int padding;
-  char* nameString;
-  struct Unit* unit = udp->unit;
 
-  struct NameStandardProc* textProc = (struct NameStandardProc*)ProcFind(ProcNameStandard);
-  if (textProc == NULL)
+  unsigned padding;
+  char* nameString;
+
+  struct NameStandardProc* nameProc = (struct NameStandardProc*)ProcFind(ProcNameStandard);
+  if ( nameProc == NULL )
   {
-    textProc = (struct NameStandardProc*)START_PROC(ProcNameStandard, proc);
-    Text_InitDB(&textProc->nameText, NAME_WIDTH);
+    nameProc = (struct NameStandardProc*)START_PROC(ProcNameStandard, proc);
+    Text_InitDB(&nameProc->nameText, NAME_STANDARD_WIDTH);
   }
 
-  Text_Clear(&textProc->nameText);
+  Text_Clear(&nameProc->nameText);
 
-  nameString = GetStringFromIndex(unit->pCharacterData->nameTextId);
-  nameString = String_ExpandTactName();
+  nameString = GetStringFromIndex(udp->unit->pCharacterData->nameTextId);
 
-  padding = Text_GetStringTextCenteredPos((NAME_WIDTH * 8), nameString);
+  #if defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
 
-  Text_SetParameters(&textProc->nameText, padding, NAME_COLOR);
-  Text_DrawString(&textProc->nameText, nameString);
+  nameString = String_ExpandNames();
 
-  Text_Display(&textProc->nameText, gUiTmScratchA + TILEMAP_INDEX(NAME_X, NAME_Y));
+  #endif // defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
+
+  if ( NAME_STANDARD_ALIGNMENT == NAME_CENTERED )
+    padding = Text_GetStringTextCenteredPos((NAME_STANDARD_WIDTH * 8), nameString);
+
+  else if ( NAME_STANDARD_ALIGNMENT == NAME_LEFT_ALIGNED )
+    padding = 0;
+
+  else if ( NAME_STANDARD_ALIGNMENT == NAME_RIGHT_ALIGNED )
+    padding = (NAME_STANDARD_WIDTH * 8) - Text_GetStringTextWidth(nameString);
+
+  else if ( NAME_STANDARD_ALIGNMENT == NAME_SHIFTED_RIGHT )
+    padding = ( NAME_STANDARD_SHIFT_CONDITION ) ? NAME_STANDARD_SHIFT : 0;
+
+  else
+    padding = Text_GetStringTextCenteredPos((NAME_STANDARD_WIDTH * 8), nameString);
+
+  Text_SetParameters(&nameProc->nameText, padding, NAME_STANDARD_COLOR);
+  Text_DrawString(&nameProc->nameText, nameString);
+
+  Text_Display(&nameProc->nameText, gUiTmScratchA + TILEMAP_INDEX(NAME_STANDARD_X, NAME_STANDARD_Y));
 
   return;
 }
+
+

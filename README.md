@@ -1,92 +1,115 @@
 
 # GORGON-EGG
 
-## Purpose
+## What is `GORGON-EGG`?
 
-`GORGON-EGG` is a replacement for Fire Emblem: The Sacred Stones' "Panel" mode unit window, which is the window displayed when the cursor is over a unit during a chapter map. It is designed to be used within an [Event Assembler](https://feuniverse.us/t/event-assembler/1749) buildfile. `GORGON-EGG` is designed to be configured by users. It uses (mostly) self-contained groups of assets called `modules` to provide window functionality such as displaying unit statistics, graphics (notably, the unit's 32x32px small portrait, commonly called a "chibi" or "minimug"), or to handle functional tasks like controlling when or how the window is displayed. User configuration is handled by a `config` file, which allows users to easily add, remove, and reposition elements. A config file is a text file with a .xml extension (commonly named `Config.xml`), which allows configurations to be easily shared and adapted.
+`GORGON-EGG` is a replacement for Fire Emblem: The Sacred Stones' "Panel" mode unit window (the window that is displayed in the corner of the screen when the cursor is over a unit during a chapter map). It is designed to be used within an [Event Assembler](https://feuniverse.us/t/1749) buildfile.
+
+`GORGON-EGG` is designed...
+
+- ...to be configured
+
+  Configuring `GORGON-EGG` is as simple as editing a text file (called the `config`) and requires no programming. Users can easily add, remove, and customize aspects of the window (which are packaged into `module`s) by editing the `config`. `Module`s include their own `README` files which explain their purpose and how they can be customized. The [`config` doc](doc/config.md) file provides details on how to create `config`s.
+
+  <details><summary>Example: a snippet of a config</summary>
+
+  ```toml
+
+  # Adding a module to the config
+
+  # Add the unit's equipped weapon's name to the window
+  [[config.modules]]
+    name = "EquipNameStandard"
+  
+  # Most visible modules have configurable positions
+  # relative to the upper-left corner of the window
+  [[config.definitions]]
+    name = "EQUIP_NAME_X"
+    value = 1
+  
+  [[config.definitions]]
+    name = "EQUIP_NAME_Y"
+    value = 1
+  
+  # Some modules have extra customization options
+  [[config.definitions]]
+    name = "EQUIP_NAME_COLOR"
+    value = "TEXT_COLOR_BLUE"
+  
+  [[module.definitions]]
+    name = "EQUIP_NAME_ALIGNMENT"
+    value = "EQUIP_NAME_LEFT_ALIGNED"
+  
+  ```
+
+  </details>
+
+- ...to be edited
+
+  It uses (mostly) self-contained groups of assets (called `module`s) to provide window elements such as displaying unit statistics, drawing graphics (such as the unit's 32x32-pixel small portrait, commonly called a `chibi` or `minimug`), or to handle functional tasks like controlling when or how the window is displayed. Advanced users can provide their own custom `module`s (or edits to the prepackaged `module`s that `GORGON-EGG` comes with) without overwriting existing `module`s by placing them into the `custom/modules` folder. The [`module` doc](doc/module.md) file provides details on how to create `module`s.
+
+  <details><summary>Example: a snippet of a module</summary>
+  
+  ```toml
+  
+  [module]
+    name = "TilemapStandard"
+  
+  [[module.statics]]
+    name = "TilemapStandard_Static"
+    file = "TilemapStandard.lyn.event"
+  
+  # ...
+  
+  [[module.includes]]
+    file = "UI1Tilemap_FE6J.lyn.event"
+    games = [ "FE6J" ]
+  
+  # ...
+  
+  [[module.includes]]
+    file = "UI1Tilemap_FE7U.lyn.event"
+    games = [ "FE7U" ]
+  
+  ```
+  
+  </details>
+
+- ...to be shared
+
+  There are two main ways to share a `GORGON-EGG` window: by sharing the `output` folder produced by building `GORGON-EGG`, or by sharing the `config` file (and any custom `module`s used by it). A shared `output` folder no longer requires `GORGON-EGG` or its dependencies, but is unable to be reconfigured. A shared `config` requires the recipient to build the window using `GORGON-EGG`, but that `config` is able to be customized by the recipient.
+
+You can find more information about `GORGON-EGG` in the [doc folder](doc).
 
 ## Acronym
 
 The full name of this project is `Modular, User-configurable, Makefile-based, C Language, "Panel"-setting Unit Window Replacement With No Pronounceable Acronym`, which is, for obvious reasons, abbreviated `GORGON-EGG`.
 
-## Prerequisites
+## Setting up and using `GORGON-EGG`
 
-`GORGON-EGG` has a few requirements that must be met before building:
+To set up `GORGON-EGG`:
 
-* A [Python3.11+](https://www.python.org/downloads/) virtual environment named [`venv`](https://docs.python.org/3/library/venv.html) must be placed in the `tools` folder (normally, by navigating to the `tools` folder and invoking `python -m venv venv`).
-* A devkitARM installation from [devkitPro](https://devkitpro.org/wiki/Getting_Started), with the path to devkitARM in your environment variables (as `DEVKITARM`)
-* A copy of [nat's FE-CLib](https://github.com/StanHash/FE-CLib) named `CLib` in the `tools` folder
-* A copy of [nat's lyn](https://github.com/StanHash/lyn) named `lyn` in the `tools` folder
-* A copy of [nat's ea-dep](https://github.com/StanHash/ea-dep) named `ea-dep` in the `tools` folder
-* A copy of [CrazyColorz5's png2dmp](https://feuniverse.us/t/1764) named `png2dmp` in the `tools` folder
-* An installation of [GNU Make](https://www.gnu.org/software/make/) (likely, your installation of devkitARM already provides `Make`)
+1. Acquire `GORGON-EGG`, either:
+   - (recommended) From the [releases](https://github.com/ZaneAvernathy/GORGON-EGG/releases) page
+   - (advanced users) From the source. If working from the source, build `GORGON-EGG`'s internal tools ([`shadowshot`](tools/shadowshot), [`neleras`](tools/neleras), and [`evileye`](tools/evileye)) using the `Makefile`s in their respective folders. This requires the [Rust](https://www.rust-lang.org/) build tool `cargo`.
+2. Install devkitARM from [devkitPro](https://devkitpro.org/wiki/Getting_Started)
+   - Be sure that the path to devkitARM is in your environment variables (as `DEVKITARM`)
+3. Install [GNU Make](https://www.gnu.org/software/make/) (likely, your installation of devkitARM already provides `Make`)
+4. Acquire and place the following tools into the `tools` folder:
+   - [nat's lyn](https://github.com/StanHash/lyn) named `lyn`
+   - [nat's ea-dep](https://github.com/StanHash/ea-dep) named `ea-dep`
+   - [CrazyColorz5's png2dmp](https://feuniverse.us/t/1764) named `png2dmp`
 
-Afterward, you can build `GORGON-EGG` by running `make` in the root directory. This will generate the file `Installer.event` in the `output` folder, which you can then `#include` as part of your Event Assembler buildfile.
+Afterward, you can build your configuration by running `make` in a terminal from the `GORGON-EGG` folder. By default, `GORGON-EGG` configurations are built for FE8U. To target another game, you can run `make <game>` where `<game>` is any one of: `fe6j`, `fe7u`, `fe7j`, `fe8u`, `fe8j`.
 
-## User Configuration
+Your buildfile should define one of `_FE6J_`, `_FE7U_`, `_FE7J_`, `_FE8U_`, or `_FE8J_`, matching the target game. Alternatively, you can pass this in when running Event Assembler using the option `-D:<GAME>=1` where `<GAME>` is one of the options listed above.
 
-Configuring the window is done by editing the `Config.xml` file within the `config` folder. The `Config.xml` file is an XML-formatted text document. It consists of exactly one set of `Config` tags, between which there are any number of `Module`, `Definition`, or `ASMDefinition` tags.
+## Miscellanea
 
-There are example configs in the [example folder](example).
+`GORGON-EGG` aims to be both user-friendly and developer-friendly.
 
-### Module READMEs
+`GORGON-EGG` tries to minimize its installation footprint by only including files requested by the config. To de-duplicate code, common functionality is split into `internal` files. These files are included exactly once even if used by multiple things. Configuration variables are collected into a common header used by code at compile-time to avoid indirect references.
 
-`Module`s, located in subfolders within the [modules folder](source/modules), come with a `README.md` file that gives the module's name, a description of the module, and the definitions/ASM definitions it provides.
+Users are not required to know anything about the underlying code in order to configure `GORGON-EGG`. Sharing a configuration typically involves sending one file, either the `config` or a zipped `output` folder.
 
-### Module tags
-
-A `Module` tag selects a module to be added to the window. A module adds some kind of functionality or element to the window. For example, to add a minimug to your window, you would add the following line to your config:
-```xml
-<Module Name="MinimugStandard"/>
-```
-
-The `Name` attribute here should be the name of the module you wish to add.
-
-### Definition tags
-
-`Definition` tags are the main way for users to configure the modules that they include. 
-
-A `Definition` tag has two forms. The main form has two attributes, `Name` and `Value`. For example, to change the X coordinate of the bar drawn by the [HPBarStandard module](source/modules/HPBarStandard), you would add the following line to your config (and change the `Value` attribute):
-```xml
-<Definition Name="HPBAR_X" Value="5"/>
-```
-
-The second form of the `Definition` tag has only the `Name` attribute. The tag's text field is used to generate the definition. For example:
-```xml
-<Definition Name="Foo">
-  #define Foo 42
-</Definition>
-```
-
-This second form is rarely needed inside configs.
-
-### ASMDefinition tags
-
-`ASMDefinition` tags have the same forms and styling of `Definition` tags, but they affect THUMB assembly sources instead of C sources. These are rarely used in configs.
-
-Here's an example of an `ASMDefinition`:
-```xml
-<ASMDefinition Name="Frob">
-  .macro Frob Foo, Bar
-    .long \Foo, \Bar
-  .endm
-</ASMDefinition>
-```
-
-## Custom modules
-
-GORGON-EGG provides the [custom](custom) folder for user-provided modules. This allows users to create custom modules or modules that override/replace prepackaged modules without having to disrupt existing files. See the [modules README](source/modules/README.md) for more details on how to make a module.
-
-## Misc. features, design philosophy
-
-GORGON-EGG automatically creates backups of your last 5 builds in the `backups` folder. A backup is created even if nothing has been changed, so be careful.
-
----
-
-GORGON-EGG aims to be both user-friendly and developer-friendly.
-
-GORGON-EGG avoids dead code by installing only what is needed based on the user's config. It splits functionality into `internal` files that can be shared across multiple modules (and only included in the final output once) in order to save space. Configuration variables are baked-in at compile time to avoid cumbersome indirect references.
-
-Users do not need to know anything about the underlying code in order to configure the window, and can easily share their configurations without needing to distribute more than a single file, in most instances.
-
-Developers are free to write their modules in either C or THUMB assembly. Prepackaged modules are written in C here for maximum clarity. GORGON-EGG provides tools for automatically building ASM and C sources, along with other utilities for formatting other files. Developers can add new modules without modifying any other files.
+`GORGON-EGG`'s prepackaged modules are written in C, and the system is set up to build requested outputs from both C and assembly sources automatically. Developers can provide new `module`s and `internal` files without modifying any other part of `GORGON-EGG`. Developers can provide portable overrides to `GORGON-EGG`'s prepackaged `module`s and `internal` files by placing the modified versions in the `custom` folder.

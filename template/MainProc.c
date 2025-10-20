@@ -1,50 +1,42 @@
 
-#include "gbafe.h"
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
-void GE_Init(struct PlayerInterfaceProc* proc);
-void GE_Reset(struct PlayerInterfaceProc* proc);
-void GE_Extend(struct PlayerInterfaceProc* proc);
-void GE_Update(struct PlayerInterfaceProc* proc);
-void GE_Retract(struct PlayerInterfaceProc* proc);
-void GE_CheckForUnit(struct PlayerInterfaceProc* proc);
 
-extern const char* GE_Name;
+const struct ProcInstruction ProcGORGON_EGG[] = {
+    PROC_SET_NAME(&UI1_Name),
+    PROC_YIELD,
 
-
-const struct ProcInstruction ProcGE[] = {
-    PROC_SET_NAME(&GE_Name),
-    PROC_SLEEP(0),
-
-    PROC_CALL_ROUTINE(GE_Init),
+    PROC_CALL(UI1_Init),
 
     // fallthrough
 
-  PROC_LABEL(GE_PROC_EXTEND),
+  PROC_LABEL(UI1_PROC_EXTEND),
 
-    PROC_WHILE_EXISTS(gProc_CameraMovement),
+    #if defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
+      PROC_WHILE_PROC(gProc_CameraMovement),
+    #endif // defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
 
-    PROC_LOOP_ROUTINE(GE_Reset),
-    PROC_LOOP_ROUTINE(GE_Extend),
-
-    // fallthrough
-
-  PROC_LABEL(GE_PROC_UPDATE),
-
-    PROC_LOOP_ROUTINE(GE_Update),
+    PROC_REPEAT(UI1_Reset),
+    PROC_REPEAT(UI1_Extend),
 
     // fallthrough
 
-  PROC_LABEL(GE_PROC_RETRACT),
+  PROC_LABEL(UI1_PROC_UPDATE),
 
-    PROC_LOOP_ROUTINE(GE_Retract),
-    PROC_GOTO(GE_PROC_EXTEND),
+    PROC_REPEAT(UI1_Update),
 
-  PROC_LABEL(GE_PROC_CHECK_FOR_UNIT),
+    // fallthrough
 
-    PROC_CALL_ROUTINE(GE_CheckForUnit),
-    PROC_GOTO(GE_PROC_UPDATE),
+  PROC_LABEL(UI1_PROC_RETRACT),
+
+    PROC_REPEAT(UI1_Retract),
+    PROC_GOTO(UI1_PROC_EXTEND),
+
+  PROC_LABEL(UI1_PROC_CHECK_FOR_UNIT),
+
+    PROC_CALL(UI1_CheckForUnit),
+    PROC_GOTO(UI1_PROC_UPDATE),
 
   PROC_END,
 };

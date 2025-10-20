@@ -1,9 +1,13 @@
 
-#include "gbafe.h"
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
-struct Vec2 GE_GetWindowPosition(struct PlayerInterfaceProc* proc);
+
+int GetItemIconId(int item);
+void LoadIconPalette(unsigned int iconType, unsigned int paletteIndex);
+void LoadIconObjectGraphics(int iconID, int rootTile);
+int GetUnitItemCount(const struct Unit* unit);
+
 
 #define INVENTORY_ICON_TILE (OAM2_CHR(INVENTORY_ICON_BASE_TILE) | OAM2_LAYER(0) | OAM2_PAL(INVENTORY_ICON_PALETTE))
 
@@ -12,11 +16,11 @@ void FullInventoryStandard_Static(struct PlayerInterfaceProc* proc, struct UnitD
 {
   /* Copies a unit's inventory icons to VRAM.
    *
-   * Also copies the palette.
+   * Also copies the item palette.
    */
 
   int i;
-  int item;
+  u16 item;
 
   for ( i = 0; i < GetUnitItemCount(udp->unit); i++ )
   {
@@ -28,7 +32,7 @@ void FullInventoryStandard_Static(struct PlayerInterfaceProc* proc, struct UnitD
       );
   }
 
-  LoadIconPalette(0, INVENTORY_ICON_PALETTE);
+  LoadIconPalette(ITEM_ICON_PALETTE_ITEMS, INVENTORY_ICON_PALETTE);
 
   return;
 }
@@ -44,14 +48,14 @@ void FullInventoryStandard_Dynamic(struct PlayerInterfaceProc* proc, struct Unit
 
   itemCount = GetUnitItemCount(udp->unit);
 
-  if ( proc->busyFlag || (itemCount == 0) )
+  if ( proc->hideContents || (itemCount == 0) )
     return;
 
-  base_coords = GE_GetWindowPosition(proc);
+  base_coords = UI1_GetWindowPosition(proc);
 
   for ( i = 0; i < itemCount; i++ )
   {
-    CallARM_PushToSecondaryOAM(
+    PushToHiOAM(
         ((base_coords.x + (i * 2)) * 8) + INVENTORY_ICON_X,
         (base_coords.y * 8) + INVENTORY_ICON_Y,
         &gObj_16x16,

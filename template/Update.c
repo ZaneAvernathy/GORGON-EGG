@@ -1,11 +1,7 @@
 
-#include "gbafe.h"
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
-void GE_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp);
-
-struct UnitDataProc* GetUnitDataProc(struct PlayerInterfaceProc* proc);
 
 #ifndef UPDATE_ON_QUADRANT_CHANGE
   /* When set to FALSE, the window will not
@@ -16,11 +12,8 @@ struct UnitDataProc* GetUnitDataProc(struct PlayerInterfaceProc* proc);
   #endif // UPDATE_ON_QUADRANT_CHANGE
 
 
-void GE_Update(struct PlayerInterfaceProc* proc)
+void UI1_Update(struct PlayerInterfaceProc* proc)
 {
-  int cursorQuadrant;
-  s8 cursorX, cursorY;
-  s8 windowX, windowY;
   struct UnitDataProc* udp;
 
   struct Unit* unit = GetUnitAtCursor();
@@ -33,7 +26,7 @@ void GE_Update(struct PlayerInterfaceProc* proc)
   if ( unit )
   {
     udp = GetUnitDataProc(proc);
-    GE_Dynamic(proc, udp);
+    UI1_Dynamic(proc, udp);
   }
 
   proc->xCursorPrevious = proc->xCursor;
@@ -47,23 +40,45 @@ void GE_Update(struct PlayerInterfaceProc* proc)
 
   if ( unit && !(ProcFind(gProc_CameraMovement)) )
   {
-    cursorQuadrant = GetCursorQuadrant();
 
-    cursorX = sPlayerInterfaceConfigLut[cursorQuadrant].xMinimug;
-    cursorY = sPlayerInterfaceConfigLut[cursorQuadrant].yMinimug;
+    #if defined(__FE6J__)
 
-    windowX = sPlayerInterfaceConfigLut[proc->cursorQuadrant].xMinimug;
-    windowY = sPlayerInterfaceConfigLut[proc->cursorQuadrant].yMinimug;
+    int side = GetUnitMapUiScreenSide();
 
-    if ( (UPDATE_ON_QUADRANT_CHANGE ? (cursorQuadrant == proc->cursorQuadrant) : TRUE) || ((cursorX == windowX) && (cursorY == windowY)) )
+    if ( (proc->windowSide == side) || side == UI_SIDE_CENTER )
     {
-      ProcGoto((Proc*)proc, GE_PROC_CHECK_FOR_UNIT);
+      ProcGoto((Proc*)proc, UI1_PROC_CHECK_FOR_UNIT);
       return;
     }
 
+    #endif // defined(__FE6J__)
+
+    #if defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
+
+    int cursorQuadrant = GetCursorQuadrant();
+
+    s8 cursorX = sPlayerInterfaceConfigLut[cursorQuadrant].xMinimug;
+    s8 cursorY = sPlayerInterfaceConfigLut[cursorQuadrant].yMinimug;
+
+    s8 windowX = sPlayerInterfaceConfigLut[proc->cursorQuadrant].xMinimug;
+    s8 windowY = sPlayerInterfaceConfigLut[proc->cursorQuadrant].yMinimug;
+
+    if ( (UPDATE_ON_QUADRANT_CHANGE ? (cursorQuadrant == proc->cursorQuadrant) : TRUE) || ((cursorX == windowX) && (cursorY == windowY)) )
+    {
+      ProcGoto((Proc*)proc, UI1_PROC_CHECK_FOR_UNIT);
+      return;
+    }
+
+    #endif // defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
+
   }
 
+  #if defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
+
   proc->isRetracting = TRUE;
+
+  #endif // defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
+
   BreakProcLoop((Proc*)proc);
 
   return;

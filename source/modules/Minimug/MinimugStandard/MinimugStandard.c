@@ -1,17 +1,15 @@
 
-#include "gbafe.h"
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
-#define GetUnitMinimugID GetUnitMiniPortraitId
 
-#define DrawMinimug PutFaceChibi
-void DrawMinimug(int portraitID, u16* tilemapPosition, int baseTile, int paletteID, s8 isFlipped);
+int GetUnitMinimugID(struct Unit* unit);
+void DrawMinimug(int portraitID, u16* tilemap, int baseTile, int paletteID, s8 isFlipped);
 
 
 void MinimugStandard_Static(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
 {
-  /* Draw the minimug the way that vanilla does.
+  /* Draws the unit's minimug the way that vanilla does.
    */
 
   int portraitID;
@@ -19,17 +17,21 @@ void MinimugStandard_Static(struct PlayerInterfaceProc* proc, struct UnitDataPro
 
   portraitID = GetUnitMinimugID(unit);
 
-  // This is for Lyon
+  // This is used in FE8 for Lyon
+
+  #if defined(__FE8U__) || defined(__FE8J__)
+
   if ( unit->state & US_BIT23 )
     portraitID++;
 
+  #endif // defined(__FE8U__) || defined(__FE8J__)
+
   DrawMinimug(
       portraitID,
-      gUiTmScratchA + ((32 * MINIMUG_Y) + MINIMUG_X),
+      gUiTmScratchA + TILEMAP_INDEX(MINIMUG_X, MINIMUG_Y),
       MINIMUG_BASE_TILE,
       MINIMUG_PALETTE,
       FALSE
     );
 
-  return;
 }

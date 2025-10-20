@@ -1,5 +1,4 @@
 
-#include "gbafe.h"
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
@@ -8,7 +7,7 @@
    * with a series of function pointers, terminated with NULL.
    * These functions are then called like
    * SomeFunction(proc);
-   * for each <Retract> tag in a module.
+   * for each [[module.retracts]] in a module.
    * Generally, there should be exactly one
    * (from whatever handles extending/retracting).
    */
@@ -23,7 +22,7 @@ const retract_func gRetractFunctions[] = {
 };
 
 
-void GE_Retract(struct PlayerInterfaceProc* proc)
+void UI1_Retract(struct PlayerInterfaceProc* proc)
 {
   /* Retract the window every cycle.
    *

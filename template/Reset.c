@@ -1,5 +1,4 @@
 
-#include "gbafe.h"
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
@@ -7,20 +6,15 @@
   /* This dummy macro will have its definition replaced
    * with a series of function pointers, terminated with NULL.
    * These functions are then called like
-   * invalidPosition |= SomeFunction(proc, quadrant, invalidPosition);
-   * for each <InvalidPosition> tag in a module.
+   * invalidPosition |= SomeFunction(proc, invalidPosition);
+   * for each [[module.invalid_positions]] in a module.
    * Generally, there should be only one
    * (from whatever handles extending/retracting).
    */
   #define INVALID_POSITION_CALLS NULL
   #endif // INVALID_POSITION_CALLS
 
-void GE_Static(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp);
-void GE_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp);
-
-struct UnitDataProc* GetUnitDataProc(struct PlayerInterfaceProc* proc);
-
-typedef bool (*invalidposition_func) (struct PlayerInterfaceProc* proc, int quadrant, bool invalidPosition);
+typedef bool (*invalidposition_func) (struct PlayerInterfaceProc* proc, bool invalidPosition);
 
 
 const invalidposition_func gInvalidPositionFunctions[] = {
@@ -28,7 +22,7 @@ const invalidposition_func gInvalidPositionFunctions[] = {
 };
 
 
-void GE_Reset(struct PlayerInterfaceProc* proc)
+void UI1_Reset(struct PlayerInterfaceProc* proc)
 {
   /* Check if the window needs to be rebuilt.
    */
@@ -37,40 +31,58 @@ void GE_Reset(struct PlayerInterfaceProc* proc)
   invalidposition_func invalid;
 
   struct UnitDataProc* udp;
-  int invalidPosition, quadrant;
+  bool invalidPosition;
 
   struct Unit* unit = GetUnitAtCursor();
 
   if ( !unit )
     return;
 
-  proc->busyFlag = TRUE;
+  proc->hideContents = TRUE;
+
+  #if defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
+
   proc->cursorQuadrant = GetCursorQuadrant();
 
-  quadrant = GetWindowQuadrant(
-      sPlayerInterfaceConfigLut[proc->cursorQuadrant].xMinimug,
-      sPlayerInterfaceConfigLut[proc->cursorQuadrant].yMinimug
-    );
+  #endif // defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
 
   invalidPosition = FALSE;
 
   for ( i = 0, invalid = gInvalidPositionFunctions[i]; invalid != NULL; i++, invalid = gInvalidPositionFunctions[i] )
   {
-    invalidPosition |= invalid(proc, quadrant, invalidPosition);
+    invalidPosition |= invalid(proc, invalidPosition);
   }
 
   if ( invalidPosition )
     return;
 
+  #if defined(__FE6J__)
+
+  proc->windowSide = GetUnitMapUiScreenSide();
+
+  if ( proc->windowSide == UI_SIDE_CENTER )
+    proc->windowSide = UI_SIDE_RIGHT;
+
+  #endif // defined(__FE6J__)
+
+  #if defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
+
+  int quadrant = GetWindowQuadrant(
+      sPlayerInterfaceConfigLut[proc->cursorQuadrant].xMinimug,
+      sPlayerInterfaceConfigLut[proc->cursorQuadrant].yMinimug
+    );
+
   proc->windowQuadrant = quadrant;
+
+  #endif // defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
 
   proc->xCursor = gGameState.cursorMapPos.x;
   proc->yCursor = gGameState.cursorMapPos.y;
 
   udp = GetUnitDataProc(proc);
 
-  GE_Static(proc, udp);
-  GE_Dynamic(proc, udp);
+  UI1_Static(proc, udp);
+  UI1_Dynamic(proc, udp);
 
   BreakProcLoop((Proc*)proc);
 

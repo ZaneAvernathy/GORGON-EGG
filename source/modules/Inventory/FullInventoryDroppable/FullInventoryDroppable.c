@@ -1,26 +1,33 @@
 
-#include "gbafe.h"
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
-struct Vec2 GE_GetWindowPosition(struct PlayerInterfaceProc* proc);
+
+int GetItemIconId(int item);
+void LoadIconPalette(unsigned int iconType, unsigned int paletteIndex);
+void LoadIconObjectGraphics(int iconID, int rootTile);
+int GetUnitItemCount(const struct Unit* unit);
+void RegisterTileGraphics(const void* source, void* target, unsigned size);
+
 
 #define INVENTORY_ICON_TILE (OAM2_CHR(INVENTORY_ICON_BASE_TILE) | OAM2_LAYER(0) | OAM2_PAL(INVENTORY_ICON_PALETTE))
 #define DROPPABLE_ICON_TILE (OAM2_CHR(DROPPABLE_ICON_BASE_TILE) | OAM2_LAYER(0) | OAM2_PAL(DROPPABLE_ICON_PALETTE))
 
-extern const u8 gDroppableItemIcon[(1 * CHR_SIZE)];
+#define DROPPABLE_ICON_ADDRESS (void*)((DROPPABLE_ICON_BASE_TILE * CHR_SIZE) + VRAM_OBJ)
+
+extern const u8 gDroppableItemIcon[(1 * 1 * CHR_SIZE)];
+extern const u16 gDroppableItemIconPalette[16];
 
 
 void FullInventoryDroppable_Static(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
 {
   /* Copies a unit's inventory icons to VRAM.
    *
-   * Also copies the palettes and droppables icon.
+   * Also copies the item palette and droppable icon.
    */
 
   int i;
-  int item;
-  void* graphicsDest;
+  u16 item;
 
   for ( i = 0; i < GetUnitItemCount(udp->unit); i++ )
   {
@@ -32,14 +39,10 @@ void FullInventoryDroppable_Static(struct PlayerInterfaceProc* proc, struct Unit
       );
   }
 
-  LoadIconPalette(0, INVENTORY_ICON_PALETTE);
+  LoadIconPalette(ITEM_ICON_PALETTE_ITEMS, INVENTORY_ICON_PALETTE);
 
-  // Copy the droppable item palette and graphics.
-
-  graphicsDest = (void*)((DROPPABLE_ICON_BASE_TILE * CHR_SIZE) + VRAM_OBJ);
-
-  RegisterTileGraphics(gDroppableItemIcon, graphicsDest, sizeof(gDroppableItemIcon));
-  ApplyPalette(gPal_MiscUIGraphics, DROPPABLE_ICON_PALETTE);
+  RegisterTileGraphics(gDroppableItemIcon, DROPPABLE_ICON_ADDRESS, sizeof(gDroppableItemIcon));
+  ApplyPalette(gDroppableItemIconPalette, DROPPABLE_ICON_PALETTE);
 
   return;
 }
@@ -47,7 +50,9 @@ void FullInventoryDroppable_Static(struct PlayerInterfaceProc* proc, struct Unit
 
 void FullInventoryDroppable_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
 {
-  /* Renders a unit's inventory icons to the window, as a single row, with an icon for droppables.
+  /* Renders a unit's inventory icons to the window, as a single row.
+   *
+   * Also draws an icon for droppable items.
    */
 
   int i, itemCount;
@@ -55,15 +60,17 @@ void FullInventoryDroppable_Dynamic(struct PlayerInterfaceProc* proc, struct Uni
 
   itemCount = GetUnitItemCount(udp->unit);
 
-  if ( proc->busyFlag || (itemCount == 0) )
+  if ( proc->hideContents || (itemCount == 0) )
     return;
 
-  base_coords = GE_GetWindowPosition(proc);
+  base_coords = UI1_GetWindowPosition(proc);
+
+  // Drawn first for priority.
 
   if ( (udp->unit->state & US_DROP_ITEM) )
   {
-    CallARM_PushToSecondaryOAM(
-        ((base_coords.x + ((itemCount - 1) * 2)) * 8) + INVENTORY_ICON_X,
+    PushToHiOAM(
+        ((base_coords.x + ((itemCount - 1) * 2)) * 8) + INVENTORY_ICON_X + 8,
         (base_coords.y * 8) + INVENTORY_ICON_Y + 8,
         &gObj_8x8,
         DROPPABLE_ICON_TILE
@@ -72,7 +79,7 @@ void FullInventoryDroppable_Dynamic(struct PlayerInterfaceProc* proc, struct Uni
 
   for ( i = 0; i < itemCount; i++ )
   {
-    CallARM_PushToSecondaryOAM(
+    PushToHiOAM(
         ((base_coords.x + (i * 2)) * 8) + INVENTORY_ICON_X,
         (base_coords.y * 8) + INVENTORY_ICON_Y,
         &gObj_16x16,

@@ -1,38 +1,40 @@
 
-// Helpers
-
-  #ifndef RESERVE
-
-    /* RESERVE(Start, End)
-     * 
-     * This helper greedily reserves a block of space for
-     * some inline hack. It prevents other things from overwriting
-     * space used by something, and also throws an error if
-     * the hack is bigger than the space allocated.
-     * 
-     * Example:
-     * 
-     * ORG 1200
-     * #include "Foo.lyn.event" // This errors if bigger than 100 bytes.
-     * RESERVE(1200, 1300)
-     * ORG 1210; BYTE 1 // Trying to overwrite the area errors.
-     */
-    #define RESERVE(Start, End) "PROTECT Start End; ASSERT ((End | 0x08000000) - CURRENTOFFSET);"
-
-  #endif // RESERVE
+#include "include/Helpers.event"
 
 // Fixed-location components
 
   // Proc
 
-  #define UI1_Start (0x00A0190C)
-  #define UI1_End   (0x00A01994)
+  #ifdef _FE6J_
+    #define UI1_Start (0x006781D4)
+    #define UI1_End   (0x00678254)
+  #endif
+
+  #ifdef _FE7U_
+    #define UI1_Start (0x00CC2C60)
+    #define UI1_End   (0x00CC2CE8)
+  #endif
+
+  #ifdef _FE7J_
+    #define UI1_Start (0x00D8B200)
+    #define UI1_End   (0x00D8B288)
+  #endif
+
+  #ifdef _FE8U_
+    #define UI1_Start (0x00A0190C)
+    #define UI1_End   (0x00A01994)
+  #endif
+
+  #ifdef _FE8J_
+    #define UI1_Start (0x00A739C4)
+    #define UI1_End   (0x00A73A4C)
+  #endif
 
   PUSH; ORG UI1_Start;
     #include "MainProc.lyn.event"
     ALIGN 4;
 
-    GE_Name: { String(GORGON); BYTE 0; };
+    UI1_Name: { String(GORGON); BYTE 0; };
 
     RESERVE(UI1_Start, UI1_End);
   POP;
@@ -40,7 +42,6 @@
 // Freespace components
 
   #include "CheckForUnit.lyn.event"
-  #include "Update.lyn.event"
   #include "CopyTilemap.lyn.event"
   #include "GetWindowPosition.lyn.event"
   #include "Extend.lyn.event"
@@ -50,5 +51,6 @@
   #include "Static.lyn.event"
   #include "Dynamic.lyn.event"
   #include "UnitData.lyn.event"
+  #include "Update.lyn.event"
 
   #include "GeneratedInstaller.event"

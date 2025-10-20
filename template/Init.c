@@ -1,5 +1,4 @@
 
-#include "gbafe.h"
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
@@ -8,12 +7,10 @@
    * with a series of function pointers, terminated with NULL.
    * These functions are then called like
    * SomeFunction(proc);
-   * for each <Init> tag in a module.
+   * for each [[module.inits]] in a module.
    */
   #define INIT_CALLS NULL
   #endif // INIT_CALLS
-
-extern const struct ProcInstruction ProcUnitData[];
 
 typedef void (*init_func) (struct PlayerInterfaceProc* proc);
 
@@ -23,7 +20,7 @@ const init_func gInitFunctions[] = {
 };
 
 
-void GE_Init(struct PlayerInterfaceProc* proc)
+void UI1_Init(struct PlayerInterfaceProc* proc)
 {
   /* Handle first-time setup.
    */
@@ -31,7 +28,14 @@ void GE_Init(struct PlayerInterfaceProc* proc)
   int i;
   init_func init;
 
+  proc->movementFrame = 0;
+
+  #if defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
+
   proc->windowQuadrant = -1;
+  proc->isRetracting = FALSE;
+
+  #endif // defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
 
   START_PROC(ProcUnitData, proc);
 
@@ -39,9 +43,6 @@ void GE_Init(struct PlayerInterfaceProc* proc)
   {
     init(proc);
   }
-
-  proc->movementFrame = 0;
-  proc->isRetracting = FALSE;
 
   return;
 }

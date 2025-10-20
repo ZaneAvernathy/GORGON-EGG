@@ -1,9 +1,12 @@
 
-#include "gbafe.h"
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
-struct Vec2 GE_GetWindowPosition(struct PlayerInterfaceProc* proc);
+
+int GetItemIconId(int item);
+void LoadIconPalette(unsigned int iconType, unsigned int paletteIndex);
+void LoadIconObjectGraphics(int iconID, int rootTile);
+
 
 #define EQUIP_ICON_TILE (OAM2_CHR(EQUIP_ICON_BASE_TILE) | OAM2_LAYER(0) | OAM2_PAL(EQUIP_ICON_PALETTE))
 
@@ -22,7 +25,7 @@ void EquipIconStandard_Static(struct PlayerInterfaceProc* proc, struct UnitDataP
         EQUIP_ICON_BASE_TILE
       );
 
-    LoadIconPalette(0, EQUIP_ICON_PALETTE);
+    LoadIconPalette(ITEM_ICON_PALETTE_ITEMS, EQUIP_ICON_PALETTE);
   }
 
   return;
@@ -36,12 +39,12 @@ void EquipIconStandard_Dynamic(struct PlayerInterfaceProc* proc, struct UnitData
 
   struct Vec2 coords;
 
-  if ( proc->busyFlag || (udp->weapon == 0) )
+  if ( proc->hideContents || (udp->weapon == 0) )
     return;
 
-  coords = GE_GetWindowPosition(proc);
+  coords = UI1_GetWindowPosition(proc);
 
-  CallARM_PushToSecondaryOAM(
+  PushToHiOAM(
       (coords.x * 8) + EQUIP_ICON_X,
       (coords.y * 8) + EQUIP_ICON_Y,
       &gObj_16x16,

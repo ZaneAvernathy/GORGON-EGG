@@ -1,7 +1,7 @@
 
-#include "gbafe.h"
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
+
 
 // These values are how many different filled states
 // the three kinds of bar tiles can have.
@@ -27,91 +27,48 @@
 #define RIGHT_CAP_FULL  (RIGHT_CAP_START + RIGHT_CAP_LEVELS)
 
 
-void DrawBarStandardLeftCap(u16* tilemapPosition, s16 filled, int baseTile)
+void DrawBarStandard(u16* tilemap, unsigned current, unsigned max, unsigned width, u16 baseTile)
 {
-  /* Draws the first tile of a bar.
+  /* Draws a bar using vanilla's tiles.
    */
 
-  // Draw a full segment if we have more than one to fill.
-  s16 level = (filled > LEFT_CAP_LEVELS) ? LEFT_CAP_FULL : filled + LEFT_CAP_START;
+  unsigned middleTiles = ( width < 2 ) ? 0 : (width - 2);
 
-  *tilemapPosition = baseTile + level;
+  unsigned maxLevels = LEFT_CAP_LEVELS + (middleTiles * MIDDLE_LEVELS) + RIGHT_CAP_LEVELS;
+  int filled = (maxLevels * current) / max;
 
-  return;
-}
+  if ( filled > LEFT_CAP_LEVELS )
+    *tilemap++ = baseTile + LEFT_CAP_FULL;
+  else
+    *tilemap++ = baseTile + LEFT_CAP_START + filled;
 
-
-void DrawBarStandardMiddle(u16* tilemapPosition, s16 filled, int tiles, int baseTile)
-{
-  /* Draws the middle of a bar.
-   */
-
-  int current;
-
-  int fullTiles = filled >> 3; // Divide by 8 but sign is an issue
-  int remaining = filled & 7;
-
-  // `tiles` here is the total number of middle tiles,
-  // and we need to place down tiles for all of them,
-  // even if they're not all `filled`.
-
-  for ( current = 0; current < tiles ; current++ )
-  {
-
-    if ( current < fullTiles )
-      *tilemapPosition = baseTile + MIDDLE_FULL;
-
-    else if ( current == fullTiles )
-      *tilemapPosition = baseTile + MIDDLE_START + remaining;
-
-    else
-      *tilemapPosition = baseTile + MIDDLE_EMPTY;
-
-    tilemapPosition++;
-  }
-
-  return;
-}
-
-
-void DrawBarStandardRightCap(u16* tilemapPosition, s16 filled, int baseTile)
-{
-  /* Draws the last tile of a bar.
-   */
-
-  // Draw a full segment if we are full.
-  s16 level = (filled >= RIGHT_CAP_LEVELS) ? RIGHT_CAP_FULL : filled + RIGHT_CAP_START;
-
-  // If we ran out of levels to draw before getting here,
-  // draw an empty tile.
-  if ( filled < 0 )
-    level = RIGHT_CAP_EMPTY;
-
-  *tilemapPosition = baseTile + level;
-
-  return;
-}
-
-
-void DrawBarStandard(u16* tilemapPosition, s16 filled, int tiles, int baseTile)
-{
-  /* Draws a bar in a way that is compatible with vanilla tiles.
-   */
-
-  DrawBarStandardLeftCap(tilemapPosition, filled, baseTile);
-
-  tilemapPosition += 1;
   filled -= LEFT_CAP_LEVELS;
 
-  // The middle occupies the width of the bar minus
-  // the two endcaps.
+  unsigned middleFilled = (filled < 0) ? 0 : (filled / MIDDLE_LEVELS);
+  unsigned middleRemaining = (filled < 0) ? 0 : (filled % MIDDLE_LEVELS);
 
-  DrawBarStandardMiddle(tilemapPosition, filled, (tiles - 2), baseTile);
+  for ( int i = 0; i < middleTiles; i++ )
+  {
+    if ( i < middleFilled )
+      *tilemap++ = baseTile + MIDDLE_FULL;
 
-  tilemapPosition += (tiles - 2);
-  filled -= ((tiles - 2) * MIDDLE_LEVELS);
+    else if ( i == middleFilled )
+      *tilemap++ = baseTile + MIDDLE_START + middleRemaining;
 
-  DrawBarStandardRightCap(tilemapPosition, filled, baseTile);
+    else
+      *tilemap++ = baseTile + MIDDLE_EMPTY;
+  }
+
+  filled -= middleTiles * MIDDLE_LEVELS;
+
+  if ( filled < 0 )
+    *tilemap++ = baseTile + RIGHT_CAP_EMPTY;
+
+  else if ( filled >= RIGHT_CAP_LEVELS)
+    *tilemap++ = baseTile + RIGHT_CAP_FULL;
+
+  else
+    *tilemap++ = baseTile + RIGHT_CAP_START + filled;
 
   return;
 }

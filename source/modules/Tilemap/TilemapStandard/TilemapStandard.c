@@ -1,11 +1,13 @@
 
-#include "gbafe.h"
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
-extern const u16 GETilemap_1[];
+extern const u16 UI1Tilemap_1[];
+void TileMap_Apply(u16* tilemap, const void* tsa, int tileref);
 
-#define CallARM_FillTileRect BgMap_ApplyTsa
+extern u16 gPal_PlayerInterface_Blue[];
+extern u16 gPal_PlayerInterface_Red[];
+extern u16 gPal_PlayerInterface_Green[];
 
 
 void GetTilemapPalette(struct Unit* unit, int paletteID)
@@ -45,8 +47,8 @@ void TilemapStandard_Static(struct PlayerInterfaceProc* proc, struct UnitDataPro
   /* Copy the tilemap and its palette.
    */
 
-  CallARM_FillTileRect(gUiTmScratchB, GETilemap_1, TILEREF(0, GE_TILEMAP_PALETTE));
-  GetTilemapPalette(udp->unit, GE_TILEMAP_PALETTE);
+  TileMap_Apply(gUiTmScratchB, UI1Tilemap_1, TILEREF(0, UI1_TILEMAP_PALETTE));
+  GetTilemapPalette(udp->unit, UI1_TILEMAP_PALETTE);
 
   return;
 }

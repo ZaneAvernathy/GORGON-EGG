@@ -1,5 +1,4 @@
 
-#include "gbafe.h"
 #include "CommonDefinitions.h"
 #include "GeneratedDefinitions.h"
 
@@ -8,7 +7,7 @@
    * with a series of function pointers, terminated with NULL.
    * These functions are then called like
    * SomeFunction(proc);
-   * for each <Extend> tag in a module.
+   * for each [[module.extends]] in a module.
    * Generally, there should be exactly one
    * (from whatever handles extending/retracting).
    */
@@ -23,7 +22,7 @@ const extend_func gExtendFunctions[] = {
 };
 
 
-void GE_Extend(struct PlayerInterfaceProc* proc)
+void UI1_Extend(struct PlayerInterfaceProc* proc)
 {
   /* Extend the window every cycle.
    *
