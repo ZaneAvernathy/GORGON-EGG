@@ -3,7 +3,7 @@
 
 ## What is `GORGON-EGG`?
 
-`GORGON-EGG` is a replacement for Fire Emblem: The Sacred Stones' "Panel" mode unit window (the window that is displayed in the corner of the screen when the cursor is over a unit during a chapter map). It is designed to be used within an [Event Assembler](https://feuniverse.us/t/1749) buildfile.
+`GORGON-EGG` is a replacement for the GBA Fire Emblem "Panel" mode unit window (the window that is displayed in the corner of the screen when the cursor is over a unit during a chapter map). It is designed to be used within an [Event Assembler](https://feuniverse.us/t/1749) buildfile.
 
 `GORGON-EGG` is designed...
 
