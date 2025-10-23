@@ -14,22 +14,22 @@
   value = 1
 
 [[module.definitions]]
-  name = "DEFENSE_RENDERER_DEFS"
+  name = "DEF_RENDERER_DEFS"
   body = '''
 void DrawUnsignedNumberRightAligned(int number, int x, int y, u16 baseObj);
 #define NEED_NUMBER_UNSIGNED_RIGHT_ALIGNED
 '''
 
 [[module.definitions]]
-  name = "DEFENSE_RENDERER"
+  name = "DEF_RENDERER"
   value = "DrawUnsignedNumberRightAligned"
 
 [[module.definitions]]
-  name = "DEFENSE_X"
+  name = "DEF_X"
   value = 16
 
 [[module.definitions]]
-  name = "DEFENSE_Y"
+  name = "DEF_Y"
   value = 8
 
 [[module.definitions]]
@@ -41,11 +41,11 @@ void DrawUnsignedNumberRightAligned(int number, int x, int y, u16 baseObj);
   value = 8
 
 [[module.definitions]]
-  name = "DEFENSE_BASE_TILE"
+  name = "DEF_BASE_TILE"
   value = "NUMBER_BASE_TILE"
 
 [[module.definitions]]
-  name = "DEFENSE_PALETTE"
+  name = "DEF_PALETTE"
   value = "NUMBER_PALETTE"
 
 

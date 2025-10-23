@@ -14,22 +14,22 @@
   value = 1
 
 [[module.definitions]]
-  name = "DODGE_RENDERER_DEFS"
+  name = "DOD_RENDERER_DEFS"
   body = '''
 void DrawUnsignedNumberRightAligned(int number, int x, int y, u16 baseObj);
 #define NEED_NUMBER_UNSIGNED_RIGHT_ALIGNED
 '''
 
 [[module.definitions]]
-  name = "DODGE_RENDERER"
+  name = "DOD_RENDERER"
   value = "DrawUnsignedNumberRightAligned"
 
 [[module.definitions]]
-  name = "DODGE_X"
+  name = "DOD_X"
   value = 16
 
 [[module.definitions]]
-  name = "DODGE_Y"
+  name = "DOD_Y"
   value = 8
 
 [[module.definitions]]
@@ -41,11 +41,11 @@ void DrawUnsignedNumberRightAligned(int number, int x, int y, u16 baseObj);
   value = 8
 
 [[module.definitions]]
-  name = "DODGE_BASE_TILE"
+  name = "DOD_BASE_TILE"
   value = "NUMBER_BASE_TILE"
 
 [[module.definitions]]
-  name = "DODGE_PALETTE"
+  name = "DOD_PALETTE"
   value = "NUMBER_PALETTE"
 
 
