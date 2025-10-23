@@ -56,15 +56,15 @@ void DrawNameSmallSJIS(char* string, unsigned padding, struct PlayerInterfacePro
   unsigned width;
   struct NameSmallSJISProc* proc = GetNameSmallSJISProc(parent);
 
-  unsigned baseTile = proc->pageFlipped ? NAME_SMALL_BASE_TILE_1 : NAME_SMALL_BASE_TILE_0;
+  unsigned baseTile = proc->pageFlipped ? NAME_SMALL_SJIS_BASE_TILE_1 : NAME_SMALL_SJIS_BASE_TILE_0;
 
-  CpuFastFill(0, gGenericBuffer, NAME_SMALL_WIDTH * CHR_SIZE);
+  CpuFastFill(0, gGenericBuffer, NAME_SMALL_SJIS_WIDTH * CHR_SIZE);
 
-  width = DrawSJISSmallStringPad(string, NAME_SMALL_COLOR, gGenericBuffer, padding);
+  width = DrawSJISSmallStringPad(string, NAME_SMALL_SJIS_COLOR, gGenericBuffer, padding);
 
-  CpuFastCopy(gGenericBuffer, VRAM_ADDRESS(baseTile), NAME_SMALL_WIDTH * CHR_SIZE);
+  CpuFastCopy(gGenericBuffer, VRAM_ADDRESS(baseTile), NAME_SMALL_SJIS_WIDTH * CHR_SIZE);
 
-  DrawSmallStringTilemap(width, baseTile, gUiTmScratchA + TILEMAP_INDEX(NAME_SMALL_X, NAME_SMALL_Y));
+  DrawSmallStringTilemap(width, baseTile, gUiTmScratchA + TILEMAP_INDEX(NAME_SMALL_SJIS_X, NAME_SMALL_SJIS_Y));
 
   proc->pageFlipped = ~proc->pageFlipped;
 
@@ -89,17 +89,25 @@ void NameSmallSJIS_Static(struct PlayerInterfaceProc* proc, struct UnitDataProc*
 
   #endif // defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
 
-  if ( NAME_SMALL_ALIGNMENT == NAME_SMALL_CENTERED )
-    padding = GetSJISSmallStringCenteredPos((NAME_SMALL_WIDTH * 8), nameString);
+  switch ( NAME_SMALL_SJIS_ALIGNMENT )
+  {
+    case NAME_CENTERED:
+      padding = GetSJISSmallStringCenteredPos((NAME_SMALL_SJIS_WIDTH * 8), nameString);
+      break;
 
-  else if ( NAME_SMALL_ALIGNMENT == NAME_SMALL_LEFT_ALIGNED )
-    padding = 0;
+    case NAME_RIGHT_ALIGNED:
+      padding = (NAME_SMALL_SJIS_WIDTH * 8) - GetSJISSmallStringWidth(nameString);
+      break;
 
-  else if ( NAME_SMALL_ALIGNMENT == NAME_SMALL_RIGHT_ALIGNED )
-    padding = (NAME_SMALL_WIDTH * 8) - GetSJISSmallStringWidth(nameString);
+    case NAME_SHIFTED_RIGHT:
+      padding = ( NAME_SMALL_SJIS_SHIFT_CONDITION ) ? NAME_SMALL_SJIS_SHIFT : 0;
+      break;
 
-  else
-    padding = GetSJISSmallStringCenteredPos((NAME_SMALL_WIDTH * 8), nameString);
+    case NAME_LEFT_ALIGNED:
+    default:
+      padding = 0;
+      break;
+  }
 
   DrawNameSmallSJIS(nameString, padding, proc);
 

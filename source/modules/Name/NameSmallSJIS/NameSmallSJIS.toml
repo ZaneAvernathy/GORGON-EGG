@@ -17,48 +17,86 @@
   file = "LibraryFunctions/LibraryFunctions.event"
 
 [[module.definitions]]
-  name = "NAME_SMALL_BASE_TILE_0"
-  value = 0x160
+  name = "NAME_X"
+  value = 1
 
 [[module.definitions]]
-  name = "NAME_SMALL_BASE_TILE_1"
-  value = 0x165
+  name = "NAME_Y"
+  value = 1
 
 [[module.definitions]]
-  name = "NAME_SMALL_COLOR"
+  name = "NAME_WIDTH"
+  value = 7
+
+[[module.definitions]]
+  name = "NAME_COLOR"
   value = "TEXT_COLOR_BLACK"
 
 [[module.definitions]]
-  name = "NAME_SMALL_X"
-  value = 3
+  name = "NAME_ALIGNMENT"
+  value = "NAME_CENTERED"
 
 [[module.definitions]]
-  name = "NAME_SMALL_Y"
-  value = 3
+  name = "NAME_SMALL_SJIS_BASE_TILE_0"
+  value = 0x160
 
 [[module.definitions]]
-  name = "NameSmallAlignments"
+  name = "NAME_SMALL_SJIS_BASE_TILE_1"
+  value = 0x165
+
+[[module.definitions]]
+  name = "NAME_SMALL_SJIS_COLOR"
+  value = "NAME_COLOR"
+
+[[module.definitions]]
+  name = "NAME_SMALL_SJIS_X"
+  value = "NAME_X"
+
+[[module.definitions]]
+  name = "NAME_SMALL_SJIS_Y"
+  value = "NAME_Y"
+
+[[module.definitions]]
+  name = "NAME_SMALL_SJIS_ALIGNMENT"
+  value = "NAME_CENTERED"
+
+[[module.definitions]]
+  name = "NAME_SMALL_SJIS_WIDTH"
+  value = "NAME_WIDTH"
+
+[[module.definitions]]
+  name = "NAME_SMALL_SJIS_SHIFT_CONDITION"
+  value = "( GetUnitAffinityIcon(udp->unit) > 0 )"
+
+[[module.definitions]]
+  name = "NAME_SMALL_SJIS_SHIFT"
+  value = 16
+
+[[module.definitions]]
+  name = "NAME_SMALL_SJIS_SHIFT_CONDITION_DECLS"
+  body = "int GetUnitAffinityIcon(struct Unit* unit);"
+
+[[module.definitions]]
+  name = "NameAlignments"
   body = '''
-enum NameSmallAlignments
+enum NameAlignments
 {
-  NAME_SMALL_CENTERED,
-  NAME_SMALL_LEFT_ALIGNED,
-  NAME_SMALL_RIGHT_ALIGNED,
+  NAME_CENTERED,
+  NAME_LEFT_ALIGNED,
+  NAME_RIGHT_ALIGNED,
+  NAME_SHIFTED_RIGHT,
 };
 '''
-
-[[module.definitions]]
-  name = "NAME_SMALL_ALIGNMENT"
-  value = "NAME_SMALL_CENTERED"
-
-[[module.definitions]]
-  name = "NAME_SMALL_WIDTH"
-  value = 5
 
 
 [[module.asm_definitions]]
   name = "GetStringFromIndex"
   body = "SET_FUNC GetStringFromIndex, 0x08013AD0 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitAffinityIcon"
+  body = "SET_FUNC GetUnitAffinityIcon, 0x08022F44 | 1"
   games = [ "FE6J" ]
 
 [[module.asm_definitions]]
@@ -78,6 +116,11 @@ enum NameSmallAlignments
   games = [ "FE7U" ]
 
 [[module.asm_definitions]]
+  name = "GetUnitAffinityIcon"
+  body = "SET_FUNC GetUnitAffinityIcon, 0x08026B24 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
   name = "gGenericBuffer"
   body = "SET_DATA gGenericBuffer, 0x02020140"
   games = [ "FE7U" ]
@@ -91,6 +134,11 @@ enum NameSmallAlignments
 [[module.asm_definitions]]
   name = "String_ExpandNames"
   body = "SET_FUNC String_ExpandNames, 0x08013374 | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitAffinityIcon"
+  body = "SET_FUNC GetUnitAffinityIcon, 0x08026FB0 | 1"
   games = [ "FE7J" ]
 
 [[module.asm_definitions]]
@@ -110,6 +158,11 @@ enum NameSmallAlignments
   games = [ "FE8U" ]
 
 [[module.asm_definitions]]
+  name = "GetUnitAffinityIcon"
+  body = "SET_FUNC GetUnitAffinityIcon, 0x080286BC | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
   name = "gGenericBuffer"
   body = "SET_DATA gGenericBuffer, 0x02020188"
   games = [ "FE8U" ]
@@ -123,6 +176,11 @@ enum NameSmallAlignments
 [[module.asm_definitions]]
   name = "String_ExpandNames"
   body = "SET_FUNC String_ExpandNames, 0x0800A004 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitAffinityIcon"
+  body = "SET_FUNC GetUnitAffinityIcon, 0x08028650 | 1"
   games = [ "FE8J" ]
 
 [[module.asm_definitions]]

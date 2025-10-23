@@ -87,17 +87,25 @@ void NameSmall_Static(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp
 
   #endif // defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
 
-  if ( NAME_SMALL_ALIGNMENT == NAME_SMALL_CENTERED )
-    padding = GetSmallStringCenteredPos((NAME_SMALL_WIDTH * 8), nameString);
+  switch ( NAME_SMALL_ALIGNMENT )
+  {
+    case NAME_CENTERED:
+      padding = GetSmallStringCenteredPos((NAME_SMALL_WIDTH * 8), nameString);
+      break;
 
-  else if ( NAME_SMALL_ALIGNMENT == NAME_SMALL_LEFT_ALIGNED )
-    padding = 0;
+    case NAME_RIGHT_ALIGNED:
+      padding = (NAME_SMALL_WIDTH * 8) - GetSmallStringWidth(nameString);
+      break;
 
-  else if ( NAME_SMALL_ALIGNMENT == NAME_SMALL_RIGHT_ALIGNED )
-    padding = (NAME_SMALL_WIDTH * 8) - GetSmallStringWidth(nameString);
+    case NAME_SHIFTED_RIGHT:
+      padding = ( NAME_SMALL_SHIFT_CONDITION ) ? NAME_SMALL_SHIFT : 0;
+      break;
 
-  else
-    padding = GetSmallStringCenteredPos((NAME_SMALL_WIDTH * 8), nameString);
+    case NAME_LEFT_ALIGNED:
+    default:
+      padding = 0;
+      break;
+  }
 
   DrawNameSmall(nameString, padding, proc);
 
