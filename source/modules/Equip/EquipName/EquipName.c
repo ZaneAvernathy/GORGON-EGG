@@ -18,16 +18,16 @@ char* GetItemName(int item);
 extern const struct ProcInstruction ProcGORGON_EGG[];
 
 
-struct EquipNameStandardProc
+struct EquipNameProc
 {
   /* 00 */ PROC_FIELDS;
   /* 2C */ struct TextHandle equipText;
 };
 
-const char EquipNameStandardProc_Name[] = "EquipNameStandard";
+const char EquipNameProc_Name[] = "EquipName";
 
-const struct ProcInstruction ProcEquipNameStandard[] = {
-  PROC_SET_NAME(&EquipNameStandardProc_Name),
+const struct ProcInstruction ProcEquipName[] = {
+  PROC_SET_NAME(&EquipNameProc_Name),
   PROC_SLEEP(0),
 
   PROC_WHILE_PROC(ProcGORGON_EGG),
@@ -36,7 +36,7 @@ const struct ProcInstruction ProcEquipNameStandard[] = {
 };
 
 
-void EquipNameStandard_Static(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
+void EquipName_Static(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
 {
   /* Draws a unit's equipped weapon's name.
    */
@@ -44,11 +44,11 @@ void EquipNameStandard_Static(struct PlayerInterfaceProc* proc, struct UnitDataP
   unsigned padding;
   char* equipString;
 
-  struct EquipNameStandardProc* equipProc = (struct EquipNameStandardProc*)ProcFind(ProcEquipNameStandard);
+  struct EquipNameProc* equipProc = (struct EquipNameProc*)ProcFind(ProcEquipName);
   if ( equipProc == NULL )
   {
-    equipProc = (struct EquipNameStandardProc*)START_PROC(ProcEquipNameStandard, proc);
-    Text_InitDB(&equipProc->equipText, EQUIP_NAME_STANDARD_WIDTH);
+    equipProc = (struct EquipNameProc*)START_PROC(ProcEquipName, proc);
+    Text_InitDB(&equipProc->equipText, EQUIP_NAME_BASE_WIDTH);
   }
 
   Text_Clear(&equipProc->equipText);
@@ -63,22 +63,22 @@ void EquipNameStandard_Static(struct PlayerInterfaceProc* proc, struct UnitDataP
 
     #endif // defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
 
-    if ( EQUIP_NAME_STANDARD_ALIGNMENT == EQUIP_NAME_CENTERED )
-      padding = Text_GetStringTextCenteredPos((EQUIP_NAME_STANDARD_WIDTH * 8), equipString);
+    if ( EQUIP_NAME_BASE_ALIGNMENT == EQUIP_NAME_CENTERED )
+      padding = Text_GetStringTextCenteredPos((EQUIP_NAME_BASE_WIDTH * 8), equipString);
 
-    else if ( EQUIP_NAME_STANDARD_ALIGNMENT == EQUIP_NAME_LEFT_ALIGNED )
+    else if ( EQUIP_NAME_BASE_ALIGNMENT == EQUIP_NAME_LEFT_ALIGNED )
       padding = 0;
 
-    else if ( EQUIP_NAME_STANDARD_ALIGNMENT == EQUIP_NAME_RIGHT_ALIGNED )
-      padding = (EQUIP_NAME_STANDARD_WIDTH * 8) - Text_GetStringTextWidth(equipString);
+    else if ( EQUIP_NAME_BASE_ALIGNMENT == EQUIP_NAME_RIGHT_ALIGNED )
+      padding = (EQUIP_NAME_BASE_WIDTH * 8) - Text_GetStringTextWidth(equipString);
 
     else
-      padding = Text_GetStringTextCenteredPos((EQUIP_NAME_STANDARD_WIDTH * 8), equipString);
+      padding = Text_GetStringTextCenteredPos((EQUIP_NAME_BASE_WIDTH * 8), equipString);
 
-    Text_SetParameters(&equipProc->equipText, padding, EQUIP_NAME_STANDARD_COLOR);
+    Text_SetParameters(&equipProc->equipText, padding, EQUIP_NAME_BASE_COLOR);
     Text_DrawString(&equipProc->equipText, equipString);
 
-    Text_Display(&equipProc->equipText, gUiTmScratchA + TILEMAP_INDEX(EQUIP_NAME_STANDARD_X, EQUIP_NAME_STANDARD_Y));
+    Text_Display(&equipProc->equipText, gUiTmScratchA + TILEMAP_INDEX(EQUIP_NAME_BASE_X, EQUIP_NAME_BASE_Y));
   }
 
   return;

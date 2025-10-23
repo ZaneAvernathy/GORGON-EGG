@@ -1,25 +1,33 @@
 
 [module]
-  name = "EquipIconStandard"
+  name = "FullInventory"
 
 [[module.statics]]
-  name = "EquipIconStandard_Static"
-  file = "EquipIconStandard.lyn.event"
+  name = "FullInventory_Static"
+  file = "FullInventory.lyn.event"
 
 [[module.dynamics]]
-  name = "EquipIconStandard_Dynamic"
-  file = "EquipIconStandard.lyn.event"
+  name = "FullInventory_Dynamic"
+  file = "FullInventory.lyn.event"
 
 [[module.definitions]]
-  name = "EQUIP_ICON_X"
+  name = "INVENTORY_ICON_X"
+  value = 40
+
+[[module.definitions]]
+  name = "INVENTORY_ICON_Y"
   value = 8
 
 [[module.definitions]]
-  name = "EQUIP_ICON_Y"
-  value = 8
+  name = "INVENTORY_ICON_BASE_TILE"
+  value = 0x0300
 
 [[module.definitions]]
-  name = "EQUIP_ICON_PAGE"
+  name = "INVENTORY_ICON_PALETTE"
+  value = 20
+
+[[module.definitions]]
+  name = "ITEM_ICON_PAGE"
   value = 0
 
 [[module.definitions]]
@@ -32,15 +40,6 @@ enum ItemIconPalettes
 };
 '''
 
-[[module.definitions]]
-  name = "EQUIP_ICON_BASE_TILE"
-  value = 0x0300
-  games = [ "FE6J" ]
-
-[[module.definitions]]
-  name = "EQUIP_ICON_PALETTE"
-  value = 20
-  games = [ "FE6J" ]
 
 [[module.asm_definitions]]
   name = "LoadIconPalette"
@@ -57,16 +56,11 @@ enum ItemIconPalettes
   body = "SET_FUNC GetItemIconId, 0x080172D8 | 1"
   games = [ "FE6J" ]
 
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x08017520 | 1"
+  games = [ "FE6J" ]
 
-[[module.definitions]]
-  name = "EQUIP_ICON_BASE_TILE"
-  value = 0x0300
-  games = [ "FE7U" ]
-
-[[module.definitions]]
-  name = "EQUIP_ICON_PALETTE"
-  value = 20
-  games = [ "FE7U" ]
 
 [[module.asm_definitions]]
   name = "LoadIconPalette"
@@ -83,16 +77,11 @@ enum ItemIconPalettes
   body = "SET_FUNC GetItemIconId, 0x08017400 | 1"
   games = [ "FE7U" ]
 
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x080176DC | 1"
+  games = [ "FE7U" ]
 
-[[module.definitions]]
-  name = "EQUIP_ICON_BASE_TILE"
-  value = 0x0300
-  games = [ "FE7J" ]
-
-[[module.definitions]]
-  name = "EQUIP_ICON_PALETTE"
-  value = 20
-  games = [ "FE7J" ]
 
 [[module.asm_definitions]]
   name = "LoadIconPalette"
@@ -109,16 +98,11 @@ enum ItemIconPalettes
   body = "SET_FUNC GetItemIconId, 0x08017808 | 1"
   games = [ "FE7J" ]
 
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x08017ACC | 1"
+  games = [ "FE7J" ]
 
-[[module.definitions]]
-  name = "EQUIP_ICON_BASE_TILE"
-  value = 0x0300
-  games = [ "FE8U" ]
-
-[[module.definitions]]
-  name = "EQUIP_ICON_PALETTE"
-  value = 20
-  games = [ "FE8U" ]
 
 [[module.asm_definitions]]
   name = "LoadIconPalette"
@@ -135,16 +119,11 @@ enum ItemIconPalettes
   body = "SET_FUNC GetItemIconId, 0x08017700 | 1"
   games = [ "FE8U" ]
 
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x080179D8 | 1"
+  games = [ "FE8U" ]
 
-[[module.definitions]]
-  name = "EQUIP_ICON_BASE_TILE"
-  value = 0x0300
-  games = [ "FE8J" ]
-
-[[module.definitions]]
-  name = "EQUIP_ICON_PALETTE"
-  value = 20
-  games = [ "FE8J" ]
 
 [[module.asm_definitions]]
   name = "LoadIconPalette"
@@ -159,4 +138,9 @@ enum ItemIconPalettes
 [[module.asm_definitions]]
   name = "GetItemIconId"
   body = "SET_FUNC GetItemIconId, 0x080174A8 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x08017780 | 1"
   games = [ "FE8J" ]

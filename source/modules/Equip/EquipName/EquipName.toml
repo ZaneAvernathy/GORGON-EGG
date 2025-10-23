@@ -1,17 +1,14 @@
 
 [module]
-  name = "EquipNameWithWarningStandard"
+  name = "EquipName"
 
 [[module.statics]]
-  name = "EquipNameWithWarningStandard_Static"
-  file = "EquipNameWithWarningStandard.lyn.event"
-
-[[module.internals]]
-  file = "LibraryFunctions/LibraryFunctions.event"
+  name = "EquipName_Static"
+  file = "EquipName.lyn.event"
 
 # `EQUIP_NAME_` definitions are shared between all of the `EquipName`
 # modules. To decouple this module's definitions from the other `EquipName`
-# modules, override the `EQUIP_NAME_WITH_WARNING_STANDARD_` definitions in your config.
+# modules, override the `EQUIP_NAME_BASE_` definitions in your config.
 
 [[module.definitions]]
   name = "EQUIP_NAME_X"
@@ -45,32 +42,24 @@ enum EquipNameAlignments
 '''
 
 [[module.definitions]]
-  name = "EQUIP_NAME_WITH_WARNING_STANDARD_X"
+  name = "EQUIP_NAME_BASE_X"
   value = "EQUIP_NAME_X"
 
 [[module.definitions]]
-  name = "EQUIP_NAME_WITH_WARNING_STANDARD_Y"
+  name = "EQUIP_NAME_BASE_Y"
   value = "EQUIP_NAME_Y"
 
 [[module.definitions]]
-  name = "EQUIP_NAME_WITH_WARNING_STANDARD_WIDTH"
+  name = "EQUIP_NAME_BASE_WIDTH"
   value = "EQUIP_NAME_WIDTH"
 
 [[module.definitions]]
-  name = "EQUIP_NAME_WITH_WARNING_STANDARD_COLOR"
+  name = "EQUIP_NAME_BASE_COLOR"
   value = "EQUIP_NAME_COLOR"
 
 [[module.definitions]]
-  name = "EQUIP_NAME_WITH_WARNING_STANDARD_ALIGNMENT"
+  name = "EQUIP_NAME_BASE_ALIGNMENT"
   value = "EQUIP_NAME_ALIGNMENT"
-
-[[module.definitions]]
-  name = "EQUIP_NAME_WITH_WARNING_STANDARD_WARNING_COLOR"
-  value = "TEXT_COLOR_GOLD"
-
-[[module.definitions]]
-  name = "EQUIP_NAME_WITH_WARNING_STANDARD_THRESHOLD"
-  value = 50
 
 
 [[module.asm_definitions]]
@@ -111,21 +100,6 @@ enum EquipNameAlignments
 [[module.asm_definitions]]
   name = "GetItemName"
   body = "SET_FUNC GetItemName, 0x08017130 | 1"
-  games = [ "FE6J" ]
-
-[[module.asm_definitions]]
-  name = "GetItemAttributes"
-  body = "SET_FUNC GetItemAttributes, 0x08017190 | 1"
-  games = [ "FE6J" ]
-
-[[module.asm_definitions]]
-  name = "GetItemUses"
-  body = "SET_FUNC GetItemUses, 0x080171A4 | 1"
-  games = [ "FE6J" ]
-
-[[module.asm_definitions]]
-  name = "GetItemMaxUses"
-  body = "SET_FUNC GetItemMaxUses, 0x080171C8 | 1"
   games = [ "FE6J" ]
 
 
@@ -174,21 +148,6 @@ enum EquipNameAlignments
   body = "SET_FUNC GetItemName, 0x080171BC | 1"
   games = [ "FE7U" ]
 
-[[module.asm_definitions]]
-  name = "GetItemAttributes"
-  body = "SET_FUNC GetItemAttributes, 0x0801727C | 1"
-  games = [ "FE7U" ]
-
-[[module.asm_definitions]]
-  name = "GetItemUses"
-  body = "SET_FUNC GetItemUses, 0x08017294 | 1"
-  games = [ "FE7U" ]
-
-[[module.asm_definitions]]
-  name = "GetItemMaxUses"
-  body = "SET_FUNC GetItemMaxUses, 0x080172BC | 1"
-  games = [ "FE7U" ]
-
 
 [[module.asm_definitions]]
   name = "Text_InitDB"
@@ -233,21 +192,6 @@ enum EquipNameAlignments
 [[module.asm_definitions]]
   name = "GetItemName"
   body = "SET_FUNC GetItemName, 0x08017610 | 1"
-  games = [ "FE7J" ]
-
-[[module.asm_definitions]]
-  name = "GetItemAttributes"
-  body = "SET_FUNC GetItemAttributes, 0x08017684 | 1"
-  games = [ "FE7J" ]
-
-[[module.asm_definitions]]
-  name = "GetItemUses"
-  body = "SET_FUNC GetItemUses, 0x0801769C | 1"
-  games = [ "FE7J" ]
-
-[[module.asm_definitions]]
-  name = "GetItemMaxUses"
-  body = "SET_FUNC GetItemMaxUses, 0x080176C4 | 1"
   games = [ "FE7J" ]
 
 
@@ -296,21 +240,6 @@ enum EquipNameAlignments
   body = "SET_FUNC GetItemName, 0x080174F4 | 1"
   games = [ "FE8U" ]
 
-[[module.asm_definitions]]
-  name = "GetItemAttributes"
-  body = "SET_FUNC GetItemAttributes, 0x0801756C | 1"
-  games = [ "FE8U" ]
-
-[[module.asm_definitions]]
-  name = "GetItemUses"
-  body = "SET_FUNC GetItemUses, 0x08017584 | 1"
-  games = [ "FE8U" ]
-
-[[module.asm_definitions]]
-  name = "GetItemMaxUses"
-  body = "SET_FUNC GetItemMaxUses, 0x080175B0 | 1"
-  games = [ "FE8U" ]
-
 
 [[module.asm_definitions]]
   name = "Text_InitDB"
@@ -355,19 +284,4 @@ enum EquipNameAlignments
 [[module.asm_definitions]]
   name = "GetItemName"
   body = "SET_FUNC GetItemName, 0x0801729C | 1"
-  games = [ "FE8J" ]
-
-[[module.asm_definitions]]
-  name = "GetItemAttributes"
-  body = "SET_FUNC GetItemAttributes, 0x08017314 | 1"
-  games = [ "FE8J" ]
-
-[[module.asm_definitions]]
-  name = "GetItemUses"
-  body = "SET_FUNC GetItemUses, 0x0801732C | 1"
-  games = [ "FE8J" ]
-
-[[module.asm_definitions]]
-  name = "GetItemMaxUses"
-  body = "SET_FUNC GetItemMaxUses, 0x08017358 | 1"
   games = [ "FE8J" ]

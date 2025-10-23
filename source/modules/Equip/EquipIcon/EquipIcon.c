@@ -11,7 +11,7 @@ void LoadIconObjectGraphics(int iconID, int rootTile);
 #define EQUIP_ICON_TILE (OAM2_CHR(EQUIP_ICON_BASE_TILE) | OAM2_LAYER(0) | OAM2_PAL(EQUIP_ICON_PALETTE))
 
 
-void EquipIconStandard_Static(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
+void EquipIcon_Static(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
 {
   /* Copies a unit's equipped weapon icon to VRAM, if they have one.
    *
@@ -32,7 +32,7 @@ void EquipIconStandard_Static(struct PlayerInterfaceProc* proc, struct UnitDataP
 }
 
 
-void EquipIconStandard_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
+void EquipIcon_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
 {
   /* Renders a unit's equipped weapon icon to the window.
    */

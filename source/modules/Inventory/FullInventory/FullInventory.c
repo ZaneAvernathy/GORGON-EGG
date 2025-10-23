@@ -12,7 +12,7 @@ int GetUnitItemCount(const struct Unit* unit);
 #define INVENTORY_ICON_TILE (OAM2_CHR(INVENTORY_ICON_BASE_TILE) | OAM2_LAYER(0) | OAM2_PAL(INVENTORY_ICON_PALETTE))
 
 
-void FullInventoryStandard_Static(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
+void FullInventory_Static(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
 {
   /* Copies a unit's inventory icons to VRAM.
    *
@@ -38,7 +38,7 @@ void FullInventoryStandard_Static(struct PlayerInterfaceProc* proc, struct UnitD
 }
 
 
-void FullInventoryStandard_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
+void FullInventory_Dynamic(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
 {
   /* Renders a unit's inventory icons to the window, as a single row.
    */

@@ -22,16 +22,16 @@ int GetItemMaxUses(int item);
 extern const struct ProcInstruction ProcGORGON_EGG[];
 
 
-struct EquipNameWithWarningStandardProc
+struct EquipNameWithWarningProc
 {
   /* 00 */ PROC_FIELDS;
   /* 2C */ struct TextHandle equipText;
 };
 
-const char EquipNameWithWarningStandardProc_Name[] = "EquipNameWithWarningStandard";
+const char EquipNameWithWarningProc_Name[] = "EquipNameWithWarning";
 
-const struct ProcInstruction ProcEquipNameWithWarningStandard[] = {
-  PROC_SET_NAME(&EquipNameWithWarningStandardProc_Name),
+const struct ProcInstruction ProcEquipNameWithWarning[] = {
+  PROC_SET_NAME(&EquipNameWithWarningProc_Name),
   PROC_SLEEP(0),
 
   PROC_WHILE_PROC(ProcGORGON_EGG),
@@ -40,7 +40,7 @@ const struct ProcInstruction ProcEquipNameWithWarningStandard[] = {
 };
 
 
-void EquipNameWithWarningStandard_Static(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
+void EquipNameWithWarning_Static(struct PlayerInterfaceProc* proc, struct UnitDataProc* udp)
 {
   /* Draws a unit's equipped weapon's name.
    */
@@ -48,11 +48,11 @@ void EquipNameWithWarningStandard_Static(struct PlayerInterfaceProc* proc, struc
   unsigned padding, color;
   char* equipString;
 
-  struct EquipNameWithWarningStandardProc* equipProc = (struct EquipNameWithWarningStandardProc*)ProcFind(ProcEquipNameWithWarningStandard);
+  struct EquipNameWithWarningProc* equipProc = (struct EquipNameWithWarningProc*)ProcFind(ProcEquipNameWithWarning);
   if ( equipProc == NULL )
   {
-    equipProc = (struct EquipNameWithWarningStandardProc*)START_PROC(ProcEquipNameWithWarningStandard, proc);
-    Text_InitDB(&equipProc->equipText, EQUIP_NAME_WITH_WARNING_STANDARD_WIDTH);
+    equipProc = (struct EquipNameWithWarningProc*)START_PROC(ProcEquipNameWithWarning, proc);
+    Text_InitDB(&equipProc->equipText, EQUIP_NAME_WITH_WARNING_WIDTH);
   }
 
   Text_Clear(&equipProc->equipText);
@@ -72,37 +72,37 @@ void EquipNameWithWarningStandard_Static(struct PlayerInterfaceProc* proc, struc
     // rather than preprocessor conditionals, so it'll be up to the compiler
     // optimizer to eliminate the unused conditions.
 
-    if ( EQUIP_NAME_WITH_WARNING_STANDARD_ALIGNMENT == EQUIP_NAME_CENTERED )
-      padding = Text_GetStringTextCenteredPos((EQUIP_NAME_WITH_WARNING_STANDARD_WIDTH * 8), equipString);
+    if ( EQUIP_NAME_WITH_WARNING_ALIGNMENT == EQUIP_NAME_CENTERED )
+      padding = Text_GetStringTextCenteredPos((EQUIP_NAME_WITH_WARNING_WIDTH * 8), equipString);
 
-    else if ( EQUIP_NAME_WITH_WARNING_STANDARD_ALIGNMENT == EQUIP_NAME_LEFT_ALIGNED )
+    else if ( EQUIP_NAME_WITH_WARNING_ALIGNMENT == EQUIP_NAME_LEFT_ALIGNED )
       padding = 0;
 
-    else if ( EQUIP_NAME_WITH_WARNING_STANDARD_ALIGNMENT == EQUIP_NAME_RIGHT_ALIGNED )
-      padding = (EQUIP_NAME_WITH_WARNING_STANDARD_WIDTH * 8) - Text_GetStringTextWidth(equipString);
+    else if ( EQUIP_NAME_WITH_WARNING_ALIGNMENT == EQUIP_NAME_RIGHT_ALIGNED )
+      padding = (EQUIP_NAME_WITH_WARNING_WIDTH * 8) - Text_GetStringTextWidth(equipString);
 
     else
-      padding = Text_GetStringTextCenteredPos((EQUIP_NAME_WITH_WARNING_STANDARD_WIDTH * 8), equipString);
+      padding = Text_GetStringTextCenteredPos((EQUIP_NAME_WITH_WARNING_WIDTH * 8), equipString);
 
-    color = EQUIP_NAME_WITH_WARNING_STANDARD_COLOR;
+    color = EQUIP_NAME_WITH_WARNING_COLOR;
     if ( !((bool)(GetItemAttributes(udp->weapon) & IA_UNBREAKABLE)) )
     {
       if ( GetItemUses(udp->weapon) == 0 )
-        color = EQUIP_NAME_WITH_WARNING_STANDARD_WARNING_COLOR;
+        color = EQUIP_NAME_WITH_WARNING_WARNING_COLOR;
 
       else
       {
         unsigned ratio = (GetItemUses(udp->weapon) * 100) / GetItemMaxUses(udp->weapon);
 
-        if ( ratio <= EQUIP_NAME_WITH_WARNING_STANDARD_THRESHOLD )
-          color = EQUIP_NAME_WITH_WARNING_STANDARD_WARNING_COLOR;
+        if ( ratio <= EQUIP_NAME_WITH_WARNING_THRESHOLD )
+          color = EQUIP_NAME_WITH_WARNING_WARNING_COLOR;
       }
     }
 
     Text_SetParameters(&equipProc->equipText, padding, color);
     Text_DrawString(&equipProc->equipText, equipString);
 
-    Text_Display(&equipProc->equipText, gUiTmScratchA + TILEMAP_INDEX(EQUIP_NAME_WITH_WARNING_STANDARD_X, EQUIP_NAME_WITH_WARNING_STANDARD_Y));
+    Text_Display(&equipProc->equipText, gUiTmScratchA + TILEMAP_INDEX(EQUIP_NAME_WITH_WARNING_X, EQUIP_NAME_WITH_WARNING_Y));
   }
 
   return;
