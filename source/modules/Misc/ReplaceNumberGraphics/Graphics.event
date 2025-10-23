@@ -1,0 +1,86 @@
+
+#ifndef CUSTOM_NUMBER_GRAPHICS
+
+  #ifndef NEED_NUMBER_GRAPHICS
+
+    #define NEED_NUMBER_GRAPHICS
+
+    #ifdef _FE6J_
+      #define gNumberGraphics 0x082DC618
+      #undef NEED_NUMBER_GRAPHICS
+    #endif // _FE6J_
+
+    #ifdef _FE7U_
+      #define gNumberGraphics 0x083F3FA4
+      #undef NEED_NUMBER_GRAPHICS
+    #endif // _FE7U_
+
+    #ifdef _FE7J_
+      #define gNumberGraphics 0x083FAA20
+      #undef NEED_NUMBER_GRAPHICS
+    #endif // _FE7J_
+
+    #ifdef _FE8U_
+      #define gNumberGraphics 0x089AD868
+      #undef NEED_NUMBER_GRAPHICS
+    #endif // _FE8U_
+
+    #ifdef _FE8J_
+      #define gNumberGraphics 0x08A1DEF0
+      #undef NEED_NUMBER_GRAPHICS
+    #endif // _FE8J_
+
+  #endif // NEED_NUMBER_GRAPHICS
+
+#endif // CUSTOM_NUMBER_GRAPHICS
+
+#ifndef CUSTOM_NUMBER_PALETTE
+
+  #ifndef NEED_NUMBER_PALETTE
+
+    #define NEED_NUMBER_PALETTE
+
+    #ifdef _FE6J_
+      #define gNumberPalette 0x082E278C
+      #undef NEED_NUMBER_PALETTE
+    #endif // _FE6J_
+
+    #ifdef _FE7U_
+      #define gNumberPalette 0x083FA12C
+      #undef NEED_NUMBER_PALETTE
+    #endif // _FE7U_
+
+    #ifdef _FE7J_
+      #define gNumberPalette 0x08400BA8
+      #undef NEED_NUMBER_PALETTE
+    #endif // _FE7J_
+
+    #ifdef _FE8U_
+      #define gNumberPalette 0x08A1D79C
+      #undef NEED_NUMBER_PALETTE
+    #endif // _FE8U_
+
+    #ifdef _FE8J_
+      #define gNumberPalette 0x08A99FA8
+      #undef NEED_NUMBER_PALETTE
+    #endif // _FE8J_
+
+  #endif // NEED_NUMBER_PALETTE
+
+#endif // CUSTOM_NUMBER_PALETTE
+
+#ifdef NEED_NUMBER_GRAPHICS
+
+  ALIGN 4; gNumberGraphics: {
+    #incbin "Numbers.4bpp.lz77"
+  };
+
+#endif // NEED_NUMBER_GRAPHICS
+
+#ifdef NEED_NUMBER_PALETTE
+
+  ALIGN 4; gNumberPalette: {
+    #incbin "Numbers.pal"
+  };
+
+#endif // NEED_NUMBER_PALETTE

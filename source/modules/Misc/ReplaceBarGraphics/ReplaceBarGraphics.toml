@@ -8,17 +8,6 @@
 
 [[module.includes]]
   file = "Graphics.event"
-  games = [ "FE6J", "FE7U", "FE7J" ]
-
-[[module.definitions]]
-  name = "gBarGraphics"
-  value = "gMapBattleInfoHPBar"
-  games = [ "FE8U", "FE8J" ]
-
-[[module.definitions]]
-  name = "gBarPalette"
-  value = "gMapBattleInfoNumberPalette"
-  games = [ "FE8U", "FE8J" ]
 
 [[module.definitions]]
   name = "BAR_BASE_TILE"
@@ -83,16 +72,6 @@
   body = "SET_FUNC Decompress, 0x08012F50 | 1"
   games = [ "FE8U" ]
 
-[[module.asm_definitions]]
-  name = "gMapBattleInfoHPBar"
-  body = "SET_DATA gMapBattleInfoHPBar, 0x089AD78C"
-  games = [ "FE8U" ]
-
-[[module.asm_definitions]]
-  name = "gMapBattleInfoNumberPalette"
-  body = "SET_DATA gMapBattleInfoNumberPalette, 0x08A1D79C"
-  games = [ "FE8U" ]
-
 
 [[module.asm_definitions]]
   name = "RegisterTileGraphics"
@@ -102,14 +81,4 @@
 [[module.asm_definitions]]
   name = "Decompress"
   body = "SET_FUNC Decompress, 0x08013008 | 1"
-  games = [ "FE8J" ]
-
-[[module.asm_definitions]]
-  name = "gMapBattleInfoHPBar"
-  body = "SET_DATA gMapBattleInfoHPBar, 0x08A1DE14"
-  games = [ "FE8J" ]
-
-[[module.asm_definitions]]
-  name = "gMapBattleInfoNumberPalette"
-  body = "SET_DATA gMapBattleInfoNumberPalette, 0x08A99FA8"
   games = [ "FE8J" ]

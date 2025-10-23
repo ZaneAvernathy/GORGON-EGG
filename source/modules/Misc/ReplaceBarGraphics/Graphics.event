@@ -1,8 +1,56 @@
 
-ALIGN 4; gBarGraphics: {
-  #incbin "Bar.4bpp.lz77"
-};
+#ifndef CUSTOM_BAR_GRAPHICS
 
-ALIGN 4; gBarPalette: {
-  #incbin "Bar.pal"
-};
+  #ifndef NEED_BAR_GRAPHICS
+
+    #define NEED_BAR_GRAPHICS
+
+    #ifdef _FE8U_
+      #define gBarGraphics 0x089AD78C
+      #undef NEED_BAR_GRAPHICS
+    #endif // _FE8U_
+
+    #ifdef _FE8J_
+      #define gBarGraphics 0x08A1DE14
+      #undef NEED_BAR_GRAPHICS
+    #endif // _FE8J_
+
+  #endif // NEED_BAR_GRAPHICS
+
+#endif // CUSTOM_BAR_GRAPHICS
+
+#ifndef CUSTOM_BAR_PALETTE
+
+  #ifndef NEED_BAR_PALETTE
+
+    #define NEED_BAR_PALETTE
+
+    #ifdef _FE8U_
+      #define gBarPalette 0x08A1D79C
+      #undef NEED_BAR_PALETTE
+    #endif // _FE8U_
+
+    #ifdef _FE8J_
+      #define gBarPalette 0x08A99FA8
+      #undef NEED_BAR_PALETTE
+    #endif // _FE8J_
+
+  #endif // NEED_BAR_PALETTE
+
+#endif // CUSTOM_BAR_PALETTE
+
+#ifdef NEED_BAR_GRAPHICS
+
+  ALIGN 4; gBarGraphics: {
+    #incbin "Bar.4bpp.lz77"
+  };
+
+#endif // NEED_BAR_GRAPHICS
+
+#ifdef NEED_BAR_PALETTE
+
+  ALIGN 4; gBarPalette: {
+    #incbin "Bar.pal"
+  };
+
+#endif // NEED_BAR_PALETTE
