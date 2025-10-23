@@ -71,7 +71,7 @@ enum NameAlignments
   value = 16
 
 [[module.definitions]]
-  name = "GetUnitAffinityIcon"
+  name = "NAME_STANDARD_SHIFT_CONDITION_DECLS"
   body = "int GetUnitAffinityIcon(struct Unit* unit);"
 
 
