@@ -15,7 +15,8 @@ u32 GetSmallFontWidth(unsigned char index, u16 glyph, const u16* font)
 {
   /* Gets the width of a small font glyph.
    *
-   * `lower` here is the lower byte of SJIS glyphs.
+   * `index` here is the non-page byte of SJIS characters.
+   * `glyph` is the full encoded character.
    */
 
   unsigned i;
