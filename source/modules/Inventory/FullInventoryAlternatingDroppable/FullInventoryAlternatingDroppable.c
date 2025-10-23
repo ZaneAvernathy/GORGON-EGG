@@ -56,7 +56,7 @@ void FullInventoryAlternatingDroppable_Dynamic(struct PlayerInterfaceProc* proc,
    *
    * Users can configure the time between alternating by editing the
    * INVENTORY_ALTERNATE_FRAMES config definition. Users can also provide
-   * their own formula for determining the currently-dsplayed icon
+   * their own formula for determining the currently-displayed icon
    * using the INVENTORY_ALTERNATE_FRAME_GETTER config definition.
    */
 

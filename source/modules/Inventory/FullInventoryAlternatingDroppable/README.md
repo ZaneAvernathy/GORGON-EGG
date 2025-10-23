@@ -18,3 +18,10 @@ This module draws a unit's items, showing each one for a number of frames before
 ## Other definitions
 
 The `ItemIconPalettes` definition describes an enum for values passed into the `LoadIconPalette` function, which generally should not be edited.
+
+By default, the currently-displayed icon is determined by
+```c
+i = (proc->hoverFramecount / INVENTORY_ALTERNATE_FRAMES) % itemCount;
+```
+
+but can be overridden by setting the `INVENTORY_ALTERNATE_FRAME_GETTER` to a C expression that yields a number `[0, itemCount)`.
