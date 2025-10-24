@@ -31,17 +31,6 @@ typedef float  f32;
 typedef double f64;
 
 
-// I'm stealing this from the fe8u decomp.
-#ifndef __STDBOOL_H__
-
-typedef s8 bool;
-enum { false, true };
-#define false false
-#define true true
-#define __bool_true_false_are_defined 1
-
-#endif // __STDBOOL_H__
-
 #define TRUE true
 #define FALSE false
 
