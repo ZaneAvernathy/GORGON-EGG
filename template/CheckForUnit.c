@@ -14,7 +14,7 @@ void UI1_CheckForUnit(struct PlayerInterfaceProc* proc)
   // If we didn't move onto a unit, retract.
   // Otherwise, redraw the window.
 
-  if ( !unit )
+  if ( unit == NULL )
   {
     ProcGoto((Proc*)proc, UI1_PROC_RETRACT);
   }
