@@ -26,4 +26,4 @@ By default, this shares the number graphics and palette of the other numbers. Yo
 
 # Other definitions
 
-The `HIT_RENDERER` definition is the name of the function responsible for rendering the number. The `HIT_RENDERER_HITS` definition Has the declaration for the renderer as well as a flag that tells the number drawing internals that it needs a specific renderer installed.
+The `HIT_RENDERER` definition is the name of the function responsible for rendering the number. The `HIT_RENDERER_HITS` definition has the declaration for the renderer as well as a flag that tells the number drawing internals that it needs a specific renderer installed.
