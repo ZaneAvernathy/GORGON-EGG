@@ -32,7 +32,7 @@ The `NameAlignments` definition describes an enum for text alignment values, and
 
 The `NAME_SMALL_SHIFT_CONDITION` should be a C expression that yields `TRUE` if the name should be shifted and `FALSE` otherwise.
 
-[details="Example shift conditions"]
+<details><summary>Example shift conditions</summary>
 
 By default, `NAME_SMALL_SHIFT_CONDITION` shifts the text if the unit has an affinity.
 
@@ -77,4 +77,4 @@ bool Bar(struct Unit* unit);
   value = "( !Foo() || Bar(udp->unit) )"
 ```
 
-[/details]
+</details>

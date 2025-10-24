@@ -23,7 +23,7 @@ Default behavior:
 
 By default, icons are only drawn if the unit is a non-player unit with at least one item. You can override the `SHOULD_DISPLAY_MISC_WARNING` advanced definition to provide a new condition to enable these icons. This definition should yield a boolean value, with `TRUE` enabling the potential for the icons to be drawn for the unit. Then, the individual conditions for the icons will need to be met before anything is drawn.
 
-[details="Example baseline conditions"]
+<details><summary>Example baseline conditions</summary>
 
 To allow any unit to be able to have these icons, try the following definition:
 ```toml
@@ -77,7 +77,7 @@ bool SomeOtherFunction(void);
   value = "( !(proc->hideContents) || SomeVanillaFunction(udp->unit) || SomeOtherFunction() )"
 ```
 
-[/details]
+</details>
 
 ## Sword display conditions
 
@@ -100,7 +100,7 @@ If you change the item slots of the staves but still need them, you can edit the
 
 You can override the `SHOULD_DISPLAY_MISC_WARNING_SWORD` definition to provide a new condition for the sword to be displayed. This definition should yield a boolean value, with `TRUE` drawing the icon for the unit.
 
-[details="Example sword conditions"]
+<details><summary>Example sword conditions</summary>
 
 To show the sword icon regardless of conditions, you can override the `SHOULD_DISPLAY_MISC_WARNING_SWORD` like:
 ```toml
@@ -111,13 +111,13 @@ To show the sword icon regardless of conditions, you can override the `SHOULD_DI
 
 You can write a more complex condition by following the same steps as for the baseline condition.
 
-[/details]
+</details>
 
 ## Bag display conditions
 
 By default, the bag icon is shown if the unit can drop an item. You can override the `SHOULD_DISPLAY_MISC_WARNING_BAG` definition to provide a new condition. This definition should yield a boolean value, with `TRUE` drawing the icon for the unit.
 
-[details="Example bag conditions"]
+<details><summary>Example bag conditions</summary>
 
 To show the bag icon regardless of conditions, you can override the `SHOULD_DISPLAY_MISC_WARNING_BAG` like:
 ```toml
@@ -128,4 +128,4 @@ To show the bag icon regardless of conditions, you can override the `SHOULD_DISP
 
 You can write a more complex condition by following the same steps as for the baseline condition.
 
-[/details]
+</details>

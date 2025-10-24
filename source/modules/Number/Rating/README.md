@@ -30,7 +30,7 @@ The `RTG_RENDERER` definition is the name of the function responsible for render
 
 The `RTG_CALCULATION` definition is a C expression that calculates the rating.
 
-[details="Example rating calculation"]
+<details><summary>Example rating calculation</summary>
 
 By default, the rating calculation looks like:
 
@@ -71,4 +71,4 @@ int Bar(struct Unit* unit);
 
 ```
 
-[/details]
+</details>
