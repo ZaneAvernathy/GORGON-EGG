@@ -1,0 +1,338 @@
+
+[module]
+  name = "HPOrStatus"
+
+[[module.statics]]
+  name = "HPOrStatus_Static"
+  file = "HPOrStatus.lyn.event"
+
+[[module.dynamics]]
+  name = "HPOrStatus_Dynamic"
+  file = "HPOrStatus.lyn.event"
+
+[[module.internals]]
+  file = "DrawNumber/DrawNumber.event"
+
+[[module.includes]]
+  file = "Images.event"
+
+[[module.asm_definitions]]
+  name = "NEED_aeabi_uidivmod"
+  value = 1
+
+[[module.internals]]
+  file = "LibraryFunctions/LibraryFunctions.event"
+
+[[module.definitions]]
+  name = "HP_OR_STATUS_FRAMES"
+  value = 64
+
+[[module.definitions]]
+  name = "STATUS_WIDTH"
+  value = 6
+
+[[module.definitions]]
+  name = "STATUS_X"
+  value = 1
+
+[[module.definitions]]
+  name = "STATUS_Y"
+  value = 1
+
+[[module.definitions]]
+  name = "STATUS_BASE_TILE"
+  value = 0x160
+
+[[module.definitions]]
+  name = "STATUS_PALETTE"
+  value = 0
+
+[[module.definitions]]
+  name = "UnitStatus"
+  body = '''
+enum UnitStatus
+{
+  UNIT_STATUS_NONE,
+
+  UNIT_STATUS_POISON,
+  UNIT_STATUS_SLEEP,
+  UNIT_STATUS_SILENCE,
+  UNIT_STATUS_BERSERK,
+
+  #if defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8U__)
+
+  UNIT_STATUS_ATTACK,
+  UNIT_STATUS_DEFENSE,
+  UNIT_STATUS_CRIT,
+  UNIT_STATUS_AVOID,
+
+  #endif // defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8U__)
+
+  #if defined(__FE8U__) || defined(__FE8J__)
+
+  UNIT_STATUS_SICK,
+  UNIT_STATUS_GORGON_EGG,
+  UNIT_STATUS_PETRIFY,
+  UNIT_STATUS_GREAT_SHIELD_PROC,
+  UNIT_STATUS_PETRIFY_BY_ALLY,
+
+  #endif // defined(__FE8U__) || defined(__FE8J__)
+
+  UNIT_STATUS_MAX,
+
+};'''
+
+
+[[module.definitions]]
+  name = "STATUS_NUMBER_BASE_TILE"
+  value = 0x128
+
+[[module.definitions]]
+  name = "STATUS_NUMBER_PALETTE"
+  value = 0
+  games = [ "FE6J", "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "STATUS_NUMBER_PALETTE"
+  value = 2
+  games = [ "FE8U", "FE8J" ]
+
+[[module.definitions]]
+  name = "STATUS_IMAGE_WIDTH"
+  value = 5
+
+[[module.definitions]]
+  name = "HP_LABEL_X"
+  value = "STATUS_X"
+
+[[module.definitions]]
+  name = "HP_LABEL_Y"
+  value = "STATUS_Y"
+
+[[module.definitions]]
+  name = "HP_LABEL_BASE_TILE"
+  value = 0x0120
+
+[[module.definitions]]
+  name = "HP_LABEL_PALETTE"
+  value = 2
+  games = [ "FE8U", "FE8J" ]
+
+[[module.definitions]]
+  name = "HP_LABEL_PALETTE"
+  value = 0
+  games = [ "FE6J", "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "HP_LABEL_WIDTH"
+  value = 2
+
+[[module.definitions]]
+  name = "HP_DIVIDER_X"
+  value = "HP_LABEL_X + 3"
+  games = [ "FE6J", "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "HP_DIVIDER_X"
+  value = "HP_LABEL_X + 4"
+  games = [ "FE8U", "FE8J" ]
+
+[[module.definitions]]
+  name = "HP_DIVIDER_Y"
+  value = "HP_LABEL_Y"
+
+[[module.definitions]]
+  name = "HP_DIVIDER_BASE_TILE"
+  value = 0x013E
+
+[[module.definitions]]
+  name = "HP_DIVIDER_PALETTE"
+  value = 2
+  games = [ "FE8U", "FE8J" ]
+
+[[module.definitions]]
+  name = "HP_DIVIDER_PALETTE"
+  value = 0
+  games = [ "FE6J", "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "HP_DIVIDER_WIDTH"
+  value = 2
+  games = [ "FE6J", "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "HP_DIVIDER_WIDTH"
+  value = 1
+  games = [ "FE8U", "FE8U" ]
+
+[[module.definitions]]
+  name = "NEED_NUMBER_2_DIGITS"
+  value = 1
+
+[[module.definitions]]
+  name = "HP_RENDERER_DEFS"
+  body = '''
+void DrawUnsignedNumberRightAligned(int number, int x, int y, u16 baseObj);
+#define NEED_NUMBER_UNSIGNED_RIGHT_ALIGNED
+'''
+
+[[module.definitions]]
+  name = "CURRENT_HP_RENDERER"
+  value = "DrawUnsignedNumberRightAligned"
+
+[[module.definitions]]
+  name = "CURRENT_HP_X"
+  value = "(HP_LABEL_X * 8) + 23"
+
+[[module.definitions]]
+  name = "CURRENT_HP_Y"
+  value = "(HP_LABEL_Y * 8)"
+
+[[module.definitions]]
+  name = "NUMBER_BASE_TILE"
+  value = 0x02E0
+
+[[module.definitions]]
+  name = "NUMBER_PALETTE"
+  value = 8
+
+[[module.definitions]]
+  name = "CURRENT_HP_BASE_TILE"
+  value = "NUMBER_BASE_TILE"
+
+[[module.definitions]]
+  name = "CURRENT_HP_PALETTE"
+  value = "NUMBER_PALETTE"
+
+[[module.definitions]]
+  name = "MAX_HP_RENDERER"
+  value = "DrawUnsignedNumberRightAligned"
+
+[[module.definitions]]
+  name = "MAX_HP_X"
+  value = "(HP_DIVIDER_X * 8) + 24"
+
+[[module.definitions]]
+  name = "MAX_HP_Y"
+  value = "(HP_LABEL_Y * 8)"
+
+[[module.definitions]]
+  name = "NUMBER_BASE_TILE"
+  value = 0x02E0
+
+[[module.definitions]]
+  name = "NUMBER_PALETTE"
+  value = 8
+
+[[module.definitions]]
+  name = "MAX_HP_BASE_TILE"
+  value = "NUMBER_BASE_TILE"
+
+[[module.definitions]]
+  name = "MAX_HP_PALETTE"
+  value = "NUMBER_PALETTE"
+
+
+[[module.asm_definitions]]
+  name = "ConvertNumberToStringOrDashes"
+  body = "SET_FUNC ConvertNumberToStringOrDashes, 0x080050F8 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitCurrentHp"
+  body = "SET_FUNC GetUnitCurrentHp, 0x08018388 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitMaxHp"
+  body = "SET_FUNC GetUnitMaxHp, 0x080183C8 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "NumberStringSpace"
+  body = "SET_DATA NumberStringSpace, 0x02027BA0"
+  games = [ "FE6J" ]
+
+
+[[module.asm_definitions]]
+  name = "ConvertNumberToStringOrDashes"
+  body = "SET_FUNC ConvertNumberToStringOrDashes, 0x08005080 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitCurrentHp"
+  body = "SET_FUNC GetUnitCurrentHp, 0x08018A70 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitMaxHp"
+  body = "SET_FUNC GetUnitMaxHp, 0x08018AB0 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "NumberStringSpace"
+  body = "SET_DATA NumberStringSpace, 0x02028D44"
+  games = [ "FE7U" ]
+
+
+[[module.asm_definitions]]
+  name = "ConvertNumberToStringOrDashes"
+  body = "SET_FUNC ConvertNumberToStringOrDashes, 0x08004F5C | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitCurrentHp"
+  body = "SET_FUNC GetUnitCurrentHp, 0x08018E60 | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitMaxHp"
+  body = "SET_FUNC GetUnitMaxHp, 0x08018EA0 | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "NumberStringSpace"
+  body = "SET_DATA NumberStringSpace, 0x02028D3C"
+  games = [ "FE7J" ]
+
+
+[[module.asm_definitions]]
+  name = "ConvertNumberToStringOrDashes"
+  body = "SET_FUNC ConvertNumberToStringOrDashes, 0x0800391C | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitCurrentHp"
+  body = "SET_FUNC GetUnitCurrentHp, 0x08019150 | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitMaxHp"
+  body = "SET_FUNC GetUnitMaxHp, 0x08019190 | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "NumberStringSpace"
+  body = "SET_DATA NumberStringSpace, 0x02028E44"
+  games = [ "FE8U" ]
+
+
+[[module.asm_definitions]]
+  name = "ConvertNumberToStringOrDashes"
+  body = "SET_FUNC ConvertNumberToStringOrDashes, 0x08003868 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitCurrentHp"
+  body = "SET_FUNC GetUnitCurrentHp, 0x08018E64 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitMaxHp"
+  body = "SET_FUNC GetUnitMaxHp, 0x08018EA4 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "NumberStringSpace"
+  body = "SET_DATA NumberStringSpace, 0x02028E44"
+  games = [ "FE8J" ]

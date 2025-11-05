@@ -1,0 +1,188 @@
+
+[module]
+  name = "CritOrDodge"
+
+[[module.inits]]
+  name = "CritOrDodge_Init"
+  file = "CritOrDodge.lyn.event"
+
+[[module.dynamics]]
+  name = "CritOrDodge_Dynamic"
+  file = "CritOrDodge.lyn.event"
+
+[[module.includes]]
+  file = "Label.event"
+
+[[module.definitions]]
+  name = "NEED_NUMBER_3_DIGITS"
+  value = 1
+
+[[module.internals]]
+  file = "DrawNumber/DrawNumber.event"
+
+[[module.definitions]]
+  name = "CRT_OR_DOD_FRAMES"
+  value = 64
+
+[[module.definitions]]
+  name = "NUMBER_BASE_TILE"
+  value = 0x02E0
+
+[[module.definitions]]
+  name = "NUMBER_PALETTE"
+  value = 8
+
+[[module.definitions]]
+  name = "CRT_BASE_TILE"
+  value = "NUMBER_BASE_TILE"
+
+[[module.definitions]]
+  name = "CRT_PALETTE"
+  value = "NUMBER_PALETTE"
+
+[[module.definitions]]
+  name = "DOD_BASE_TILE"
+  value = "NUMBER_BASE_TILE"
+
+[[module.definitions]]
+  name = "DOD_PALETTE"
+  value = "NUMBER_PALETTE"
+
+[[module.definitions]]
+  name = "CRT_OR_DOD_RENDERER_DEFS"
+  body = '''
+void DrawUnsignedNumberRightAligned(int number, int x, int y, u16 baseObj);
+#define NEED_NUMBER_UNSIGNED_RIGHT_ALIGNED
+'''
+
+[[module.definitions]]
+  name = "CRT_RENDERER"
+  value = "DrawUnsignedNumberRightAligned"
+
+[[module.definitions]]
+  name = "DOD_RENDERER"
+  value = "DrawUnsignedNumberRightAligned"
+
+[[module.definitions]]
+  name = "CRT_LABEL_X"
+  value = 1
+
+[[module.definitions]]
+  name = "CRT_LABEL_Y"
+  value = 1
+
+[[module.definitions]]
+  name = "DOD_LABEL_X"
+  value = 1
+
+[[module.definitions]]
+  name = "DOD_LABEL_Y"
+  value = 1
+
+[[module.definitions]]
+  name = "CRT_OR_DOD_SPACING"
+  value = 24
+
+[[module.definitions]]
+  name = "CRT_LABEL_WIDTH"
+  value = 2
+
+[[module.definitions]]
+  name = "DOD_LABEL_WIDTH"
+  value = 2
+
+[[module.definitions]]
+  name = "CRT_LABEL_BASE_TILE"
+  value = 0x0166
+
+[[module.definitions]]
+  name = "CRT_LABEL_PALETTE"
+  value = 2
+
+[[module.definitions]]
+  name = "DOD_LABEL_BASE_TILE"
+  value = 0x016A
+
+[[module.definitions]]
+  name = "DOD_LABEL_PALETTE"
+  value = 2
+
+
+[[module.asm_definitions]]
+  name = "RegisterTileGraphics"
+  body = "SET_FUNC RegisterTileGraphics, 0x08002B04 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "ConvertNumberToStringOrDashes"
+  body = "SET_FUNC ConvertNumberToStringOrDashes, 0x080050F8 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "NumberStringSpace"
+  body = "SET_DATA NumberStringSpace, 0x02027BA0"
+  games = [ "FE6J" ]
+
+
+[[module.asm_definitions]]
+  name = "RegisterTileGraphics"
+  body = "SET_FUNC RegisterTileGraphics, 0x08003078 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "ConvertNumberToStringOrDashes"
+  body = "SET_FUNC ConvertNumberToStringOrDashes, 0x08005080 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "NumberStringSpace"
+  body = "SET_DATA NumberStringSpace, 0x02028D44"
+  games = [ "FE7U" ]
+
+
+[[module.asm_definitions]]
+  name = "RegisterTileGraphics"
+  body = "SET_FUNC RegisterTileGraphics, 0x08002F54 | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "ConvertNumberToStringOrDashes"
+  body = "SET_FUNC ConvertNumberToStringOrDashes, 0x08004F5C | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "NumberStringSpace"
+  body = "SET_DATA NumberStringSpace, 0x02028D3C"
+  games = [ "FE7J" ]
+
+
+[[module.asm_definitions]]
+  name = "RegisterTileGraphics"
+  body = "SET_FUNC RegisterTileGraphics, 0x08002014 | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "ConvertNumberToStringOrDashes"
+  body = "SET_FUNC ConvertNumberToStringOrDashes, 0x0800391C | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "NumberStringSpace"
+  body = "SET_DATA NumberStringSpace, 0x02028E44"
+  games = [ "FE8U" ]
+
+
+[[module.asm_definitions]]
+  name = "RegisterTileGraphics"
+  body = "SET_FUNC RegisterTileGraphics, 0x08001F64 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "ConvertNumberToStringOrDashes"
+  body = "SET_FUNC ConvertNumberToStringOrDashes, 0x08003868 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "NumberStringSpace"
+  body = "SET_DATA NumberStringSpace, 0x02028E44"
+  games = [ "FE8J" ]

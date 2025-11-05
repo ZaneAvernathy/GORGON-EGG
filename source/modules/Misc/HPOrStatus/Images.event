@@ -1,0 +1,89 @@
+
+#ifdef _FE6J_
+
+  #define NEED_STATUS_J
+
+#endif // _FE6J_
+
+#ifdef _FE7U_
+
+  #define NEED_STATUS_U
+  #define NEED_RING_STATUS
+
+#endif // _FE7U_
+
+#ifdef _FE7J_
+
+  #define NEED_STATUS_J
+  #define NEED_RING_STATUS
+
+#endif // _FE7J_
+
+#ifdef _FE8U_
+
+  #define NEED_STATUS_U
+  #define NEED_RING_STATUS
+  #define NEED_PETRIFY_STATUS
+
+#endif // _FE8U_
+
+#ifdef _FE8J_
+
+  #define NEED_STATUS_J
+  #define NEED_RING_STATUS
+  #define NEED_PETRIFY_STATUS
+
+#endif // _FE8J_
+
+ALIGN 4; gStatusImage: {
+
+  #ifdef NEED_STATUS_U
+
+    #incbin "Graphics/Poison.4bpp"
+    #incbin "Graphics/Sleep.4bpp"
+    #incbin "Graphics/Silence.4bpp"
+    #incbin "Graphics/Berserk.4bpp"
+
+    #ifdef NEED_RING_STATUS
+
+    #incbin "Graphics/Attack.4bpp"
+    #incbin "Graphics/Defense.4bpp"
+    #incbin "Graphics/Crit.4bpp"
+    #incbin "Graphics/Avoid.4bpp"
+
+    #endif // NEED_RING_STATUS
+
+    #ifdef NEED_PETRIFY_STATUS
+
+    #incbin "Graphics/Petrify.4bpp"
+
+    #endif // NEED_PETRIFY_STATUS
+
+  #endif // NEED_STATUS_U
+
+  #ifdef NEED_STATUS_J
+
+    #incbin "Graphics/PoisonJ.4bpp"
+    #incbin "Graphics/SleepJ.4bpp"
+    #incbin "Graphics/SilenceJ.4bpp"
+    #incbin "Graphics/BerserkJ.4bpp"
+
+    #ifdef NEED_RING_STATUS
+
+    #incbin "Graphics/AttackJ.4bpp"
+    #incbin "Graphics/DefenseJ.4bpp"
+    #incbin "Graphics/CritJ.4bpp"
+    #incbin "Graphics/AvoidJ.4bpp"
+
+    #endif // NEED_RING_STATUS
+
+    #ifdef NEED_PETRIFY_STATUS
+
+    #incbin "Graphics/PetrifyJ.4bpp"
+
+    #endif // NEED_PETRIFY_STATUS
+
+  #endif // NEED_STATUS_J
+
+};
+
