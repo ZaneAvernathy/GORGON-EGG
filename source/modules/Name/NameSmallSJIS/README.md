@@ -28,6 +28,8 @@ If using the `NAME_SHIFTED_RIGHT` alignment, the text will be shifted to the rig
 
 ## Other definitions
 
+The vanilla games override parts of the SJIS encoding that are otherwise unused in the games in order to fit certain halfwidth strings. If these are not needed, add `#define NO_SJIS_HACKS` to your buildfile before including GORGON-EGG.
+
 The `NameAlignments` definition describes an enum for text alignment values, and generally should not be edited.
 
 The `NAME_SMALL_SJIS_SHIFT_CONDITION` should be a C expression that yields `TRUE` if the name should be shifted and `FALSE` otherwise.
