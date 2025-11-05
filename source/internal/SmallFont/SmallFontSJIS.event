@@ -262,7 +262,6 @@ ALIGN 4; gSmallFontSJISExceptionPage:
 
   #ifndef NO_SJIS_HACKS
 
-
     #ifdef _FE6J_
 
       #define NEED_SJIS_THUNDERSTORM
