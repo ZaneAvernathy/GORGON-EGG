@@ -11,7 +11,7 @@ This module functions like the `HPOrStatusStandard` module, except that it insta
 
 # User configuration
 
-This module assumes that most users will want all of the elements to appear as they do in vanilla. You can move the entire module's elements as a group by setting the `STATUS_X` and `STATUS_Y` definitions.
+This module assumes that most users will want all of the elements to appear as they do in vanilla. You can move the entire module's elements as a group by setting the `HP_OR_STATUS_X` and `HP_OR_STATUS_Y` definitions.
 
 ## Simple definitions (shared)
 
@@ -38,7 +38,7 @@ This module assumes that most users will want all of the elements to appear as t
 
 ## Simple definitions (linked positions)
 
-  * `STATUS_X` and `STATUS_Y`: The base position of the elements in tiles
+  * `HP_OR_STATUS_X` and `HP_OR_STATUS_X`: The base position of the elements in tiles
 
 ## Simple definitions (decoupled positions)
 

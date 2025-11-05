@@ -39,14 +39,28 @@
 [[module.definitions]]
   name = "STATUS_WIDTH"
   value = 6
+  games = [ "FE6J", "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "STATUS_WIDTH"
+  value = 7
+  games = [ "FE8U", "FE8J" ]
+
+[[module.definitions]]
+  name = "HP_OR_STATUS_X"
+  value = 5
+
+[[module.definitions]]
+  name = "HP_OR_STATUS_Y"
+  value = 3
 
 [[module.definitions]]
   name = "STATUS_X"
-  value = 1
+  value = "HP_OR_STATUS_X"
 
 [[module.definitions]]
   name = "STATUS_Y"
-  value = 1
+  value = "HP_OR_STATUS_Y"
 
 [[module.definitions]]
   name = "STATUS_BASE_TILE"
@@ -197,7 +211,13 @@ void DrawUnsignedNumberRightAligned(int number, int x, int y, u16 baseObj);
 
 [[module.definitions]]
   name = "CURRENT_HP_X"
-  value = "(HP_LABEL_X * 8) + 23"
+  value = "((HP_LABEL_X + HP_LABEL_WIDTH) * 8) + 7"
+  games = [ "FE6J", "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "CURRENT_HP_X"
+  value = "((HP_LABEL_X + HP_LABEL_WIDTH) * 8) + 8"
+  games = [ "FE8U", "FE8J" ]
 
 [[module.definitions]]
   name = "CURRENT_HP_Y"
@@ -225,7 +245,13 @@ void DrawUnsignedNumberRightAligned(int number, int x, int y, u16 baseObj);
 
 [[module.definitions]]
   name = "MAX_HP_X"
-  value = "(HP_DIVIDER_X * 8) + 24"
+  value = "((HP_DIVIDER_X + HP_DIVIDER_WIDTH - 1) * 8) + 9"
+  games = [ "FE6J", "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "MAX_HP_X"
+  value = "((HP_DIVIDER_X + HP_DIVIDER_WIDTH) * 8) + 8"
+  games = [ "FE8U", "FE8J" ]
 
 [[module.definitions]]
   name = "MAX_HP_Y"
