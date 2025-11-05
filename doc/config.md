@@ -113,3 +113,6 @@ Changing a non-integer value:
 ```
 
 </details>
+
+Some advanced user C-language definitions may require GCC library functions. See the [LibraryFunctions module](/source/modules/Misc/LibraryFunctions/README.md) for more information.
+

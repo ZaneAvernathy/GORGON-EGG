@@ -1,0 +1,6 @@
+
+[module]
+  name = "LibraryFunctions"
+
+[[module.internals]]
+  file = "LibraryFunctions/LibraryFunctions.event"

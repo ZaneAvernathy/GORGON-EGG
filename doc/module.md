@@ -574,3 +574,20 @@ Mixing both kinds of requirements:
 ```
 
 </details>
+
+## Library functions
+
+Sometimes when writing a `module` a compiled component may reference a GCC library function (these are generally prefixed with `__` and are generally not explicitly called) which isn't found within a vanilla game. GORGON-EGG includes support for missing library functions in the [LibraryFunctions internal file](/source/internal/LibraryFunctions/LibraryFunctions.event).
+
+If your `module` requires a library feature, add an assembly definition to your `module declaration` file for the feature. This definition's name is prefixed with `NEED_` and is followed by the name of the feature with its leading underscores removed.
+
+For example, if you require `__ashldi3`, your `module declaration` file might include:
+
+```toml
+[[module.asm_definitions]]
+  name = "NEED_ashldi3"
+  value = 1
+
+[[module.internals]]
+  file = "LibraryFunctions/LibraryFunctions.event"
+```
