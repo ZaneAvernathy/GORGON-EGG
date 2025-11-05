@@ -47,7 +47,7 @@ void DecompressMinimugGraphics(int portraitID, int baseTile, int paletteID)
 
     #endif // defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
 
-    ApplyPalette(info->palette, paletteID);
+    ApplyPalette(info->palette, BG_PALETTE(paletteID));
   }
 
   return;

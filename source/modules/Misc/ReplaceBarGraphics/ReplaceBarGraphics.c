@@ -31,7 +31,7 @@ void ReplaceBarGraphics_Init(struct PlayerInterfaceProc* proc)
       );
   }
 
-  ApplyPalette(gBarPalette, BAR_PALETTE);
+  ApplyPalette(gBarPalette, BG_PALETTE(BAR_PALETTE));
 
   return;
 }

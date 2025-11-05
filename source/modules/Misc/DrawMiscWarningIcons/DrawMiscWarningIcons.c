@@ -116,7 +116,7 @@ void DrawMiscWarningIcons_Init(struct PlayerInterfaceProc* proc)
    */
 
   Decompress(gMiscWMGraphics, VRAM_OBJ_ADDRESS(MISC_WARNINGS_BASE_TILE));
-  ApplyPalette(gMiscWMPalette, MISC_WARNINGS_PALETTE);
+  ApplyPalette(gMiscWMPalette, OBJ_PALETTE(MISC_WARNINGS_PALETTE));
 
   return;
 }

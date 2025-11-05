@@ -36,7 +36,7 @@ void GetTilemapPalette(struct Unit* unit, int paletteID)
       break;
 
   }
-  ApplyPalette(palette, paletteID);
+  ApplyPalette(palette, BG_PALETTE(paletteID));
 
   return;
 }

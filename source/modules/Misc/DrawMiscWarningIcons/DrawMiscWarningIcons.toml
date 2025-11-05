@@ -36,7 +36,7 @@
 
 [[module.definitions]]
   name = "MISC_WARNINGS_PALETTE"
-  value = 21
+  value = 5
 
 [[module.definitions]]
   name = "US_DROP_ITEM"

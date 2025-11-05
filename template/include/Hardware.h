@@ -146,8 +146,8 @@
 
 #define VRAM_OBJ (VRAM + 0x10000)
 
-#define VRAM_ADDRESS(tile) (VRAM + ((tile * CHR_SIZE) & 0x1FFFF))
-#define VRAM_OBJ_ADDRESS(tile) (VRAM_OBJ + ((tile * CHR_SIZE) & 0x1FFFF))
+#define VRAM_ADDRESS(tile) (VRAM + (((tile) * CHR_SIZE) & 0x1FFFF))
+#define VRAM_OBJ_ADDRESS(tile) (VRAM_OBJ + (((tile) * CHR_SIZE) & 0x1FFFF))
 
 #define BG_PALETTE(idx) ( 0 + idx )
 #define OBJ_PALETTE(idx) ( 16 + idx )

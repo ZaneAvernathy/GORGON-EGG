@@ -40,7 +40,7 @@
 
 [[module.definitions]]
   name = "DROPPABLE_ICON_PALETTE"
-  value = 21
+  value = 5
 
 [[module.definitions]]
   name = "ItemIconPalettes"

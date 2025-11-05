@@ -42,7 +42,7 @@ void FullInventoryAlternatingDroppable_Static(struct PlayerInterfaceProc* proc, 
   LoadIconPalette(ITEM_ICON_PALETTE_ITEMS, INVENTORY_ICON_PALETTE);
 
   RegisterTileGraphics(gDroppableItemIcon, DROPPABLE_ICON_ADDRESS, sizeof(gDroppableItemIcon));
-  ApplyPalette(gDroppableItemIconPalette, DROPPABLE_ICON_PALETTE);
+  ApplyPalette(gDroppableItemIconPalette, OBJ_PALETTE(DROPPABLE_ICON_PALETTE));
 
   return;
 }
