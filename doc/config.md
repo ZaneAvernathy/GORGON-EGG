@@ -116,3 +116,6 @@ Changing a non-integer value:
 
 Some advanced user C-language definitions may require GCC library functions. See the [LibraryFunctions module](/source/modules/Misc/LibraryFunctions/README.md) for more information.
 
+### Extra conditions for definitions
+
+`[[config.definitions]]` and `[[config.asm_definitions]]` can also make use of the same [requirements](/doc/module.md#requirements) that `module`s can use.
