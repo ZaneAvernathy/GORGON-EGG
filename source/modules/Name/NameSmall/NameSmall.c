@@ -66,7 +66,7 @@ void DrawNameSmall(char* string, unsigned padding, struct PlayerInterfaceProc* p
 
   DrawSmallStringTilemap(width, baseTile, gUiTmScratchA + TILEMAP_INDEX(NAME_SMALL_X, NAME_SMALL_Y));
 
-  proc->pageFlipped = ~proc->pageFlipped;
+  proc->pageFlipped = !proc->pageFlipped;
 
   return;
 }

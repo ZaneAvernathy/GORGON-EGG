@@ -66,7 +66,7 @@ void DrawNameSmallSJIS(char* string, unsigned padding, struct PlayerInterfacePro
 
   DrawSmallStringTilemap(width, baseTile, gUiTmScratchA + TILEMAP_INDEX(NAME_SMALL_SJIS_X, NAME_SMALL_SJIS_Y));
 
-  proc->pageFlipped = ~proc->pageFlipped;
+  proc->pageFlipped = !proc->pageFlipped;
 
   return;
 }
