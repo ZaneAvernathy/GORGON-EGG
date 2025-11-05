@@ -30,4 +30,11 @@
 
 [[module.definitions]]
   name = "HP_DIVIDER_WIDTH"
+  value = 2
+  games = [ "FE6J", "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "HP_DIVIDER_WIDTH"
   value = 1
+  games = [ "FE8U", "FE8U" ]
+

@@ -28,12 +28,6 @@
 [[module.definitions]]
   name = "DEF_LABEL_PALETTE"
   value = 2
-  games = [ "FE8U", "FE8J" ]
-
-[[module.definitions]]
-  name = "DEF_LABEL_PALETTE"
-  value = 0
-  games = [ "FE6J", "FE7U", "FE7J" ]
 
 [[module.definitions]]
   name = "DEF_LABEL_WIDTH"
