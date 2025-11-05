@@ -98,7 +98,7 @@ The `source` folder has two subfolders: `internal` and `modules`. The `modules` 
 
 The `internal` folder contains code or other functionality that may be shared between multiple `module`s. Since `GORGON-EGG` tries to minimize its space footprint, common elements are broken out to here and are only installed once.
 
-During the build process, `GORGON-EGG` will copies folders from the `source` folder into the `output` when they are needed by the user's `config`.
+During the build process, `GORGON-EGG` will copy folders from the `source` folder into the `output` when they are needed by the user's `config`.
 
 If you need to change the functionality of a prepackaged `module`, copy it to the `custom` folder before editing it. This will allow you to share the modified version with other people without overwriting their prepackaged version.
 
