@@ -13,6 +13,7 @@ These modules draw a bar representing some stat or value.
 
 These modules handle extending/retracting the window and are used in conjunction with the [tilemap modules](#tilemap).
 
+  * [DrawNotConst](/source/modules/Draw/DrawNotConst): Extends/retracts horizontally from the corner of the screen, with the possibility that the window's size is not constant.
   * [DrawStandard](/source/modules/Draw/DrawStandard): Extends/retracts horizontally from the corner of the screen the way vanilla does
   * [DrawVertical](/source/modules/Draw/DrawVertical): Extends/retracts vertically from the corner of the screen
 
