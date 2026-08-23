@@ -58,7 +58,7 @@
 
 [[module.definitions]]
   name = "NAME_SMALL_SJIS_ALIGNMENT"
-  value = "NAME_CENTERED"
+  value = "NAME_ALIGNMENT"
 
 [[module.definitions]]
   name = "NAME_SMALL_SJIS_WIDTH"
