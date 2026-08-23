@@ -114,3 +114,4 @@ These modules handle defining the window's tilemap. They are used alongside [Dra
 
   * [TilemapStandard](/source/modules/Tilemap/TilemapStandard): Vanilla's tilemap
   * [TilemapZane](/source/modules/Tilemap/TilemapZane): An example tilemap
+  * [TilemapFlag](/source/modules/Tilemap/TilemapFlag): Draws two different tilemaps depending on an event flag
