@@ -163,7 +163,7 @@ void DrawKind(unsigned kind, unsigned color)
 
 void DrawIndex(unsigned index, unsigned color)
 {
-  char buffer[3] = { '\0', '\0', '\0' };
+  char buffer[4] = { '\0', '\0', '\0', '\0' };
 
   unsigned upper = (index & 0xF0) >> 4;
   unsigned lower = (index & 0x0F);
