@@ -154,7 +154,9 @@ pub fn implement_config(
   // This is created here because we already have to iterate through our
   // internal files in order to copy them, so we might as well save the work
   // of doing it again when generating their `#include` lines.
-  let mut installer_lines = Vec::<String>::new();
+  let mut installer_lines = vec![
+      format!("// Generated with GORGON-EGG v{v}", v = version!()),
+    ];
 
   for (flavor_folder, internal) in &module_contents.internals
   {

@@ -6,6 +6,9 @@ use typed_path::{WindowsPathBuf, UnixPathBuf};
 use anyhow::{bail, Result};
 use semver::Version;
 
+#[macro_use]
+extern crate version;
+
 mod module;
 use module::{discover_modules, get_matching_modules, catch_missing_modules};
 
