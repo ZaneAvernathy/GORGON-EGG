@@ -1,0 +1,12 @@
+
+1.1.0:
+  Add GORGON-EGG version to generated EA installer
+  New modules:
+    TilemapFlag
+    DrawNotConst
+  Fixes:
+    NameSmallSJIS now properly inherits shared `NAME-` alignment
+    Misc. typos
+
+1.0.0:
+  Initial release
