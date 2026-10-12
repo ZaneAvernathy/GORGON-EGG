@@ -92,7 +92,7 @@ These modules draw the unit's name.
 
 # Number
 
-These modules draws numbers for various stats.
+These modules draw numbers for various stats.
 
   * [Attack](/source/modules/Number/Attack)
   * [AttackSpeed](/source/modules/Number/AttackSpeed)
