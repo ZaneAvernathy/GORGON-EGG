@@ -135,7 +135,7 @@ unsigned GetSmallStringCenteredPos(unsigned width, const char* string)
 {
   /* Gets the X-offset of a centered small text string in pixels.
    */
-  int pad = (width - GetSmallStringWidth(string)) / 2;
+  signed pad = width - GetSmallStringWidth(string);
 
-  return pad >= 0 ? pad : 0;
+  return pad >= 0 ? (pad / 2) : 0;
 }
