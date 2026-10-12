@@ -16,6 +16,8 @@ enum
   UNIT_DEFINITION_ITEM_COUNT = 4,
 
   UNIT_WEXP_COUNT = 8,
+
+  UNITS_PER_FACTION = 0x40,
 };
 
 enum
@@ -27,11 +29,73 @@ enum
 };
 
 #define UNIT_FACTION(unit) ((unit)->index & 0xC0)
+#define UNIT_CATTRIBUTES(unit) ((unit)->pCharacterData->attributes | (unit)->pClassData->attributes)
+#define UNIT_IS_VALID(unit) ((unit) && (unit)->pCharacterData)
+#define UNIT_MOV_BASE(aUnit) ((aUnit)->pClassData->baseMov)
+#define UNIT_MOV(aUnit) ((aUnit)->movBonus + UNIT_MOV_BASE(aUnit))
+
+#define UNIT_USEBIT_WEAPON (1 << 0)
+#define UNIT_USEBIT_STAFF  (1 << 1)
+
+#define FOR_UNITS(begin, end, var_name, body)                               \
+  {                                                                         \
+    struct Unit * var_name;                                                 \
+    for ( __auto_type __unit_id = (begin); __unit_id < (end); ++__unit_id ) \
+    {                                                                       \
+      var_name = GetUnit(__unit_id);                                        \
+                                                                            \
+      if ( !UNIT_IS_VALID(var_name) )                                       \
+        continue;                                                           \
+                                                                            \
+      body                                                                  \
+    }                                                                       \
+  }
+
+#define FOR_UNITS_FACTION(faction, var_name, body) FOR_UNITS((faction) + 1, (faction) + UNITS_PER_FACTION, var_name, body)
+#define FOR_UNITS_ALL(var_name, body) FOR_UNITS(FACTION_BLUE + 1, FACTION_PURPLE, var_name, body)
 
 
 #if defined(__FE6J__)
 
   #define UNIT_SUPPORT_COUNT 10
+
+  enum
+  {
+    CA_MOUNTED_AID       = (1 <<  0),
+    CA_CANTO             = (1 <<  1),
+    CA_STEAL             = (1 <<  2),
+    CA_THIEF             = (1 <<  3),
+    CA_DANCE             = (1 <<  4),
+    CA_PLAY              = (1 <<  5),
+    CA_CRIT_BONUS        = (1 <<  6),
+    CA_BALLISTA          = (1 <<  7),
+    CA_PROMOTED          = (1 <<  8),
+    CA_SUPPLY            = (1 <<  9),
+    CA_MOUNT             = (1 << 10),
+    CA_WYVERN            = (1 << 11),
+    CA_PEGASUS           = (1 << 12),
+    CA_LORD              = (1 << 13),
+    CA_FEMALE            = (1 << 14),
+    CA_BOSS              = (1 << 15),
+    CA_LOCK_1            = (1 << 16),
+    CA_LOCK_2            = (1 << 17),
+    CA_LOCK_3            = (1 << 18),
+    CA_LOCK_4            = (1 << 19),
+    CA_20                = (1 << 20),
+    CA_TRIATTACK_PEGASUS = (1 << 21),
+    CA_TRIATTACK_ARMOR   = (1 << 22),
+    CA_ALT_CHAR          = (1 << 23),
+    CA_MAJOR_BOSS        = (1 << 24),
+
+    CA_REFRESHER = CA_DANCE | CA_PLAY,
+    CA_FLYER = CA_WYVERN | CA_PEGASUS,
+    CA_TRIATTACK_ANY = CA_TRIATTACK_PEGASUS | CA_TRIATTACK_ARMOR,
+
+    CA_LOCK_ROY = CA_LOCK_1,
+    CA_LOCK_MYRM = CA_LOCK_2,
+    CA_LOCK_DRAGON = CA_LOCK_3,
+    CA_LOCK_ZEPHIEL = CA_LOCK_4,
+  };
 
   struct CharacterData
   {
@@ -248,6 +312,103 @@ enum
   };
 
 #endif // defined(__FE6J__)
+
+#if defined(__FE7U__) || defined(__FE7J__)
+
+  enum
+  {
+    CA_MOUNTED_AID       = (1 <<  0),
+    CA_CANTO             = (1 <<  1),
+    CA_STEAL             = (1 <<  2),
+    CA_THIEF             = (1 <<  3),
+    CA_DANCE             = (1 <<  4),
+    CA_PLAY              = (1 <<  5),
+    CA_CRIT_BONUS        = (1 <<  6),
+    CA_BALLISTA          = (1 <<  7),
+    CA_PROMOTED          = (1 <<  8),
+    CA_SUPPLY            = (1 <<  9),
+    CA_MOUNT             = (1 << 10),
+    CA_WYVERN            = (1 << 11),
+    CA_PEGASUS           = (1 << 12),
+    CA_LORD              = (1 << 13),
+    CA_FEMALE            = (1 << 14),
+    CA_BOSS              = (1 << 15),
+    CA_LOCK_1            = (1 << 16),
+    CA_LOCK_2            = (1 << 17),
+    CA_LOCK_3            = (1 << 18),
+    CA_LOCK_4            = (1 << 19),
+    CA_UNSELECTABLE      = (1 << 20),
+    CA_TRIATTACK_PEGASUS = (1 << 21),
+    CA_TRIATTACK_ARMOR   = (1 << 22),
+    CA_ALT_CHAR          = (1 << 23),
+    CA_MAJOR_BOSS        = (1 << 24),
+    CA_ASSASSIN          = (1 << 25),
+    CA_MAGIC_SEAL        = (1 << 26),
+    CA_DROPS_ITEM        = (1 << 27),
+    CA_LOCK_5            = (1 << 28),
+    CA_LOCK_6            = (1 << 29),
+    CA_LOCK_7            = (1 << 30),
+    CA_LOCK_8            = (1 << 31),
+
+    CA_REFRESHER = CA_DANCE | CA_PLAY,
+    CA_FLYER = CA_WYVERN | CA_PEGASUS,
+    CA_TRIATTACK_ANY = CA_TRIATTACK_PEGASUS | CA_TRIATTACK_ARMOR,
+
+    CA_LOCK_ROY = CA_LOCK_1,
+    CA_LOCK_MYRM = CA_LOCK_2,
+    CA_LOCK_DRAGON = CA_LOCK_3,
+    CA_LOCK_MORPH = CA_LOCK_4,
+    CA_LOCK_ELIWOOD = CA_LOCK_5,
+    CA_LOCK_HECTOR = CA_LOCK_6,
+    CA_LOCK_LYN = CA_LOCK_7,
+    CA_LOCK_ATHOS = CA_LOCK_8,
+  };
+
+#endif // defined(__FE7U__) || defined(__FE7J__)
+
+#if defined(__FE8U__) || defined(__FE8J__)
+
+  enum
+  {
+    CA_MOUNTED_AID       = (1 <<  0),
+    CA_CANTO             = (1 <<  1),
+    CA_STEAL             = (1 <<  2),
+    CA_THIEF             = (1 <<  3),
+    CA_DANCE             = (1 <<  4),
+    CA_PLAY              = (1 <<  5),
+    CA_CRIT_BONUS        = (1 <<  6),
+    CA_BALLISTA          = (1 <<  7),
+    CA_PROMOTED          = (1 <<  8),
+    CA_SUPPLY            = (1 <<  9),
+    CA_MOUNT             = (1 << 10),
+    CA_WYVERN            = (1 << 11),
+    CA_PEGASUS           = (1 << 12),
+    CA_LORD              = (1 << 13),
+    CA_FEMALE            = (1 << 14),
+    CA_BOSS              = (1 << 15),
+    CA_LOCK_1            = (1 << 16),
+    CA_LOCK_2            = (1 << 17),
+    CA_LOCK_3            = (1 << 18),
+    CA_LEVEL_CAP_10      = (1 << 19),
+    CA_UNSELECTABLE      = (1 << 20),
+    CA_TRIATTACK_PEGASUS = (1 << 21),
+    CA_TRIATTACK_ARMOR   = (1 << 22),
+    CA_ALT_CHAR          = (1 << 23),
+    CA_MAJOR_BOSS        = (1 << 24),
+    CA_ASSASSIN          = (1 << 25),
+    CA_MAGIC_SEAL        = (1 << 26),
+    CA_SUMMON            = (1 << 27),
+    CA_LOCK_4            = (1 << 28),
+    CA_LOCK_5            = (1 << 29),
+    CA_LOCK_6            = (1 << 30),
+    CA_LOCK_7            = (1 << 31),
+
+    CA_REFRESHER = CA_DANCE | CA_PLAY,
+    CA_FLYER = CA_WYVERN | CA_PEGASUS,
+    CA_TRIATTACK_ANY = CA_TRIATTACK_PEGASUS | CA_TRIATTACK_ARMOR,
+  };
+
+#endif // defined(__FE8U__) || defined(__FE8J__)
 
 #if defined(__FE7U__) || defined(__FE7J__) || defined(__FE8U__) || defined(__FE8J__)
 
