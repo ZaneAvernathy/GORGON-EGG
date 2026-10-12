@@ -60,7 +60,7 @@ ifeq (,$(findstring s,$(firstword -$(MAKEFLAGS))))
 endif
 
 .DEFAULT_GOAL := build
-.PHONY: build template
+.PHONY: build do_template
 
 
 $(OUTPUT_DIR):
