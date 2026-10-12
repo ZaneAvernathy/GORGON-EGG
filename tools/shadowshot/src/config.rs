@@ -23,6 +23,7 @@ pub struct Config
   modules: Option<Vec<ConfigModule>>,
   definitions: Option<Vec<Definition>>,
   asm_definitions: Option<Vec<Definition>>,
+  ea_definitions: Option<Vec<Definition>>,
 }
 
 
@@ -41,6 +42,7 @@ pub struct ConfigResult
   pub modules: Vec<String>,
   definitions: OrderedHashMap<String, Definition>,
   asm_definitions: OrderedHashMap<String, Definition>,
+  ea_definitions:  OrderedHashMap<String, Definition>,
 }
 
 impl ConfigResult
@@ -52,6 +54,7 @@ impl ConfigResult
       modules: Vec::new(),
       definitions: OrderedHashMap::new(),
       asm_definitions: OrderedHashMap::new(),
+      ea_definitions:  OrderedHashMap::new(),
     }
   }
 }
@@ -105,6 +108,18 @@ pub fn read_config(path: &UnixPathBuf, game: &str, version: &Version) -> Result<
     }
   }
 
+  if let Some(ea_definition_overrides) = config.ea_definitions
+  {
+    for def in ea_definition_overrides
+    {
+      def.check()?;
+      if def.requirements.matches(game, version)
+      {
+        result.ea_definitions.insert(def.name.clone(), def);
+      }
+    }
+  }
+
   Ok(result)
 }
 
@@ -133,6 +148,7 @@ pub fn implement_config(
 
   module_contents.definitions.extend(config.definitions);
   module_contents.asm_definitions.extend(config.asm_definitions);
+  module_contents.ea_definitions.extend(config.ea_definitions);
 
   // Copy our modules and internal files into the output.
 
@@ -156,6 +172,7 @@ pub fn implement_config(
   // of doing it again when generating their `#include` lines.
   let mut installer_lines = vec![
       format!("// Generated with GORGON-EGG v{v}", v = version!()),
+      String::from("#include \"GeneratedEADefinitions.event\""),
     ];
 
   for (flavor_folder, internal) in &module_contents.internals
@@ -196,6 +213,14 @@ pub fn implement_config(
   asm_def_lines.push('\n');
 
   fs::write(output_folder.join("GeneratedASMDefinitions.s").to_str().unwrap(), asm_def_lines)?;
+
+  fs::write(
+      output_folder.join("GeneratedEADefinitions.event").to_str().unwrap(),
+      &module_contents.ea_definitions.values()
+        .map(|d| d.to_ea_definition_string())
+        .collect::<Vec<_>>()
+        .join("\n")
+    )?;
 
   let mut def_lines = module_contents.definitions.values()
                         .map(|d| d.to_definition_string())

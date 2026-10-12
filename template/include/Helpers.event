@@ -2,7 +2,7 @@
 // This can be checked against to see if GORGON-EGG is installed in a buildfile.
 #define __GORGON_EGG__
 #define __GORGON_EGG_MAJOR__ 1
-#define __GORGON_EGG_MINOR__ 1
+#define __GORGON_EGG_MINOR__ 2
 #define __GORGON_EGG_PATCH__ 0
 
 

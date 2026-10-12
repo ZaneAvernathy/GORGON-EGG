@@ -132,6 +132,18 @@ impl Definition
       format!(".set {}, {}", self.name, self.value.clone().unwrap())
     }
   }
+
+  pub fn to_ea_definition_string(&self) -> String
+  {
+    if self.value.is_none()
+    {
+      self.body.clone().unwrap()
+    }
+    else
+    {
+      format!("#define {} \"{}\"", self.name, self.value.clone().unwrap())
+    }
+  }
 }
 
 
@@ -174,6 +186,7 @@ pub struct Module
 
   pub definitions: Option<Vec<Definition>>,
   pub asm_definitions: Option<Vec<Definition>>,
+  pub ea_definitions: Option<Vec<Definition>>,
 
   pub includes: Option<Vec<Include>>,
   pub internals: Option<Vec<Include>>,
@@ -193,6 +206,7 @@ pub struct ImplementedModule
 {
   pub definitions: OrderedHashMap<String, Definition>,
   pub asm_definitions: OrderedHashMap<String, Definition>,
+  pub ea_definitions: OrderedHashMap<String, Definition>,
 
   pub includes: OrderedHashSet<UnixPathBuf>,
   pub internals: OrderedHashSet<(UnixPathBuf, UnixPathBuf)>,
@@ -213,6 +227,7 @@ impl ImplementedModule
     {
       definitions: OrderedHashMap::new(),
       asm_definitions: OrderedHashMap::new(),
+      ea_definitions: OrderedHashMap::new(),
 
       includes: OrderedHashSet::new(),
       internals: OrderedHashSet::new(),
@@ -371,6 +386,7 @@ pub fn read_module(
   let def_targets = [
       (&module.definitions, &mut all_contents.definitions),
       (&module.asm_definitions, &mut all_contents.asm_definitions),
+      (&module.ea_definitions, &mut all_contents.ea_definitions),
     ];
 
   for (defs_opt, dest) in def_targets
