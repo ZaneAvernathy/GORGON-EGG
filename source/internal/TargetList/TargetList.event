@@ -1,0 +1,399 @@
+
+// This file provides tools for generating lists of units according to
+// some kind of targeting strategy. See the `README.md` for more information.
+
+
+// Definitions
+
+  #ifdef _FE6J_
+
+    #ifndef UnitHasMagicRank
+      #define UnitHasMagicRank                (0x08018188 | 1)
+    #endif // UnitHasMagicRank
+
+    #ifndef GetUnitWeaponUsabilityBits
+      #define GetUnitWeaponUsabilityBits      (0x08018258 | 1)
+    #endif // GetUnitWeaponUsabilityBits
+
+    #ifndef BmMapFill
+      #define BmMapFill                       (0x08018960 | 1)
+    #endif // BmMapFill
+
+    #ifndef GenerateUnitMovementMapExt
+      #define GenerateUnitMovementMapExt      (0x08019384 | 1)
+    #endif // GenerateUnitMovementMapExt
+
+    #ifndef GenerateUnitCompleteAttackRange
+      #define GenerateUnitCompleteAttackRange (0x08019B38 | 1)
+    #endif // GenerateUnitCompleteAttackRange
+
+    #ifndef GenerateUnitCompleteStaffRange
+      #define GenerateUnitCompleteStaffRange  (0x0801A3C0 | 1)
+    #endif // GenerateUnitCompleteStaffRange
+
+    #ifndef SetWorkingBmMap
+      #define SetWorkingBmMap                 (0x0801A558 | 1)
+    #endif // SetWorkingBmMap
+
+    #ifndef ForEachUnitInRange
+      #define ForEachUnitInRange              (0x08020B04 | 1)
+    #endif // ForEachUnitInRange
+
+    #ifndef AddUnitToTargetListIfNotAllied
+      #define AddUnitToTargetListIfNotAllied  (0x08020D44 | 1)
+    #endif // AddUnitToTargetListIfNotAllied
+
+    #ifndef AddUnitToTargetListIfAllied
+      #define AddUnitToTargetListIfAllied     (0x08021240 | 1)
+    #endif // AddUnitToTargetListIfAllied
+
+    #ifndef InitTargets
+      #define InitTargets                     (0x080420CC | 1)
+    #endif // InitTargets
+
+    #ifndef GetSelectTargetCount
+      #define GetSelectTargetCount            (0x0804254C | 1)
+    #endif // GetSelectTargetCount
+
+    #ifndef GetTarget
+      #define GetTarget                       (0x08042558 | 1)
+    #endif // GetTarget
+
+    #ifndef gBmMapUnit
+      #define gBmMapUnit   0x0202D204
+    #endif // gBmMapUnit
+
+    #ifndef gBmMapRange
+      #define gBmMapRange  0x0202D210
+    #endif // gBmMapRange
+
+    #ifndef gBmMapOther
+      #define gBmMapOther  0x0202D21C
+    #endif // gBmMapOther
+
+    #ifndef gSubjectUnit
+      #define gSubjectUnit 0x02032C68
+    #endif // gSubjectUnit
+
+  #endif // _FE6J_
+
+  #ifdef _FE7U_
+
+    #ifndef UnitHasMagicRank
+      #define UnitHasMagicRank                (0x080184DC | 1)
+    #endif // UnitHasMagicRank
+
+    #ifndef GetUnitWeaponUsabilityBits
+      #define GetUnitWeaponUsabilityBits      (0x080185AC | 1)
+    #endif // GetUnitWeaponUsabilityBits
+
+    #ifndef BmMapFill
+      #define BmMapFill                       (0x080190AC | 1)
+    #endif // BmMapFill
+
+    #ifndef GenerateUnitMovementMapExt
+      #define GenerateUnitMovementMapExt      (0x08019BE0 | 1)
+    #endif // GenerateUnitMovementMapExt
+
+    #ifndef GenerateUnitCompleteAttackRange
+      #define GenerateUnitCompleteAttackRange (0x0801A4D4 | 1)
+    #endif // GenerateUnitCompleteAttackRange
+
+    #ifndef GenerateUnitCompleteStaffRange
+      #define GenerateUnitCompleteStaffRange  (0x0801AE10 | 1)
+    #endif // GenerateUnitCompleteStaffRange
+
+    #ifndef GenerateMagicSealMap
+      #define GenerateMagicSealMap            (0x0801B148 | 1)
+    #endif // GenerateMagicSealMap
+
+    #ifndef SetWorkingBmMap
+      #define SetWorkingBmMap                 (0x0801B190 | 1)
+    #endif // SetWorkingBmMap
+
+    #ifndef ForEachUnitInRange
+      #define ForEachUnitInRange              (0x080239B0 | 1)
+    #endif // ForEachUnitInRange
+
+    #ifndef AddUnitToTargetListIfNotAllied
+      #define AddUnitToTargetListIfNotAllied  (0x08023c20 | 1)
+    #endif // AddUnitToTargetListIfNotAllied
+
+    #ifndef AddUnitToTargetListIfAllied
+      #define AddUnitToTargetListIfAllied     (0x08024174 | 1)
+    #endif // AddUnitToTargetListIfAllied
+
+    #ifndef InitTargets
+      #define InitTargets                     (0x0804ACE4 | 1)
+    #endif // InitTargets
+
+    #ifndef GetSelectTargetCount
+      #define GetSelectTargetCount            (0x0804b174 | 1)
+    #endif // GetSelectTargetCount
+
+    #ifndef GetTarget
+      #define GetTarget                       (0x0804b180 | 1)
+    #endif // GetTarget
+
+    #ifndef gBmMapUnit
+      #define gBmMapUnit   0x0202E3DC
+    #endif // gBmMapUnit
+
+    #ifndef gBmMapRange
+      #define gBmMapRange  0x0202E3E8
+    #endif // gBmMapRange
+
+    #ifndef gBmMapOther
+      #define gBmMapOther  0x0202E3F4
+    #endif // gBmMapOther
+
+    #ifndef gSubjectUnit
+      #define gSubjectUnit 0x02033E40
+    #endif // gSubjectUnit
+
+  #endif // _FE7U_
+
+  #ifdef _FE7J_
+
+    #ifndef UnitHasMagicRank
+      #define UnitHasMagicRank                (0x080188CC | 1)
+    #endif // UnitHasMagicRank
+
+    #ifndef GetUnitWeaponUsabilityBits
+      #define GetUnitWeaponUsabilityBits      (0x0801899C | 1)
+    #endif // GetUnitWeaponUsabilityBits
+
+    #ifndef BmMapFill
+      #define BmMapFill                       (0x08019494 | 1)
+    #endif // BmMapFill
+
+    #ifndef GenerateUnitMovementMapExt
+      #define GenerateUnitMovementMapExt      (0x08019FC0 | 1)
+    #endif // GenerateUnitMovementMapExt
+
+    #ifndef GenerateUnitCompleteAttackRange
+      #define GenerateUnitCompleteAttackRange (0x0801A8B4 | 1)
+    #endif // GenerateUnitCompleteAttackRange
+
+    #ifndef GenerateUnitCompleteStaffRange
+      #define GenerateUnitCompleteStaffRange  (0x0801B1F0 | 1)
+    #endif // GenerateUnitCompleteStaffRange
+
+    #ifndef GenerateMagicSealMap
+      #define GenerateMagicSealMap            (0x0801B528 | 1)
+    #endif // GenerateMagicSealMap
+
+    #ifndef SetWorkingBmMap
+      #define SetWorkingBmMap                 (0x0801b570 | 1)
+    #endif // SetWorkingBmMap
+
+    #ifndef ForEachUnitInRange
+      #define ForEachUnitInRange              (0x08023E3C | 1)
+    #endif // ForEachUnitInRange
+
+    #ifndef AddUnitToTargetListIfNotAllied
+      #define AddUnitToTargetListIfNotAllied  (0x080240AC | 1)
+    #endif // AddUnitToTargetListIfNotAllied
+
+    #ifndef AddUnitToTargetListIfAllied
+      #define AddUnitToTargetListIfAllied     (0x08024600 | 1)
+    #endif // AddUnitToTargetListIfAllied
+
+    #ifndef InitTargets
+      #define InitTargets                     (0x0804B4C0 | 1)
+    #endif // InitTargets
+
+    #ifndef GetSelectTargetCount
+      #define GetSelectTargetCount            (0x0804B950 | 1)
+    #endif // GetSelectTargetCount
+
+    #ifndef GetTarget
+      #define GetTarget                       (0x0804B95C | 1)
+    #endif // GetTarget
+
+    #ifndef gBmMapUnit
+      #define gBmMapUnit   0x0202E3D8
+    #endif // gBmMapUnit
+
+    #ifndef gBmMapRange
+      #define gBmMapRange  0x0202E3E4
+    #endif // gBmMapRange
+
+    #ifndef gBmMapOther
+      #define gBmMapOther  0x0202E3F0
+    #endif // gBmMapOther
+
+    #ifndef gSubjectUnit
+      #define gSubjectUnit 0x02033E3C
+    #endif // gSubjectUnit
+
+  #endif // _FE7J_
+
+  #ifdef _FE8U_
+
+    #ifndef UnitHasMagicRank
+      #define UnitHasMagicRank                (0x08018A58 | 1)
+    #endif // UnitHasMagicRank
+
+    #ifndef GetUnitWeaponUsabilityBits
+      #define GetUnitWeaponUsabilityBits      (0x08018B28 | 1)
+    #endif // GetUnitWeaponUsabilityBits
+
+    #ifndef BmMapFill
+      #define BmMapFill                       (0x080197E4 | 1)
+    #endif // BmMapFill
+
+    #ifndef GenerateUnitMovementMapExt
+      #define GenerateUnitMovementMapExt      (0x0801A3CC | 1)
+    #endif // GenerateUnitMovementMapExt
+
+    #ifndef GenerateUnitCompleteAttackRange
+      #define GenerateUnitCompleteAttackRange (0x0801ACBC | 1)
+    #endif // GenerateUnitCompleteAttackRange
+
+    #ifndef GenerateUnitCompleteStaffRange
+      #define GenerateUnitCompleteStaffRange  (0x0801B618 | 1)
+    #endif // GenerateUnitCompleteStaffRange
+
+    #ifndef GenerateMagicSealMap
+      #define GenerateMagicSealMap            (0x0801B950 | 1)
+    #endif // GenerateMagicSealMap
+
+    #ifndef SetWorkingBmMap
+      #define SetWorkingBmMap                 (0x0801B998 | 1)
+    #endif // SetWorkingBmMap
+
+    #ifndef ForEachUnitInRange
+      #define ForEachUnitInRange              (0x08024EAC | 1)
+    #endif // ForEachUnitInRange
+
+    #ifndef AddUnitToTargetListIfNotAllied
+      #define AddUnitToTargetListIfNotAllied  (0x0802517C | 1)
+    #endif // AddUnitToTargetListIfNotAllied
+
+    #ifndef AddUnitToTargetListIfAllied
+      #define AddUnitToTargetListIfAllied     (0x080256F0 | 1)
+    #endif // AddUnitToTargetListIfAllied
+
+    #ifndef InitTargets
+      #define InitTargets                     (0x0804F8A4 | 1)
+    #endif // InitTargets
+
+    #ifndef GetSelectTargetCount
+      #define GetSelectTargetCount            (0x0804FD28 | 1)
+    #endif // GetSelectTargetCount
+
+    #ifndef GetTarget
+      #define GetTarget                       (0x0804FD34 | 1)
+    #endif // GetTarget
+
+
+    #ifndef gBmMapUnit
+      #define gBmMapUnit   0x0202E4D8
+    #endif // gBmMapUnit
+
+    #ifndef gBmMapRange
+      #define gBmMapRange  0x0202E4E4
+    #endif // gBmMapRange
+
+    #ifndef gBmMapOther
+      #define gBmMapOther  0x0202E4F0
+    #endif // gBmMapOther
+
+    #ifndef gSubjectUnit
+      #define gSubjectUnit 0x02033F3C
+    #endif // gSubjectUnit
+
+  #endif // _FE8U_
+
+  #ifdef _FE8J_
+
+    #ifndef UnitHasMagicRank
+      #define UnitHasMagicRank                (0x0801876C | 1)
+    #endif // UnitHasMagicRank
+
+    #ifndef GetUnitWeaponUsabilityBits
+      #define GetUnitWeaponUsabilityBits      (0x0801883C | 1)
+    #endif // GetUnitWeaponUsabilityBits
+
+    #ifndef BmMapFill
+      #define BmMapFill                       (0x080194BC | 1)
+    #endif // BmMapFill
+
+    #ifndef GenerateUnitMovementMapExt
+      #define GenerateUnitMovementMapExt      (0x0801A09C | 1)
+    #endif // GenerateUnitMovementMapExt
+
+    #ifndef GenerateUnitCompleteAttackRange
+      #define GenerateUnitCompleteAttackRange (0x0801A998 | 1)
+    #endif // GenerateUnitCompleteAttackRange
+
+    #ifndef GenerateUnitCompleteStaffRange
+      #define GenerateUnitCompleteStaffRange  (0x0801B2F4 | 1)
+    #endif // GenerateUnitCompleteStaffRange
+
+    #ifndef GenerateMagicSealMap
+      #define GenerateMagicSealMap            (0x0801B620 | 1)
+    #endif // GenerateMagicSealMap
+
+    #ifndef SetWorkingBmMap
+      #define SetWorkingBmMap                 (0x0801B668 | 1)
+    #endif // SetWorkingBmMap
+
+    #ifndef ForEachUnitInRange
+      #define ForEachUnitInRange              (0x08024E5C | 1)
+    #endif // ForEachUnitInRange
+
+    #ifndef AddUnitToTargetListIfNotAllied
+      #define AddUnitToTargetListIfNotAllied  (0x0802512C | 1)
+    #endif // AddUnitToTargetListIfNotAllied
+
+    #ifndef AddUnitToTargetListIfAllied
+      #define AddUnitToTargetListIfAllied     (0x080256A0 | 1)
+    #endif // AddUnitToTargetListIfAllied
+
+    #ifndef InitTargets
+      #define InitTargets                     (0x08050618 | 1)
+    #endif // InitTargets
+
+    #ifndef GetSelectTargetCount
+      #define GetSelectTargetCount            (0x08050A9C | 1)
+    #endif // GetSelectTargetCount
+
+    #ifndef GetTarget
+      #define GetTarget                       (0x08050AA8 | 1)
+    #endif // GetTarget
+
+
+    #ifndef gBmMapUnit
+      #define gBmMapUnit   0x0202E4D4
+    #endif // gBmMapUnit
+
+    #ifndef gBmMapRange
+      #define gBmMapRange  0x0202E4E0
+    #endif // gBmMapRange
+
+    #ifndef gBmMapOther
+      #define gBmMapOther  0x0202E4EC
+    #endif // gBmMapOther
+
+    #ifndef gSubjectUnit
+      #define gSubjectUnit 0x02033F38
+    #endif // gSubjectUnit
+
+  #endif // _FE8J_
+
+
+// Sources
+
+  #ifdef NEED_ForEachTarget
+    #include "ForEachTarget.lyn.event"
+  #endif // NEED_ForEachTarget
+
+  #ifdef NEED_GetTargetList_HostileInRange
+    #include "GetTargetList_HostileInRange.lyn.event"
+  #endif // NEED_GetTargetList_HostileInRange
+
+  #ifdef NEED_GetTargetList_HostileAll
+    #include "GetTargetList_HostileAll.lyn.event"
+  #endif // NEED_GetTargetList_HostileAll
