@@ -1,0 +1,178 @@
+
+[module]
+  name = "DrawTargetsInRangeItems"
+  version = ">=1.2.0"
+
+[[module.internals]]
+  file = "DrawSmallIcons/DrawSmallIcons.event"
+
+[[module.ea_definitions]]
+  name = "NEED_GetTargetList_HostileInRange"
+  body = "#define NEED_GetTargetList_HostileInRange"
+
+[[module.ea_definitions]]
+  name = "NEED_GetTargetList_HostileAll"
+  body = "#define NEED_GetTargetList_HostileAll"
+
+[[module.ea_definitions]]
+  name = "NEED_ForEachTarget"
+  body = "#define NEED_ForEachTarget"
+
+[[module.internals]]
+  file = "TargetList/TargetList.event"
+
+[[module.asm_definitions]]
+  name = "NEED_aeabi_uidivmod"
+  value = 1
+
+[[module.internals]]
+  file = "LibraryFunctions/LibraryFunctions.event"
+
+[[module.inits]]
+  name = "DrawTargetsInRangeItems_Init"
+  file = "DrawTargetsInRangeItems.lyn.event"
+
+[[module.statics]]
+  name = "DrawTargetsInRangeItems_Static"
+  file = "DrawTargetsInRangeItems.lyn.event"
+
+[[module.dynamics]]
+  name = "DrawTargetsInRangeItems_Dynamic"
+  file = "DrawTargetsInRangeItems.lyn.event"
+
+
+[[module.ea_definitions]]
+  name = "USE_ICON_ITEMS"
+  body = "#define USE_ICON_ITEMS"
+
+[[module.definitions]]
+  name = "SMALLICON_DICT_TILE"
+  value = 0x0340
+
+[[module.definitions]]
+  name = "SMALLICON_PALETTE"
+  value = 6
+
+[[module.definitions]]
+  name = "DRAW_TARGETS_IN_RANGE_FRAMES_PER_ICON"
+  value = 64
+
+[[module.definitions]]
+  name = "DRAW_TARGETS_IN_RANGE_INACTIVE_FRAMES"
+  value = 0
+
+
+[[module.asm_definitions]]
+  name = "memset"
+  body = "SET_FUNC memset, 0x0809F9F0 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x08017520 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemIconId"
+  body = "SET_FUNC GetItemIconId, 0x080172D8 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "ProcScr_PrepPhase"
+  body = "SET_DATA ProcScr_PrepPhase, 0x085C7E44"
+  games = [ "FE6J" ]
+
+[[module.definitions]]
+  name = "IsPrepMapActive"
+  body = """
+extern const struct ProcInstruction ProcScr_PrepPhase[];
+static inline bool IsPrepMapActive(void)
+{
+  return ProcFind(ProcScr_PrepPhase) ? TRUE : FALSE;
+}
+"""
+  games = [ "FE6J" ]
+
+
+[[module.asm_definitions]]
+  name = "memset"
+  body = "SET_FUNC memset, 0x080BFFF8 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x080176DC | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "GetItemIconId"
+  body = "SET_FUNC GetItemIconId, 0x08017400 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "IsPrepMapActive"
+  body = "SET_FUNC IsPrepMapActive, 0x08031258 | 1"
+  games = [ "FE7U" ]
+
+
+[[module.asm_definitions]]
+  name = "memset"
+  body = "SET_FUNC memset, 0x080C0B3C | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x08017ACC | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemIconId"
+  body = "SET_FUNC GetItemIconId, 0x08017808 | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "IsPrepMapActive"
+  body = "SET_FUNC IsPrepMapActive, 0x08031740 | 1"
+  games = [ "FE7J" ]
+
+
+[[module.asm_definitions]]
+  name = "memset"
+  body = "SET_FUNC memset, 0x080D1C6C | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x080179D8 | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "GetItemIconId"
+  body = "SET_FUNC GetItemIconId, 0x08017700 | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "IsPrepMapActive"
+  body = "SET_FUNC IsPrepMapActive, 0x080342FC | 1"
+  games = [ "FE8U" ]
+
+
+[[module.asm_definitions]]
+  name = "memset"
+  body = "SET_FUNC memset, 0x080D6968 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x08017780 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemIconId"
+  body = "SET_FUNC GetItemIconId, 0x080174A8 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "IsPrepMapActive"
+  body = "SET_FUNC IsPrepMapActive, 0x08034204 | 1"
+  games = [ "FE8J" ]
