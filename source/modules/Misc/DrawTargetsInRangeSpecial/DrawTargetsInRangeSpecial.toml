@@ -1,0 +1,696 @@
+
+[module]
+  name = "DrawTargetsInRangeSpecial"
+  version = ">=1.2.0"
+
+[[module.internals]]
+  file = "DrawSmallIcons/DrawSmallIcons.event"
+
+[[module.ea_definitions]]
+  name = "NEED_GetTargetList_HostileInRange"
+  body = "#define NEED_GetTargetList_HostileInRange"
+
+[[module.ea_definitions]]
+  name = "NEED_GetTargetList_HostileAll"
+  body = "#define NEED_GetTargetList_HostileAll"
+
+[[module.ea_definitions]]
+  name = "NEED_ForEachTarget"
+  body = "#define NEED_ForEachTarget"
+
+[[module.internals]]
+  file = "TargetList/TargetList.event"
+
+[[module.asm_definitions]]
+  name = "NEED_aeabi_uidivmod"
+  value = 1
+
+[[module.internals]]
+  file = "LibraryFunctions/LibraryFunctions.event"
+
+[[module.inits]]
+  name = "DrawTargetsInRangeSpecial_Init"
+  file = "DrawTargetsInRangeSpecial.lyn.event"
+
+[[module.statics]]
+  name = "DrawTargetsInRangeSpecial_Static"
+  file = "DrawTargetsInRangeSpecial.lyn.event"
+
+[[module.dynamics]]
+  name = "DrawTargetsInRangeSpecial_Dynamic"
+  file = "DrawTargetsInRangeSpecial.lyn.event"
+
+[[module.definitions]]
+  name = "SMALLICON_DICT_TILE"
+  value = 0x0340
+
+[[module.definitions]]
+  name = "SMALLICON_PALETTE"
+  value = 6
+
+[[module.definitions]]
+  name = "DRAW_TARGETS_IN_RANGE_FRAMES_PER_ICON"
+  value = 64
+
+[[module.definitions]]
+  name = "DRAW_TARGETS_IN_RANGE_INACTIVE_FRAMES"
+  value = 0
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00002"
+  body = "#define USE_ICON_00002"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00003"
+  body = "#define USE_ICON_00003"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00004"
+  body = "#define USE_ICON_00004"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00005"
+  body = "#define USE_ICON_00005"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00006"
+  body = "#define USE_ICON_00006"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00007"
+  body = "#define USE_ICON_00007"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00008"
+  body = "#define USE_ICON_00008"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00009"
+  body = "#define USE_ICON_00009"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00030"
+  body = "#define USE_ICON_00030"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00084"
+  body = "#define USE_ICON_00084"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00452"
+  body = "#define USE_ICON_00452"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00464"
+  body = "#define USE_ICON_00464"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00038"
+  body = "#define USE_ICON_00038"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00016"
+  body = "#define USE_ICON_00016"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00065"
+  body = "#define USE_ICON_00065"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00022"
+  body = "#define USE_ICON_00022"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00385"
+  body = "#define USE_ICON_00385"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00066"
+  body = "#define USE_ICON_00066"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00386"
+  body = "#define USE_ICON_00386"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00387"
+  body = "#define USE_ICON_00387"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00081"
+  body = "#define USE_ICON_00081"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00082"
+  body = "#define USE_ICON_00082"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00084"
+  body = "#define USE_ICON_00084"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00074"
+  body = "#define USE_ICON_00074"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00075"
+  body = "#define USE_ICON_00075"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00059"
+  body = "#define USE_ICON_00059"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00001"
+  body = "#define USE_ICON_00001"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00032"
+  body = "#define USE_ICON_00032"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00033"
+  body = "#define USE_ICON_00033"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00034"
+  body = "#define USE_ICON_00034"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00035"
+  body = "#define USE_ICON_00035"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00036"
+  body = "#define USE_ICON_00036"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00037"
+  body = "#define USE_ICON_00037"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00038"
+  body = "#define USE_ICON_00038"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_000039"
+  body = "#define USE_ICON_00039"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00040"
+  body = "#define USE_ICON_00040"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00041"
+  body = "#define USE_ICON_00041"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00042"
+  body = "#define USE_ICON_00042"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00043"
+  body = "#define USE_ICON_00043"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00044"
+  body = "#define USE_ICON_00044"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00048"
+  body = "#define USE_ICON_00048"
+
+
+[[module.definitions]]
+  name = "US_DROP_ITEM"
+  value = "(1 << 12)"
+  games = [ "FE7U", "FE7J", "FE8U", "FE8J" ]
+
+
+[[module.definitions]]
+  name = "IsUnitEffectiveAgainst"
+  games = [ "FE6J", "FE7U", "FE7J" ]
+  body = """
+inline bool IsUnitEffectiveAgainst(struct Unit * unit, struct Unit * target)
+{
+  return FALSE;
+}
+"""
+
+
+[[module.definitions]]
+  name = "ITEM_TORCH"
+  value = 0x6B
+  games = [ "FE6J" ]
+
+[[module.definitions]]
+  name = "ITEM_CHESTKEY"
+  value = 0x64
+  games = [ "FE6J" ]
+
+[[module.definitions]]
+  name = "ITEM_DOORKEY"
+  value = 0x65
+  games = [ "FE6J" ]
+
+[[module.definitions]]
+  name = "ITEM_BRIDGEKEY"
+  value = 0x66
+  games = [ "FE6J" ]
+
+[[module.definitions]]
+  name = "ITEM_STAFF_SILENCE"
+  value = 0x4B
+  games = [ "FE6J" ]
+
+[[module.definitions]]
+  name = "ITEM_STAFF_SLEEP"
+  value = 0x4C
+  games = [ "FE6J" ]
+
+[[module.definitions]]
+  name = "ITEM_STAFF_BERSERK"
+  value = 0x50
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "memset"
+  body = "SET_FUNC memset, 0x0809F9F0 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x08017520 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemIconId"
+  body = "SET_FUNC GetItemIconId, 0x080172D8 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "ProcScr_PrepPhase"
+  body = "SET_DATA ProcScr_PrepPhase, 0x085C7E44"
+  games = [ "FE6J" ]
+
+[[module.definitions]]
+  name = "IsPrepMapActive"
+  body = """
+extern const struct ProcInstruction ProcScr_PrepPhase[];
+static inline bool IsPrepMapActive(void)
+{
+  return ProcFind(ProcScr_PrepPhase) ? TRUE : FALSE;
+}
+"""
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseWeapon"
+  body = "SET_FUNC CanUnitUseWeapon, 0x08016538 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseStaff"
+  body = "SET_FUNC CanUnitUseStaff, 0x08016644 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemType"
+  body = "SET_FUNC GetItemType, 0x08017174 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "IsItemEffectiveAgainst"
+  body = "SET_FUNC IsItemEffectiveAgainst, 0x08016A10 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemAttributes"
+  body = "SET_FUNC GetItemAttributes, 0x08017190 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemWeaponEffect"
+  body = "SET_FUNC GetItemWeaponEffect, 0x080172F8 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "IsItemStealable"
+  body = "SET_FUNC IsItemStealable, 0x08016D34 | 1"
+  games = [ "FE6J" ]
+
+
+[[module.definitions]]
+  name = "ITEM_HOPLON_GUARD"
+  value = 0x7B
+  games = [ "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "ITEM_TORCH"
+  value = 0x6F
+  games = [ "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "ITEM_CHESTKEY"
+  value = 0x68
+  games = [ "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "ITEM_DOORKEY"
+  value = 0x69
+  games = [ "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "ITEM_CHESTKEY_BUNDLE"
+  value = 0x78
+  games = [ "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "ITEM_FILLAS_MIGHT"
+  value = 0x7C
+  games = [ "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "ITEM_NINISS_GRACE"
+  value = 0x7D
+  games = [ "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "ITEM_THORS_IRE"
+  value = 0x7E
+  games = [ "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "ITEM_SETS_LITANY"
+  value = 0x7F
+  games = [ "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "ITEM_STAFF_SILENCE"
+  value = 0x50
+  games = [ "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "ITEM_STAFF_SLEEP"
+  value = 0x51
+  games = [ "FE7U", "FE7J" ]
+
+[[module.definitions]]
+  name = "ITEM_STAFF_BERSERK"
+  value = 0x52
+  games = [ "FE7U", "FE7J" ]
+
+
+[[module.asm_definitions]]
+  name = "memset"
+  body = "SET_FUNC memset, 0x080BFFF8 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x080176DC | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "GetItemIconId"
+  body = "SET_FUNC GetItemIconId, 0x08017400 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "IsPrepMapActive"
+  body = "SET_FUNC IsPrepMapActive, 0x08031258 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseWeaponNow"
+  body = "SET_FUNC CanUnitUseWeaponNow, 0x08016380 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseStaffNow"
+  body = "SET_FUNC CanUnitUseStaffNow, 0x08016428 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "GetItemType"
+  body = "SET_FUNC GetItemType, 0x0801725C | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "IsItemEffectiveAgainst"
+  body = "SET_FUNC IsItemEffectiveAgainst, 0x08016820 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "GetItemAttributes"
+  body = "SET_FUNC GetItemAttributes, 0x0801727C | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "GetItemWeaponEffect"
+  body = "SET_FUNC GetItemWeaponEffect, 0x08017424 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "IsItemStealable"
+  body = "SET_FUNC IsItemStealable, 0x08016D38 | 1"
+  games = [ "FE7U" ]
+
+
+[[module.asm_definitions]]
+  name = "memset"
+  body = "SET_FUNC memset, 0x080C0B3C | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x08017ACC | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemIconId"
+  body = "SET_FUNC GetItemIconId, 0x08017808 | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "IsPrepMapActive"
+  body = "SET_FUNC IsPrepMapActive, 0x08031740 | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseWeaponNow"
+  body = "SET_FUNC CanUnitUseWeaponNow, 0x080167FC | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseStaffNow"
+  body = "SET_FUNC CanUnitUseStaffNow, 0x080168A4 | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemType"
+  body = "SET_FUNC GetItemType, 0x08017664 | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "IsItemEffectiveAgainst"
+  body = "SET_FUNC IsItemEffectiveAgainst, 0x08016C80 | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemAttributes"
+  body = "SET_FUNC GetItemAttributes, 0x08017684 | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemWeaponEffect"
+  body = "SET_FUNC GetItemWeaponEffect, 0x0801782C | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "IsItemStealable"
+  body = "SET_FUNC IsItemStealable, 0x0801718C | 1"
+  games = [ "FE7J" ]
+
+
+[[module.definitions]]
+  name = "ITEM_HOPLON_GUARD"
+  value = 0x7C
+  games = [ "FE8U", "FE8J" ]
+
+[[module.definitions]]
+  name = "ITEM_TORCH"
+  value = 0x70
+  games = [ "FE8U", "FE8J" ]
+
+[[module.definitions]]
+  name = "ITEM_CHESTKEY"
+  value = 0x69
+  games = [ "FE8U", "FE8J" ]
+
+[[module.definitions]]
+  name = "ITEM_DOORKEY"
+  value = 0x6A
+  games = [ "FE8U", "FE8J" ]
+
+[[module.definitions]]
+  name = "ITEM_CHESTKEY_BUNDLE"
+  value = 0x79
+  games = [ "FE8U", "FE8J" ]
+
+[[module.definitions]]
+  name = "ITEM_FILLAS_MIGHT"
+  value = 0x7D
+  games = [ "FE8U", "FE8J" ]
+
+[[module.definitions]]
+  name = "ITEM_NINISS_GRACE"
+  value = 0x7E
+  games = [ "FE8U", "FE8J" ]
+
+[[module.definitions]]
+  name = "ITEM_THORS_IRE"
+  value = 0x7F
+  games = [ "FE8U", "FE8J" ]
+
+[[module.definitions]]
+  name = "ITEM_SETS_LITANY"
+  value = 0x80
+  games = [ "FE8U", "FE8J" ]
+
+[[module.definitions]]
+  name = "ITEM_STAFF_SILENCE"
+  value = 0x51
+  games = [ "FE8U", "FE8J" ]
+
+[[module.definitions]]
+  name = "ITEM_STAFF_SLEEP"
+  value = 0x52
+  games = [ "FE8U", "FE8J" ]
+
+[[module.definitions]]
+  name = "ITEM_STAFF_BERSERK"
+  value = 0x53
+  games = [ "FE8U", "FE8J" ]
+
+
+[[module.asm_definitions]]
+  name = "memset"
+  body = "SET_FUNC memset, 0x080D1C6C | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x080179D8 | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "GetItemIconId"
+  body = "SET_FUNC GetItemIconId, 0x08017700 | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "IsPrepMapActive"
+  body = "SET_FUNC IsPrepMapActive, 0x080342FC | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseWeaponNow"
+  body = "SET_FUNC CanUnitUseWeaponNow, 0x08016750 | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseStaffNow"
+  body = "SET_FUNC CanUnitUseStaffNow, 0x08016800 | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "GetItemType"
+  body = "SET_FUNC GetItemType, 0x08017548 | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "IsItemEffectiveAgainst"
+  body = "SET_FUNC IsItemEffectiveAgainst, 0x08016BEC | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "IsUnitEffectiveAgainst"
+  body = "SET_FUNC IsUnitEffectiveAgainst, 0x08016C88 | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "GetItemAttributes"
+  body = "SET_FUNC GetItemAttributes, 0x0801756C | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "GetItemWeaponEffect"
+  body = "SET_FUNC GetItemWeaponEffect, 0x08017724 | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "IsItemStealable"
+  body = "SET_FUNC IsItemStealable, 0x08017054 | 1"
+  games = [ "FE8U" ]
+
+
+[[module.asm_definitions]]
+  name = "memset"
+  body = "SET_FUNC memset, 0x080D6968 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x08017780 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemIconId"
+  body = "SET_FUNC GetItemIconId, 0x080174A8 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "IsPrepMapActive"
+  body = "SET_FUNC IsPrepMapActive, 0x08034204 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseWeaponNow"
+  body = "SET_FUNC CanUnitUseWeaponNow, 0x080164F8 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseStaffNow"
+  body = "SET_FUNC CanUnitUseStaffNow, 0x080165A8 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemType"
+  body = "SET_FUNC GetItemType, 0x080172F0 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "IsItemEffectiveAgainst"
+  body = "SET_FUNC IsItemEffectiveAgainst, 0x08016994 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "IsUnitEffectiveAgainst"
+  body = "SET_FUNC IsUnitEffectiveAgainst, 0x08016A30 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemAttributes"
+  body = "SET_FUNC GetItemAttributes, 0x08017314 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemWeaponEffect"
+  body = "SET_FUNC GetItemWeaponEffect, 0x080174CC | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "IsItemStealable"
+  body = "SET_FUNC IsItemStealable, 0x08016DFC | 1"
+  games = [ "FE8J" ]

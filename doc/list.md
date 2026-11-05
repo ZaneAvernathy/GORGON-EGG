@@ -83,6 +83,7 @@ This section of modules is a catch-all for modules that do not fit cleanly into 
   * [ReplaceNumberGraphics](/source/modules/Misc/ReplaceBNumberGraphics): Provides an easy way to replace number graphics
   * [DrawTargetsInRangeItems](/source/modules/Misc/DrawTargetsInRangeItems): Draws item icons over hostile in-range units' map sprites
   * [DrawTargetsInRangeWeaponTypes](/source/modules/Misc/DrawTargetsInRangeWeaponTypes): Draws item type icons over hostile in-range units' map sprites
+  * [DrawTargetsInRangeSpecial](/source/modules/Misc/DrawTargetsInRangeSpecial): Draws icons over hostile in-range units' map sprites based on their items
 
 # Name
 
