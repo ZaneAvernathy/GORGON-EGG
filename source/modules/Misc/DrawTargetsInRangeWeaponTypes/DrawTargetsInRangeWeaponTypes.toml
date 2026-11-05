@@ -1,0 +1,300 @@
+
+[module]
+  name = "DrawTargetsInRangeWeaponTypes"
+  version = ">=1.2.0"
+
+[[module.internals]]
+  file = "DrawSmallIcons/DrawSmallIcons.event"
+
+[[module.ea_definitions]]
+  name = "NEED_GetTargetList_HostileInRange"
+  body = "#define NEED_GetTargetList_HostileInRange"
+
+[[module.ea_definitions]]
+  name = "NEED_GetTargetList_HostileAll"
+  body = "#define NEED_GetTargetList_HostileAll"
+
+[[module.ea_definitions]]
+  name = "NEED_ForEachTarget"
+  body = "#define NEED_ForEachTarget"
+
+[[module.internals]]
+  file = "TargetList/TargetList.event"
+
+[[module.asm_definitions]]
+  name = "NEED_aeabi_uidivmod"
+  value = 1
+
+[[module.internals]]
+  file = "LibraryFunctions/LibraryFunctions.event"
+
+[[module.inits]]
+  name = "DrawTargetsInRangeWeaponTypes_Init"
+  file = "DrawTargetsInRangeWeaponTypes.lyn.event"
+
+[[module.statics]]
+  name = "DrawTargetsInRangeWeaponTypes_Static"
+  file = "DrawTargetsInRangeWeaponTypes.lyn.event"
+
+[[module.dynamics]]
+  name = "DrawTargetsInRangeWeaponTypes_Dynamic"
+  file = "DrawTargetsInRangeWeaponTypes.lyn.event"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00002"
+  body = "#define USE_ICON_00002"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00003"
+  body = "#define USE_ICON_00003"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00004"
+  body = "#define USE_ICON_00004"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00005"
+  body = "#define USE_ICON_00005"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00006"
+  body = "#define USE_ICON_00006"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00007"
+  body = "#define USE_ICON_00007"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00008"
+  body = "#define USE_ICON_00008"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00009"
+  body = "#define USE_ICON_00009"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00030"
+  body = "#define USE_ICON_00030"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00001"
+  body = "#define USE_ICON_00001"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00452"
+  body = "#define USE_ICON_00452"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00464"
+  body = "#define USE_ICON_00464"
+
+[[module.ea_definitions]]
+  name = "USE_ICON_00038"
+  body = "#define USE_ICON_00038"
+
+[[module.definitions]]
+  name = "SMALLICON_DICT_TILE"
+  value = 0x0340
+
+[[module.definitions]]
+  name = "SMALLICON_PALETTE"
+  value = 6
+
+[[module.definitions]]
+  name = "DRAW_TARGETS_IN_RANGE_FRAMES_PER_ICON"
+  value = 64
+
+[[module.definitions]]
+  name = "DRAW_TARGETS_IN_RANGE_INACTIVE_FRAMES"
+  value = 0
+
+
+[[module.asm_definitions]]
+  name = "memset"
+  body = "SET_FUNC memset, 0x0809F9F0 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x08017520 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemIconId"
+  body = "SET_FUNC GetItemIconId, 0x080172D8 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "ProcScr_PrepPhase"
+  body = "SET_DATA ProcScr_PrepPhase, 0x085C7E44"
+  games = [ "FE6J" ]
+
+[[module.definitions]]
+  name = "IsPrepMapActive"
+  body = """
+extern const struct ProcInstruction ProcScr_PrepPhase[];
+static inline bool IsPrepMapActive(void)
+{
+  return ProcFind(ProcScr_PrepPhase) ? TRUE : FALSE;
+}
+"""
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseWeapon"
+  body = "SET_FUNC CanUnitUseWeapon, 0x08016538 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseStaff"
+  body = "SET_FUNC CanUnitUseStaff, 0x08016644 | 1"
+  games = [ "FE6J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemType"
+  body = "SET_FUNC GetItemType, 0x08017174 | 1"
+  games = [ "FE6J" ]
+
+
+[[module.asm_definitions]]
+  name = "memset"
+  body = "SET_FUNC memset, 0x080BFFF8 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x080176DC | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "GetItemIconId"
+  body = "SET_FUNC GetItemIconId, 0x08017400 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "IsPrepMapActive"
+  body = "SET_FUNC IsPrepMapActive, 0x08031258 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseWeaponNow"
+  body = "SET_FUNC CanUnitUseWeaponNow, 0x08016380 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseStaffNow"
+  body = "SET_FUNC CanUnitUseStaffNow, 0x08016428 | 1"
+  games = [ "FE7U" ]
+
+[[module.asm_definitions]]
+  name = "GetItemType"
+  body = "SET_FUNC GetItemType, 0x0801725C | 1"
+  games = [ "FE7U" ]
+
+
+[[module.asm_definitions]]
+  name = "memset"
+  body = "SET_FUNC memset, 0x080C0B3C | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x08017ACC | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemIconId"
+  body = "SET_FUNC GetItemIconId, 0x08017808 | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "IsPrepMapActive"
+  body = "SET_FUNC IsPrepMapActive, 0x08031740 | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseWeaponNow"
+  body = "SET_FUNC CanUnitUseWeaponNow, 0x080167FC | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseStaffNow"
+  body = "SET_FUNC CanUnitUseStaffNow, 0x080168A4 | 1"
+  games = [ "FE7J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemType"
+  body = "SET_FUNC GetItemType, 0x08017664 | 1"
+  games = [ "FE7J" ]
+
+
+[[module.asm_definitions]]
+  name = "memset"
+  body = "SET_FUNC memset, 0x080D1C6C | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x080179D8 | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "GetItemIconId"
+  body = "SET_FUNC GetItemIconId, 0x08017700 | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "IsPrepMapActive"
+  body = "SET_FUNC IsPrepMapActive, 0x080342FC | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseWeaponNow"
+  body = "SET_FUNC CanUnitUseWeaponNow, 0x08016750 | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseStaffNow"
+  body = "SET_FUNC CanUnitUseStaffNow, 0x08016800 | 1"
+  games = [ "FE8U" ]
+
+[[module.asm_definitions]]
+  name = "GetItemType"
+  body = "SET_FUNC GetItemType, 0x08017548 | 1"
+  games = [ "FE8U" ]
+
+
+[[module.asm_definitions]]
+  name = "memset"
+  body = "SET_FUNC memset, 0x080D6968 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "GetUnitItemCount"
+  body = "SET_FUNC GetUnitItemCount, 0x08017780 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemIconId"
+  body = "SET_FUNC GetItemIconId, 0x080174A8 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "IsPrepMapActive"
+  body = "SET_FUNC IsPrepMapActive, 0x08034204 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseWeaponNow"
+  body = "SET_FUNC CanUnitUseWeaponNow, 0x080164F8 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "CanUnitUseStaffNow"
+  body = "SET_FUNC CanUnitUseStaffNow, 0x080165A8 | 1"
+  games = [ "FE8J" ]
+
+[[module.asm_definitions]]
+  name = "GetItemType"
+  body = "SET_FUNC GetItemType, 0x080172F0 | 1"
+  games = [ "FE8J" ]
