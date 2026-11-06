@@ -9,7 +9,7 @@ A `config` is a [TOML](https://toml.io/en/)-formatted file (with a `.toml` exten
 
 It optionally begins with a `[config]` table, and contains any number of the following component arrays of tables:
   * `[[config.modules]]`: Add a module to the window
-  * `[[config.definitions]]` and `[[config.asm_definitions]]`: Customize a module's functionality
+  * `[[config.definitions]]`, `[[config.asm_definitions]]`, `[[config.ea_definitions]]`: Customize a module's functionality
 
 `GORGON-EGG` provides a number of `module`s in the [modules folder](/source/modules). These are called `prepackaged modules`. Users can also supply their own `module`s by placing them in the [custom modules folder](/custom/modules). See the [module README](/doc/module.md) for more information about creating a module.
 
@@ -53,7 +53,7 @@ They have one key: a string called `name` that corresponds to the name of a `mod
 
 ### Customizing a module with definitions and assembly definitions
 
-A `module`'s `README.md` file will list any definitions and assembly definitions that the `module` provides. You can override these definitions in your `config` in order to move window elements around, change widths/sizes, palette indices, etc.
+A `module`'s `README.md` file will list any definitions, assembly definitions, and EA definitions that the `module` provides. You can override these definitions in your `config` in order to move window elements around, change widths/sizes, palette indices, etc.
 
 A `[[config.definitions]]` component has two forms: a simple and an advanced form. The simple form is generally used for commonly-edited values like coordinates and sizes.
 
@@ -74,9 +74,9 @@ The advanced form is used for more complex C-language definitions. Generally, th
 
 Advanced users can take a look at the [module definition doc](/doc/module.md#definition-components) for more information on the advanced form.
 
-A `[[config.asm_definitions]]` component is nearly identical to a `[[config.definitions]]` component and serves the same purpose. A `module` may implement its customization options as either, depending on how the `module` is written. Advanced users can look at the [module assembly definition doc](/doc/module.md#assembly-definition-components) for more information.
+A `[[config.asm_definitions]]` or `[[config.ea_definitions]]` component is nearly identical to a `[[config.definitions]]` component and serves the same purpose. A `module` may implement its customization options as either, depending on how the `module` is written. Advanced users can look at the [module assembly definition doc](/doc/module.md#assembly-definition-components) or the [module EA definition doc](/doc/module.md#ea-definition-components) for more information.
 
-<details><summary>Example definitions and assembly definitions</summary>
+<details><summary>Example definitions</summary>
 
 Changing the position of a module:
 ```toml
@@ -118,4 +118,4 @@ Some advanced user C-language definitions may require GCC library functions. See
 
 ### Extra conditions for definitions
 
-`[[config.definitions]]` and `[[config.asm_definitions]]` can also make use of the same [requirements](/doc/module.md#requirements) that `module`s can use.
+`[[config.definitions]]`, `[[config.asm_definitions]]`, and `[[config.ea_definitions]]` can also make use of the same [requirements](/doc/module.md#requirements) that `module`s can use.

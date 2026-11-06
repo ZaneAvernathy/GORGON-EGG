@@ -5,7 +5,7 @@ A `module` is a package of code, data, graphics, etc. that typically implements 
 
 When a `module declaration` file specifies a file to include, it refers to the output file required. That is, if a `module` needs a file `Example.lyn.event`, that file may be built from a corresponding `Example.c` file in the module folder by `GORGON-EGG` during the build process. `GORGON-EGG` comes packaged with tools to automatically build a few types of output files, namely turning C or assembly source files into `.lyn.event` files.
 
-A `module` should include a corresponding `README.md` file that provides the `module`'s name, [requirements](#requirements), [definitions](#definition-components)/[assembly definitions](#assembly-definition-components), and description.
+A `module` should include a corresponding `README.md` file that provides the `module`'s name, [requirements](#requirements), [definitions](#definition-components)/[assembly definitions](#assembly-definition-components)/[EA definitions](#ea-definition-components), and description.
 
 ## Module declarations
 
@@ -19,6 +19,7 @@ The `[module]` table is followed by any number of component arrays of tables:
 
   * `[[module.definitions]]`: Add a C definition to the generated header
   * `[[module.asm_definitions]]`: Add an assembly definition to the generated assembly include file
+  * `[[module.ea_definitions]]`: Add an EA definition to the generated EA include file
   * `[[module.includes]]`: Add an EA-formatted file to the EA installer output
   * `[[module.internals]]`: Add an EA-formatted internal file to the EA installer output
   * `[[module.statics]]`, `[[module.dynamics]]`, `[[module.tilemap_destinations]]`, `[[module.extends]]`, `[[module.retracts]]`, `[[module.inits]]`, `[[module.invalid_positions]]`: Add a function (in some file) that handles a specific window task
@@ -270,6 +271,64 @@ You can use [requirements](#requirements) to ensure that the right function addr
 ```
 
 </details>
+
+### EA definition components
+
+A `[[module.ea_definitions]]` component adds a new defined value, macro, or other EA-syntax snippet to the generated EA include file. They have two forms: a simple form and an advanced form.
+
+The simple form has two keys:
+  * `name` - a string for the name of the definition as it appears in EA files
+  * `value` - a string or integer for the value of the definition
+
+This simple form is transformed into the following line:
+```
+#define Name "Value"
+```
+
+The advanced form has two keys:
+  * `name` - a string for the name of the definition
+  * `body` - a string containing the full definition as it appears in the generated include
+
+The `body` is copied directly into the generated EA include file.
+
+These `[[module.ea_definitions]]` components can be overridden by `[[config.ea_definitions]]` within user `config`s that have identical `name` keys.
+
+<details><summary>Example EA definition components</summary>
+
+Simple EA definitions:
+```toml
+[[module.ea_definitions]]
+  name = "Example1"
+  value = 0x42
+
+[[module.ea_definitions]]
+  name = "Example2"
+  value = "(Example1 * 2)"
+```
+
+These create the following lines in the generated EA include file:
+```
+#define Example1 "0x42"
+#define Example2 "(Example1 * 2)"
+```
+
+Note that integers can be specified as either integers or strings.
+
+Advanced EA definitions:
+```toml
+[[module.ea_definitions]]
+  name = "MyMacro"
+  body = '''#define MyMacro(foo, bar) "WORD (foo); BYTE (bar); ALIGN 4;"'''
+```
+
+This creates the following line in the generated EA include file:
+```
+#define MyMacro(foo, bar) "WORD (foo); BYTE (bar); ALIGN 4;"
+```
+
+Similar to how the [definition](#definition-components) components work, the `name` key of an EA definition component does not have to correspond to the definition's body, and is used for definition overriding.
+
+</details>>
 
 ### Internal file components
 
