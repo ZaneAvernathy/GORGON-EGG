@@ -61,9 +61,14 @@ The `Icon` variants draw 8x8-pixel icons instead of text labels.
   * [Resistance](/source/modules/Label/Resistance)
   * [AttackIcon](/source/modules/Label/AttackIcon)
   * [AttackSpeedIcon](/source/modules/Label/AttackSpeedIcon)
+  * [AvoidIcon](/source/modules/Label/AvoidIcon)
   * [CritIcon](/source/modules/Label/CritIcon)
   * [DefenseIcon](/source/modules/Label/DefenseIcon)
+  * [DodgeIcon](/source/modules/Label/DodgeIcon)
+  * [ExperienceIcon](/source/modules/Label/ExperienceIcon)
+  * [HitIcon](/source/modules/Label/HitIcon)
   * [HPIcon](/source/modules/Label/HPIcon)
+  * [LevelIcon](/source/modules/Label/LevelIcon)
   * [ResistanceIcon](/source/modules/Label/ResistanceIcon)
 
 # Minimug

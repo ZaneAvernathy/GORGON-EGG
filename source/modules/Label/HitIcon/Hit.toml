@@ -1,0 +1,43 @@
+
+[module]
+  name = "HitLabelIcon"
+  version = ">=1.3.0"
+
+[[module.internals]]
+  file = "DrawSmallIcons/DrawSmallIcons.event"
+
+[[module.inits]]
+  name = "HitLabelIcon_Init"
+  file = "Hit.lyn.event"
+
+[[module.statics]]
+  name = "HitLabelIcon_Static"
+  file = "Hit.lyn.event"
+
+[[module.dynamics]]
+  name = "HitLabelIcon_Dynamic"
+  file = "Hit.lyn.event"
+
+[[module.definitions]]
+  name = "HIT_LABEL_X"
+  value = 4
+
+[[module.definitions]]
+  name = "HIT_LABEL_Y"
+  value = 4
+
+[[module.definitions]]
+  name = "SMALLICON_DICT_TILE"
+  value = 0x0340
+
+[[module.definitions]]
+  name = "SMALLICON_PALETTE"
+  value = 6
+
+[[module.definitions]]
+  name = "ICON_LABEL_HIT"
+  value = 223
+
+[[module.ea_definitions]]
+  name = "USE_ICON_000223"
+  body = "#define USE_ICON_00223"

@@ -1,0 +1,43 @@
+
+[module]
+  name = "ExperienceLabelIcon"
+  version = ">=1.3.0"
+
+[[module.internals]]
+  file = "DrawSmallIcons/DrawSmallIcons.event"
+
+[[module.inits]]
+  name = "ExperienceLabelIcon_Init"
+  file = "Experience.lyn.event"
+
+[[module.statics]]
+  name = "ExperienceLabelIcon_Static"
+  file = "Experience.lyn.event"
+
+[[module.dynamics]]
+  name = "ExperienceLabelIcon_Dynamic"
+  file = "Experience.lyn.event"
+
+[[module.definitions]]
+  name = "EXP_LABEL_X"
+  value = 4
+
+[[module.definitions]]
+  name = "EXP_LABEL_Y"
+  value = 3
+
+[[module.definitions]]
+  name = "SMALLICON_DICT_TILE"
+  value = 0x0340
+
+[[module.definitions]]
+  name = "SMALLICON_PALETTE"
+  value = 6
+
+[[module.definitions]]
+  name = "ICON_LABEL_EXPERIENCE"
+  value = 221
+
+[[module.ea_definitions]]
+  name = "USE_ICON_000221"
+  body = "#define USE_ICON_00221"
