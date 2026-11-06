@@ -126,6 +126,9 @@ void DrawTargetsInRangeWeaponTypes_RenderIcons(struct PlayerInterfaceProc * proc
    * This function should be used with `ForEachTarget`.
    */
 
+  if ( target->state & (US_HIDDEN | US_UNDER_A_ROOF | US_FOG) )
+    return;
+
   int x = (target->xPos * 16) - gGameState.cameraRealPos.x;
   int y = (target->yPos * 16) - gGameState.cameraRealPos.y;
 

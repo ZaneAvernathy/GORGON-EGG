@@ -220,6 +220,17 @@
   name = "USE_ICON_00048"
   body = "#define USE_ICON_00048"
 
+[[module.definitions]]
+  name = "US_HIDDEN"
+  value = "(1 << 0)"
+
+[[module.definitions]]
+  name = "US_UNDER_A_ROOF"
+  value = "(1 << 7)"
+
+[[module.definitions]]
+  name = "US_FOG"
+  value = "(1 << 9)"
 
 [[module.definitions]]
   name = "US_DROP_ITEM"
