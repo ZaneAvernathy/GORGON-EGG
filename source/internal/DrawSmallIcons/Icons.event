@@ -933,6 +933,31 @@
   #incbin "Icons/00218.4bpp"
 #endif // USE_ICON_00218
 
+#ifdef USE_ICON_00219
+  WORD 00219
+  #incbin "Icons/00219.4bpp"
+#endif // USE_ICON_00219
+
+#ifdef USE_ICON_00220
+  WORD 00220
+  #incbin "Icons/00220.4bpp"
+#endif // USE_ICON_00220
+
+#ifdef USE_ICON_00221
+  WORD 00221
+  #incbin "Icons/00221.4bpp"
+#endif // USE_ICON_00221
+
+#ifdef USE_ICON_00222
+  WORD 00222
+  #incbin "Icons/00222.4bpp"
+#endif // USE_ICON_00222
+
+#ifdef USE_ICON_00223
+  WORD 00223
+  #incbin "Icons/00223.4bpp"
+#endif // USE_ICON_00223
+
 #ifdef USE_ICON_00227
   WORD 00227
   #incbin "Icons/00227.4bpp"
