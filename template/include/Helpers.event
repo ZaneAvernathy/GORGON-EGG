@@ -3,7 +3,7 @@
 #define __GORGON_EGG__
 #define __GORGON_EGG_MAJOR__ 1
 #define __GORGON_EGG_MINOR__ 3
-#define __GORGON_EGG_PATCH__ 0
+#define __GORGON_EGG_PATCH__ 1
 
 
 // The following game-related definitions are in case users are building
