@@ -1,4 +1,12 @@
 
+1.3.0:
+  New modules:
+    AvoidIcon
+    DodgeIcon
+    ExperienceIcon
+    HitIcon
+    LevelIcon
+
 1.2.0:
   Add EA definitions to module and config format
   Add item types, weapon types, character attributes, and unit helpers to headers
