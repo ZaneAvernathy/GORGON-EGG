@@ -1,0 +1,43 @@
+
+[module]
+  name = "AttackSpeedLabelIcon"
+  version = ">=1.2.0"
+
+[[module.internals]]
+  file = "DrawSmallIcons/DrawSmallIcons.event"
+
+[[module.inits]]
+  name = "AttackSpeedLabelIcon_Init"
+  file = "AttackSpeed.lyn.event"
+
+[[module.statics]]
+  name = "AttackSpeedLabelIcon_Static"
+  file = "AttackSpeed.lyn.event"
+
+[[module.dynamics]]
+  name = "AttackSpeedLabelIcon_Dynamic"
+  file = "AttackSpeed.lyn.event"
+
+[[module.definitions]]
+  name = "AS_LABEL_X"
+  value = 1
+
+[[module.definitions]]
+  name = "AS_LABEL_Y"
+  value = 2
+
+[[module.definitions]]
+  name = "SMALLICON_DICT_TILE"
+  value = 0x0340
+
+[[module.definitions]]
+  name = "SMALLICON_PALETTE"
+  value = 6
+
+[[module.definitions]]
+  name = "ICON_LABEL_ATTACK_SPEED"
+  value = 195
+
+[[module.ea_definitions]]
+  name = "USE_ICON_000195"
+  body = "#define USE_ICON_00195"

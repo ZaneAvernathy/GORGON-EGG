@@ -1,0 +1,43 @@
+
+[module]
+  name = "AttackLabelIcon"
+  version = ">=1.2.0"
+
+[[module.internals]]
+  file = "DrawSmallIcons/DrawSmallIcons.event"
+
+[[module.inits]]
+  name = "AttackLabelIcon_Init"
+  file = "Attack.lyn.event"
+
+[[module.statics]]
+  name = "AttackLabelIcon_Static"
+  file = "Attack.lyn.event"
+
+[[module.dynamics]]
+  name = "AttackLabelIcon_Dynamic"
+  file = "Attack.lyn.event"
+
+[[module.definitions]]
+  name = "ATK_LABEL_X"
+  value = 1
+
+[[module.definitions]]
+  name = "ATK_LABEL_Y"
+  value = 1
+
+[[module.definitions]]
+  name = "SMALLICON_DICT_TILE"
+  value = 0x0340
+
+[[module.definitions]]
+  name = "SMALLICON_PALETTE"
+  value = 6
+
+[[module.definitions]]
+  name = "ICON_LABEL_ATTACK"
+  value = 196
+
+[[module.ea_definitions]]
+  name = "USE_ICON_000196"
+  body = "#define USE_ICON_00196"

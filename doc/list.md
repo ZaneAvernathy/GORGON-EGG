@@ -44,6 +44,8 @@ These modules draw a label graphic that generally corresponds with a stat. They 
 
 The [HPDivider](/source/modules/Label/HPDivider) module draws the `/` that is displayed between the current and max HP numbers on the vanilla window.
 
+The `Icon` variants draw 8x8-pixel icons instead of text labels.
+
   * [Attack](/source/modules/Label/Attack)
   * [AttackSpeed](/source/modules/Label/AttackSpeed)
   * [Avoid](/source/modules/Label/Avoid)
@@ -57,6 +59,12 @@ The [HPDivider](/source/modules/Label/HPDivider) module draws the `/` that is di
   * [Level](/source/modules/Label/Level)
   * [Rating](/source/modules/Label/Rating)
   * [Resistance](/source/modules/Label/Resistance)
+  * [AttackIcon](/source/modules/Label/AttackIcon)
+  * [AttackSpeedIcon](/source/modules/Label/AttackSpeedIcon)
+  * [CritIcon](/source/modules/Label/CritIcon)
+  * [DefenseIcon](/source/modules/Label/DefenseIcon)
+  * [HPIcon](/source/modules/Label/HPIcon)
+  * [ResistanceIcon](/source/modules/Label/ResistanceIcon)
 
 # Minimug
 
