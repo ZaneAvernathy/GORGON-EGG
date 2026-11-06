@@ -1,4 +1,24 @@
 
+1.2.0:
+  Add EA definitions to module and config format
+  Add item types, weapon types, character attributes, and unit helpers to headers
+  New internals:
+    TargetList
+    DrawSmallIcons
+  New modules:
+    DrawTargetsInRangeItems
+    DrawTargetsInRangeWeaponTypes
+    DrawTargetsInRangeSpecial
+    AttackIcon
+    AttackSpeedIcon
+    CritIcon
+    DefenseIcon
+    HPIcon
+    ResistanceIcon
+  Fixes:
+    Fixed crash when SmallFont text exceeds allotted width
+    Fixed TextViewer buffer length when working with SJIS text
+
 1.1.0:
   Add GORGON-EGG version to generated EA installer
   New modules:
